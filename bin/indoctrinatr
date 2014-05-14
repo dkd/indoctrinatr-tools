@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "indoctrinatr/tools/cli"
+
+Indoctrinatr::Tools::CLI.start(ARGV)

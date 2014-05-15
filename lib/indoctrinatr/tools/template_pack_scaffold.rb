@@ -1,24 +1,25 @@
 module Indoctrinatr
   module Tools
     class TemplatePackScaffold
-      attr_reader :template_name, :path_name, :config_file_path
+      attr_reader :template_pack_name, :path_name
 
-      def initialize template_name
-        @template_name = template_name
-        @path_name = Pathname.new(Dir.pwd).join template_name
+      def initialize template_pack_name
+        @template_pack_name = template_pack_name
+        @path_name = Pathname.new(Dir.pwd).join template_pack_name
       end
 
       def call
         create_folder
         create_configuration_file
         create_tex_file
+        show_success
       end
 
       private
 
       def create_folder
         if Dir.exists? path_name
-          raise "A folder with name #{template_name} already exists."
+          raise "A folder with name #{template_pack_name} already exists."
         else
           Dir.mkdir path_name          
         end
@@ -36,6 +37,10 @@ module Indoctrinatr
         end
       end
 
+      def show_success
+        puts "A folder '#{template_pack_name}' was created. Happy templating…"
+      end
+
       def config_file_path
         path_name.join 'configuration.yaml'
       end
@@ -45,7 +50,7 @@ module Indoctrinatr
       end
 
       def default_configuration_file_content
-"template_name: '#{template_name}'
+"template_name: '#{template_pack_name}'
 template_description: 'Describe your template here'
 attributes:
   -
@@ -55,13 +60,11 @@ attributes:
   -
     name: second_attribute
     data_type: Text
-    default_value: 'default value of second attribute'
-"
+    default_value: 'default value of second attribute'\n"
       end
 
       def default_tex_file_content
-'
-'
+        "\n"
       end
     end
   end

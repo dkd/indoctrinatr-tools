@@ -3,12 +3,13 @@
 require 'gli'
 require 'indoctrinatr/tools/version'
 require 'indoctrinatr/tools/template_pack_scaffold'
+require 'indoctrinatr/tools/template_pack_packer'
 
 include GLI::App
 
 program_desc 'Create and manage template packs for Indoctrinatr'
 version Indoctrinatr::Tools::VERSION
-config_file File.join(ENV['HOME'], '.indoctrinatr.rc')
+config_file '.indoctrinatr.rc', locate: [:cwd, :home, '/etc/']
 
 desc 'Display current version'
 command :version do |c|
@@ -17,12 +18,39 @@ command :version do |c|
   end
 end
 
-desc 'Create a scaffold folder for a new Indoctrinatr template pack'
-arg_name 'scaffold_name'
+desc 'Create a scaffold for a new Indoctrinatr template pack'
+arg_name 'template_pack_name'
 command :new do |c|
   c.action do |global_options, options, args|
-    template_name = args.join "_"
-    Indoctrinatr::Tools::TemplatePackScaffold.new(template_name).call
+    template_pack_name = args.join "_"
+    Indoctrinatr::Tools::TemplatePackScaffold.new(template_pack_name).call
+  end
+end
+
+desc 'Create a template pack from a given source folder'
+arg_name 'template_pack_name'
+command :pack do |c|
+  c.action do |global_options, options, args|
+    template_pack_name = args.join "_"
+    Indoctrinatr::Tools::TemplatePackPacker.new(template_pack_name).call
+  end
+end
+
+desc 'Display instructions for bash autocompletion'
+command :display_bash_autocompletion do |c|
+  c.action do |global_options, options, args|
+    puts 'Add this to your .bashrc (and open up a new shell):
+
+complete -F get_indoctrinatr_targets indoctrinatr
+function get_indoctrinatr_targets() 
+{
+    if [ -z $2 ] ; then
+        COMPREPLY=(`indoctriatr help -c`)
+    else
+        COMPREPLY=(`indoctriatr help -c $2`)
+    fi
+}
+'
   end
 end
 

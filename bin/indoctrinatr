@@ -9,7 +9,7 @@ include GLI::App
 
 program_desc 'Create and manage template packs for Indoctrinatr'
 version Indoctrinatr::Tools::VERSION
-config_file '.indoctrinatr.rc', locate: [:cwd, :home, '/etc/']
+config_file '.indoctrinatr.rc'
 
 desc 'Display current version'
 command :version do |c|

@@ -3,7 +3,7 @@
 require 'gli'
 require 'indoctrinatr/tools/version'
 
-include GLI::APP
+include GLI::App
 
 version Indoctrinatr::Tools::VERSION
 config_file File.join(ENV['HOME'], '.indoctrinatr.rc')

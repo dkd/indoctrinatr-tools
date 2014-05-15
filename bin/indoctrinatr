@@ -1,5 +1,23 @@
 #!/usr/bin/env ruby
 
-require "indoctrinatr/tools/cli"
+
+require 'gli'
+require 'indoctrinatr/tools/version'
 
 Indoctrinatr::Tools::CLI.start(ARGV)
+
+include GLI::APP
+
+version Indoctrinatr::Tools::VERSION
+config_file File.join(ENV['HOME'], '.indoctrinatr.rc')
+
+desc 'Create a scaffold for a new Indoctrinatr template pack'
+
+command :new do |c|
+  c.desc 'name of the new template pack'
+  arg_name '[scaffold_name...]'
+
+  c.action do |global_options, options, args|
+    Indoctrinatr::Tools::TemplatePackScaffold.new(args).call
+  end
+end

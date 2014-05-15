@@ -6,6 +6,7 @@ require 'indoctrinatr/tools/template_pack_scaffold'
 
 include GLI::App
 
+program_desc 'Create and manage template packs for Indoctrinatr'
 version Indoctrinatr::Tools::VERSION
 config_file File.join(ENV['HOME'], '.indoctrinatr.rc')
 
@@ -16,14 +17,12 @@ command :version do |c|
   end
 end
 
-
 desc 'Create a scaffold folder for a new Indoctrinatr template pack'
+arg_name 'scaffold_name'
 command :new do |c|
-  c.desc 'name of the new template pack'
-  c.arg_name '[scaffold_name...]'
-
   c.action do |global_options, options, args|
-    Indoctrinatr::Tools::TemplatePackScaffold.new(args).call
+    template_name = args.join "_"
+    Indoctrinatr::Tools::TemplatePackScaffold.new(template_name).call
   end
 end
 

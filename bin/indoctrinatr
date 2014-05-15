@@ -1,10 +1,7 @@
 #!/usr/bin/env ruby
 
-
 require 'gli'
 require 'indoctrinatr/tools/version'
-
-Indoctrinatr::Tools::CLI.start(ARGV)
 
 include GLI::APP
 

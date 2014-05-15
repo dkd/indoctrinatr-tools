@@ -26,18 +26,25 @@ module Indoctrinatr
 
       def create_configuration_file
         File.open(config_file_path, 'w') do |config_file|
-          config_file.write default_template_config_content
+          config_file.write default_configuration_file_content
         end
       end
 
       def create_tex_file
+        File.open(tex_file_path, 'w') do |tex_file|
+          tex_file.write default_tex_file_content
+        end
       end
 
       def config_file_path
         path_name.join 'configuration.yaml'
       end
 
-      def default_template_config_content
+      def tex_file_path
+        path_name.join 'template.tex'
+      end
+
+      def default_configuration_file_content
 "template_name: '#{template_name}'
 template_description: 'Describe your template here'
 attributes:
@@ -50,6 +57,11 @@ attributes:
     data_type: Text
     default_value: 'default value of second attribute'
 "
+      end
+
+      def default_tex_file_content
+'
+'
       end
     end
   end

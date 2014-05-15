@@ -50,6 +50,7 @@ function get_indoctrinatr_targets()
         COMPREPLY=(`indoctriatr help -c $2`)
     fi
 }
+
 '
   end
 end

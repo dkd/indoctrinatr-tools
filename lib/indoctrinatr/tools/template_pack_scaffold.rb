@@ -19,7 +19,7 @@ module Indoctrinatr
 
       def create_folder
         if Dir.exists? path_name
-          raise "A folder with name #{template_pack_name} already exists."
+          raise "A folder with name '#{template_pack_name}' already exists."
         else
           Dir.mkdir path_name          
         end
@@ -38,7 +38,7 @@ module Indoctrinatr
       end
 
       def show_success
-        puts "A folder '#{template_pack_name}' was created. Happy templating…"
+        puts "A template pack in folder '#{template_pack_name}' was created. Happy templating…"
       end
 
       def config_file_path

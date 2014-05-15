@@ -59,4 +59,28 @@ function get_indoctrinatr_targets()
   end
 end
 
+
+# thanks to http://devopsbox.es/posts/2013/10-31-the-cleanest-gli-bash-zsh-tab-completion.html
+desc 'Display instructions for zsh completion'
+command :display_zsh_completion do |c|
+  c.action do |global_options, options, args|
+    puts 'Add this to your .zshrc (and open up a new shell):
+
+if [[ -n ${ZSH_VERSION-} ]]; then
+  autoload -U +X bashcompinit && bashcompinit
+fi
+complete -F get_indoctrinatr_commands indoctrinatr
+function get_indoctrinatr_commands()
+{
+  local binary="indoctrinatr"
+  help_params=${COMP_WORDS[@]:1}
+  clean_params=${help_params//-*([^ ])?( )}
+  COMPREPLY=(`$binary help -c $clean_params`)
+}
+
+'
+  end
+end
+
+
 exit run(ARGV)

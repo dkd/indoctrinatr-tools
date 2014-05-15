@@ -37,7 +37,7 @@ module Indoctrinatr
         path_name.join 'configuration.yaml'
       end
 
-      def default_template_config_content template_name
+      def default_template_config_content
 "template_name: '#{template_name}'
 template_description: 'Describe your template here'
 attributes:

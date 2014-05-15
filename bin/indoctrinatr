@@ -20,7 +20,7 @@ end
 desc 'Create a scaffold folder for a new Indoctrinatr template pack'
 command :new do |c|
   c.desc 'name of the new template pack'
-  arg_name '[scaffold_name...]'
+  c.arg_name '[scaffold_name...]'
 
   c.action do |global_options, options, args|
     Indoctrinatr::Tools::TemplatePackScaffold.new(args).call

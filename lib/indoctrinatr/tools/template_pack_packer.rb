@@ -1,6 +1,6 @@
 module Indoctrinatr
   module Tools
-    class TemplatePackScaffold
+    class TemplatePackPacker
       attr_accessor :template_pack_name
 
       def initialize template_pack_name

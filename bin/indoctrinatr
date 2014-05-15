@@ -49,9 +49,9 @@ complete -F get_indoctrinatr_targets indoctrinatr
 function get_indoctrinatr_targets() 
 {
     if [ -z $2 ] ; then
-        COMPREPLY=(`indoctriatr help -c`)
+        COMPREPLY=(`indoctrinatr help -c`)
     else
-        COMPREPLY=(`indoctriatr help -c $2`)
+        COMPREPLY=(`indoctrinatr help -c $2`)
     fi
 }
 
@@ -69,6 +69,7 @@ command :display_zsh_completion do |c|
 if [[ -n ${ZSH_VERSION-} ]]; then
   autoload -U +X bashcompinit && bashcompinit
 fi
+
 complete -F get_indoctrinatr_commands indoctrinatr
 function get_indoctrinatr_commands()
 {

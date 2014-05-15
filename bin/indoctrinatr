@@ -18,3 +18,5 @@ command :new do |c|
     Indoctrinatr::Tools::TemplatePackScaffold.new(args).call
   end
 end
+
+exit run(ARGV)

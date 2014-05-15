@@ -2,14 +2,22 @@
 
 require 'gli'
 require 'indoctrinatr/tools/version'
+require 'indoctrinatr/tools/template_pack_scaffold'
 
 include GLI::App
 
 version Indoctrinatr::Tools::VERSION
 config_file File.join(ENV['HOME'], '.indoctrinatr.rc')
 
-desc 'Create a scaffold for a new Indoctrinatr template pack'
+desc 'Display current version'
+command :version do |c|
+  c.action do |global_options, options, args|
+    puts Indoctrinatr::Tools::VERSION
+  end
+end
 
+
+desc 'Create a scaffold folder for a new Indoctrinatr template pack'
 command :new do |c|
   c.desc 'name of the new template pack'
   arg_name '[scaffold_name...]'

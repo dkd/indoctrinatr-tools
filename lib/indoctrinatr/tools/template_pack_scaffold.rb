@@ -26,9 +26,9 @@ module Indoctrinatr
       end
  
       def copy_configuration_file
-        source_config_file = Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', ''configuration.yaml'')
-        
-        FileUtils.copy_file source_config_file, path_name
+        source_config_file = Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'configuration.yaml')
+        destination_confi_file = 
+        FileUtils.copy_file source_config_file, path_name.join('configuration.yaml')
         # File.open(config_file_path, 'w') do |config_file|
         #   config_file.write default_configuration_file_content
         # end

@@ -3,12 +3,11 @@ require 'zip'
 module Indoctrinatr
   module Tools
     class TemplatePackPacker
-      attr_accessor :template_pack_name, :path_name, :destination_zip_file
+      attr_accessor :template_pack_name, :path_name
 
       def initialize template_pack_name
         @template_pack_name = template_pack_name
         @path_name = Pathname.new(Dir.pwd).join template_pack_name
-        @destination_zip_file = Pathname.new(Dir.pwd).join "#{template_pack_name}.zip"
       end
 
       def call
@@ -41,6 +40,10 @@ module Indoctrinatr
 
       def show_success
         puts "The template pack '#{template_pack_name}.zip' was created successfully."
+      end
+
+      def destination_zip_file
+        Pathname.new(Dir.pwd).join "#{template_pack_name}.zip"
       end
 
       def internal_file_name file_name

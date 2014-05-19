@@ -31,26 +31,30 @@ module Indoctrinatr
       end
  
       def copy_configuration_file
-        source_config_file = Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'configuration.yaml')
-        destination_config_file = path_name.join('configuration.yaml')
-        FileUtils.copy_file source_config_file, destination_config_file
+        FileUtils.copy_file source_config_file, destination_config_file_path
       end
 
       def copy_tex_file
-        source_tex_file = Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex')
-        destination_tex_file = path_name.join('template.tex')
-        FileUtils.copy_file source_tex_file, destination_tex_file
+        FileUtils.copy_file source_tex_file, destination_tex_file_path
       end
 
       def show_success
         puts "A template pack scaffold was created in folder '#{template_pack_name}'. Happy templating…"
       end
 
-      def config_file_path
+      def source_config_file_path
+        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'configuration.yaml')
+      end
+
+      def destination_config_file_path
         path_name.join 'configuration.yaml'
       end
 
-      def tex_file_path
+      def source_tex_file_path
+        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex')
+      end
+
+      def destination_tex_file_path
         path_name.join 'template.tex'
       end
     end

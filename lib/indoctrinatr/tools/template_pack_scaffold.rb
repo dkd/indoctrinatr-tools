@@ -43,7 +43,7 @@ module Indoctrinatr
       end
 
       def show_success
-        puts "A template pack in folder '#{template_pack_name}' was created. Happy templating…"
+        puts "A template pack scaffold was created in folder '#{template_pack_name}'. Happy templating…"
       end
 
       def config_file_path

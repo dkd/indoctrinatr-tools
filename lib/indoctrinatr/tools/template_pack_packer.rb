@@ -15,6 +15,7 @@ module Indoctrinatr
         check_for_folder
         remove_existing_zip
         zip_template_folder
+        show_success
       end
 
       private
@@ -36,6 +37,10 @@ module Indoctrinatr
             zipfile.add(internal_file_name(file), file)
           end
         end
+      end
+
+      def show_success
+        puts "The template pack '#{template_pack_name}' was created successfully."
       end
 
       def internal_file_name file_name

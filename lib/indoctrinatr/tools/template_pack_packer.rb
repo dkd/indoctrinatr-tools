@@ -12,11 +12,18 @@ module Indoctrinatr
       end
 
       def call
+        check_for_folder
         remove_existing_zip
         zip_template_folder
       end
 
       private
+
+      def check_for_folder
+        unless Dir.exists? path_name
+          raise "A folder with name '#{template_pack_name}' does not exist."
+        end
+      end
 
       def remove_existing_zip
         FileUtils.rm destination_zip_file, force: true

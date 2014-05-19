@@ -40,7 +40,7 @@ module Indoctrinatr
       end
 
       def show_success
-        puts "The template pack '#{template_pack_name}' was created successfully."
+        puts "The template pack '#{template_pack_name}.zip' was created successfully."
       end
 
       def internal_file_name file_name

@@ -10,6 +10,7 @@ module Indoctrinatr
 
       def call
         create_folder
+        create_asset_folder
         copy_configuration_file
         copy_tex_file
         show_success
@@ -24,20 +25,21 @@ module Indoctrinatr
           Dir.mkdir path_name          
         end
       end
+
+      def create_asset_folder
+        Dir.mkdir path_name.join('assets')
+      end
  
       def copy_configuration_file
         source_config_file = Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'configuration.yaml')
-        destination_confi_file = 
-        FileUtils.copy_file source_config_file, path_name.join('configuration.yaml')
-        # File.open(config_file_path, 'w') do |config_file|
-        #   config_file.write default_configuration_file_content
-        # end
+        destination_config_file = path_name.join('configuration.yaml')
+        FileUtils.copy_file source_config_file, destination_config_file
       end
 
       def copy_tex_file
-        # File.open(tex_file_path, 'w') do |tex_file|
-        #   tex_file.write default_tex_file_content
-        # end
+        source_tex_file = Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex')
+        destination_tex_file = path_name.join('template.tex')
+        FileUtils.copy_file source_tex_file, destination_tex_file
       end
 
       def show_success

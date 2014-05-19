@@ -19,7 +19,7 @@ module Indoctrinatr
       private
 
       def remove_existing_zip
-        FileUtils.rm destination_zip_file
+        FileUtils.rm destination_zip_file, force: true
       end
 
       def zip_template_folder

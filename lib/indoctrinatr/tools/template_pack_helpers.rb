@@ -15,7 +15,7 @@ module Indoctrinatr
       end
 
       def tex_file_path
-        path_name.join template_pack_name, '.tex.erb'
+        path_name.join template_pack_name + '.tex.erb'
       end
     end
   end

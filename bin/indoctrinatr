@@ -6,6 +6,7 @@ require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_packer'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
 require 'indoctrinatr/tools/template_pack_default_values_compiler'
+require 'indoctrinatr/tools/template_pack_cleaner'
 
 include GLI::App
 
@@ -58,6 +59,16 @@ command :pdf do |c|
   c.action do |global_options, options, args|
     template_pack_name = args.join "_"
     Indoctrinatr::Tools::TemplatePackDefaultValuesCompiler.new(template_pack_name).call
+  end
+end
+
+
+desc 'Clean template pack and its parent folder from Latex work files'
+arg_name 'template_pack_name'
+command :cleanup do |c|
+  c.action do |global_options, options, args|
+    template_pack_name = args.join "_"
+    Indoctrinatr::Tools::TemplatePackCleaner.new(template_pack_name).call
   end
 end
 

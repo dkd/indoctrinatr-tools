@@ -1,8 +1,11 @@
+require 'indoctrinatr/tools/template_pack_helpers'
 require 'zip'
 
 module Indoctrinatr
   module Tools
     class TemplatePackPacker
+      include TemplatePackHelpers
+
       attr_accessor :template_pack_name, :path_name
 
       def initialize template_pack_name
@@ -19,18 +22,11 @@ module Indoctrinatr
 
       private
 
-      def check_for_folder
-        unless Dir.exists? path_name
-          raise "A folder with name '#{template_pack_name}' does not exist."
-        end
-      end
-
       def remove_existing_zip
         FileUtils.rm destination_zip_file, force: true
       end
 
       def zip_template_folder
-        
         Zip::File.open(destination_zip_file, Zip::File::CREATE) do |zipfile|
           Dir[File.join(path_name, '**', '**')].each do |file|
             zipfile.add(internal_file_name(file), file)

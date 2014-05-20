@@ -19,11 +19,10 @@ module Indoctrinatr
       private
 
       def create_folder
-        if Dir.exists? path_name
-          raise "A folder with name '#{template_pack_name}' already exists."
-        else
-          Dir.mkdir path_name          
-        end
+        raise 'Please specify a template pack name.' if template_pack_name.blank?
+        raise "A folder with name '#{template_pack_name}' already exists." if Dir.exists? path_name
+
+        Dir.mkdir path_name          
       end
 
       def create_asset_folder

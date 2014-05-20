@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "gli",                 "~> 2.10.0"
   spec.add_dependency "rubyzip",             "~> 1.1.3"
+
+  spec.requirements << "xelatex"
 end

@@ -40,7 +40,7 @@ module Indoctrinatr
       end
 
       def write_tex_file
-        File.write(path_name.join("#{template_pack_name}_with_default_values.tex"), parsed_tex_file_content)
+        File.write tex_with_default_values_file_path, parsed_tex_file_content
       end
     end
   end

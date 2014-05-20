@@ -17,6 +17,10 @@ module Indoctrinatr
       def tex_file_path
         path_name.join template_pack_name + '.tex.erb'
       end
+
+      def tex_with_default_values_file_path
+        path_name.join template_pack_name + '_with_default_values.tex'
+      end
     end
   end
 end

@@ -29,7 +29,7 @@ module Indoctrinatr
       end
 
       def read_tex_file
-        @tex_file_content = File.read path_name.join 'template.tex.erb'
+        @tex_file_content = File.read path_name.join "#{template_pack_name}.tex.erb"
       end
 
       def parse_tex_file
@@ -37,7 +37,7 @@ module Indoctrinatr
       end
 
       def write_tex_file
-        File.write(path_name.join('template.tex'), parsed_tex_file_content)
+        File.write(path_name.join("#{template_pack_name}_with_default_values.tex"), parsed_tex_file_content)
       end
     end
   end

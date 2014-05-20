@@ -19,7 +19,7 @@ module Indoctrinatr
       private
 
       def create_folder
-        raise 'Please specify a template pack name.' if template_pack_name.blank?
+        raise 'Please specify a template pack name.' if template_pack_name.empty?
         raise "A folder with name '#{template_pack_name}' already exists." if Dir.exists? path_name
 
         Dir.mkdir path_name          

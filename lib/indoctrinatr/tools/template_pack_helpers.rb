@@ -2,7 +2,7 @@ module Indoctrinatr
   module Tools
     module TemplatePackHelpers
       def check_for_folder
-        raise 'Please specify a template pack name.' if template_pack_name.blank?
+        raise 'Please specify a template pack name.' if template_pack_name.empty?
         raise "A folder with name '#{template_pack_name}' does not exist." unless Dir.exists? path_name
       end
 

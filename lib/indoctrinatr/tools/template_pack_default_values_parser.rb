@@ -1,4 +1,6 @@
 require 'indoctrinatr/tools/default_values'
+require 'erubis'
+require 'to_latex'
 
 module Indoctrinatr
   module Tools

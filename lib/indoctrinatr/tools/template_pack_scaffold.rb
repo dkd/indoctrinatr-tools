@@ -1,11 +1,14 @@
+require 'indoctrinatr/tools/template_pack_helpers'
+
 module Indoctrinatr
   module Tools
     class TemplatePackScaffold
-      attr_reader :template_pack_name, :path_name
+      include TemplatePackHelpers
+
+      attr_accessor :template_pack_name
 
       def initialize template_pack_name
         @template_pack_name = template_pack_name
-        @path_name = Pathname.new(Dir.pwd).join template_pack_name
       end
 
       def call
@@ -30,11 +33,11 @@ module Indoctrinatr
       end
  
       def copy_configuration_file
-        FileUtils.copy_file source_config_file_path, destination_config_file_path
+        FileUtils.copy_file source_config_file_path, config_file_path
       end
 
       def copy_tex_file
-        FileUtils.copy_file source_tex_file_path, destination_tex_file_path
+        FileUtils.copy_file source_tex_file_path, tex_file_path
       end
 
       def show_success
@@ -45,16 +48,8 @@ module Indoctrinatr
         Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'configuration.yaml')
       end
 
-      def destination_config_file_path
-        path_name.join 'configuration.yaml'
-      end
-
       def source_tex_file_path
         Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex.erb')
-      end
-
-      def destination_tex_file_path
-        path_name.join "#{template_pack_name}.tex.erb"
       end
     end
   end

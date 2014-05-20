@@ -6,11 +6,10 @@ module Indoctrinatr
     class TemplatePackPacker
       include TemplatePackHelpers
 
-      attr_accessor :template_pack_name, :path_name
+      attr_accessor :template_pack_name
 
       def initialize template_pack_name
         @template_pack_name = template_pack_name
-        @path_name = Pathname.new(Dir.pwd).join template_pack_name
       end
 
       def call

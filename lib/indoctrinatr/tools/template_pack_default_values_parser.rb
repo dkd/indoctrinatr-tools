@@ -8,11 +8,10 @@ module Indoctrinatr
     class TemplatePackDefaultValuesParser
       include TemplatePackHelpers
 
-      attr_accessor :template_pack_name, :path_name, :configuration, :default_values, :tex_file_content, :parsed_tex_file_content
+      attr_accessor :template_pack_name, :configuration, :default_values, :tex_file_content, :parsed_tex_file_content
 
       def initialize template_pack_name
         @template_pack_name = template_pack_name
-        @path_name = Pathname.new(Dir.pwd).join template_pack_name
       end
 
       def call

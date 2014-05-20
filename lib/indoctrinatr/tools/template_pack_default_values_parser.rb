@@ -1,4 +1,3 @@
-require 'yaml' 
 require 'indoctrinatr/tools/default_values'
 
 module Indoctrinatr
@@ -22,7 +21,7 @@ module Indoctrinatr
 
       def read_config_file
         config_file_content = File.read path_name.join 'configuration.yaml'
-        @configuration = Yaml.load config_file_content
+        @configuration = YAML.load config_file_content
         attributes_as_hashes_in_array = @configuration.fetch "attributes", []
         @default_values = DefaultValues.new attributes_as_hashes_in_array
       end

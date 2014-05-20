@@ -31,11 +31,11 @@ module Indoctrinatr
       end
  
       def copy_configuration_file
-        FileUtils.copy_file source_config_file, destination_config_file_path
+        FileUtils.copy_file source_config_file_path, destination_config_file_path
       end
 
       def copy_tex_file
-        FileUtils.copy_file source_tex_file, destination_tex_file_path
+        FileUtils.copy_file source_tex_file_path, destination_tex_file_path
       end
 
       def show_success

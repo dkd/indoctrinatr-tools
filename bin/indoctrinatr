@@ -4,6 +4,7 @@ require 'gli'
 require 'indoctrinatr/tools/version'
 require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_packer'
+require 'indoctrinatr/tools/template_pack_default_values_parser'
 
 include GLI::App
 
@@ -36,6 +37,16 @@ command :pack do |c|
   c.action do |global_options, options, args|
     template_pack_name = args.join "_"
     Indoctrinatr::Tools::TemplatePackPacker.new(template_pack_name).call
+  end
+end
+
+
+desc 'Parse tex file with ERB and default values of template pack'
+arg_name 'template_pack_name'
+command :parse do |c|
+  c.action do |global_options, options, args|
+    template_pack_name = args.join "_"
+    Indoctrinatr::Tools::TemplatePackDefaultValuesParser.new(template_pack_name).call
   end
 end
 

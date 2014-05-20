@@ -51,11 +51,11 @@ module Indoctrinatr
       end
 
       def source_tex_file_path
-        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex')
+        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex.erb')
       end
 
       def destination_tex_file_path
-        path_name.join 'template.tex'
+        path_name.join 'template.tex.erb'
       end
     end
   end

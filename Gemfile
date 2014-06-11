@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://rubygems.dkd.de'
 
 # Specify your gem's dependencies in indoctrinatr-tools.gemspec
 gemspec

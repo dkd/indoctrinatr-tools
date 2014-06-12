@@ -28,6 +28,7 @@ module Indoctrinatr
         config_file_content = File.read config_file_path
         @configuration = YAML.load config_file_content
         attributes_as_hashes_in_array = @configuration.fetch "attributes", []
+        attributes_as_hashes_in_array << { template_asset_path: path_name }
         @default_values = DefaultValues.new attributes_as_hashes_in_array
       end
 

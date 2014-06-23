@@ -28,19 +28,19 @@ command :workflow do |c|
   c.action do |global_options, options, args|
     puts 'The workflow for a project (e.g. demo) looks like this:
 
-1. $ indoctrinatr new demo
-    Creates a new Indoctrinatr Template Pack in the folder demo
+1. Run in shell: indoctrinatr new demo
+   Creates a new Indoctrinatr Template Pack in the folder demo
 
 2. edit demo.tex.erb and configuration.yaml according to needs
 
-3. $ indoctrinatr parse demo
-    Parses tex file demo_with_default_values.tex with ERB and default values from configuration.yaml
+3. Run in shell: indoctrinatr parse demo
+   Parses tex file demo_with_default_values.tex with ERB and default values from configuration.yaml
 
-4. $ indoctrinatr pdf demo
-    Compiles PDF from demo_with_default_values.tex
+4. Run in shell: indoctrinatr pdf demo
+   Compiles PDF from demo_with_default_values.tex
 
-5. $ indoctrinatr pack demo
-    Creates demo.zip with all required file for upload to Indoctrinatr server
+5. Run in shell: indoctrinatr pack demo
+   Creates demo.zip with all required file for upload to Indoctrinatr server
 
 '
   end

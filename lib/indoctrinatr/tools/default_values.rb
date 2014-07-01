@@ -8,6 +8,10 @@ module Indoctrinatr
         end
       end
 
+      def textilize textile
+        RedCloth.new(textile).to_latex
+      end
+
       def get_binding
         binding
       end

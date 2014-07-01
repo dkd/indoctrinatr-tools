@@ -48,11 +48,9 @@ end
 
 
 desc 'Create, compile and pack a demo project'
-arg_name 'template-pack-name'
 command :demo do |c|
   c.action do |global_options, options, args|
-    template_pack_name = args.join "_"
-    Indoctrinatr::Tools::TemplatePackDemo.new(template_pack_name).call
+    Indoctrinatr::Tools::TemplatePackDemo.new('demo').call
   end
 end
 

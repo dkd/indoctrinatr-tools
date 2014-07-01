@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rubyzip",             "~> 1.1.4"
   spec.add_dependency "erubis",              "~> 2.7.0"
   spec.add_dependency "to_latex",            "~> 0.5.0"
-  spec.add_dependency "redcloth",            "~> 4.0"
+  spec.add_dependency "RedCloth",            "~> 4.2"
 
   spec.requirements << "xelatex"
 end

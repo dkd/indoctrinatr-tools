@@ -1,3 +1,5 @@
+require 'redcloth'
+
 module Indoctrinatr
   module Tools
     class DefaultValues

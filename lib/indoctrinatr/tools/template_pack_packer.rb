@@ -42,7 +42,7 @@ module Indoctrinatr
       end
 
       def internal_file_name file_name
-        file_name.sub(path_name.to_s, '')[1..-1] # remove leading /
+        template_pack_name + '/' + file_name.sub(path_name.to_s, '')[1..-1] # remove leading /
       end
     end
   end

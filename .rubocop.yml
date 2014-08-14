@@ -4,3 +4,5 @@ Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
 Style/RegexpLiteral:
   MaxSlashes: 0
+Style/Documentation:
+  Enabled: false

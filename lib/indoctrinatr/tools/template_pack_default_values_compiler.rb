@@ -17,8 +17,7 @@ module Indoctrinatr
       private
 
       def compile_tex_file
-        args = %w{-shell-escape -interaction batchmode}
-        args << tex_with_default_values_file_path.to_s
+        args = ['-shell-escape', '-interaction', 'batchmode', tex_with_default_values_file_path.to_s]
         system 'xelatex', *args
       end
     end

@@ -1,0 +1,6 @@
+Style/LineLength:
+  Max: 200
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/RegexpLiteral:
+  MaxSlashes: 0

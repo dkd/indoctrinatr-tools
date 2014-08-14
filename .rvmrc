@@ -2,4 +2,4 @@ rvm use 2.1
 
 alias brake='bundle exec'
 alias rubocop='bundle exec rubocop'
-alias cucumber='brake cucumber --format=progress'
+alias cucumber='brake cucumber'

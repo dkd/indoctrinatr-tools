@@ -19,7 +19,7 @@ module Indoctrinatr
       private
 
       def cleanup_log_files
-        Dir[File.join(path_name, '**', '*.log',)].each do |file|
+        Dir[File.join(path_name, '**', '*.log')].each do |file|
           FileUtils.rm file, force: true
         end
       end

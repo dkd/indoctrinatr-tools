@@ -14,7 +14,7 @@ module Indoctrinatr
         RedCloth.new(textile).to_latex
       end
 
-      def get_binding
+      def retrieve_binding
         binding
       end
     end

@@ -27,7 +27,7 @@ module Indoctrinatr
       def read_config_file
         config_file_content = File.read config_file_path
         @configuration = YAML.load config_file_content
-        attributes_as_hashes_in_array = @configuration.fetch "attributes", []
+        attributes_as_hashes_in_array = @configuration.fetch 'attributes', []
         attributes_as_hashes_in_array << { 'name' => 'template_asset_path', 'default_value' => path_name }
         @default_values = DefaultValues.new attributes_as_hashes_in_array
       end
@@ -37,7 +37,7 @@ module Indoctrinatr
       end
 
       def parse_tex_file
-        @parsed_tex_file_content = Erubis::Eruby.new(@tex_file_content).result(default_values.get_binding)
+        @parsed_tex_file_content = Erubis::Eruby.new(@tex_file_content).result(default_values.retrieve_binding)
       end
 
       def write_tex_file

@@ -22,16 +22,16 @@ module Indoctrinatr
       private
 
       def create_folder
-        raise 'Please specify a template pack name.' if template_pack_name.empty?
-        raise "A folder with name '#{template_pack_name}' already exists." if Dir.exists? path_name
+        fail 'Please specify a template pack name.' if template_pack_name.empty?
+        fail "A folder with name '#{template_pack_name}' already exists." if Dir.exist? path_name
 
-        Dir.mkdir path_name          
+        Dir.mkdir path_name
       end
 
       def create_asset_folder
         Dir.mkdir path_name.join('assets')
       end
- 
+
       def copy_configuration_file
         FileUtils.copy_file source_config_file_path, config_file_path
       end

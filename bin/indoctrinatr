@@ -25,7 +25,7 @@ end
 desc 'Display the suggested workflow'
 command :workflow do |c|
   c.action do
-    puts 'The workflow for a project (e.g. demo) looks like this:
+    puts 'The workflow for a project (e.g. demo) typically looks like this:
 
 1. Run in shell: indoctrinatr new demo
    Creates a new Indoctrinatr Template Pack in the folder demo

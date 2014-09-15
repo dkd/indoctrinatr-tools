@@ -1,5 +1,5 @@
 module Indoctrinatr
   module Tools
-    VERSION = '0.0.12'
+    VERSION = '0.0.13'
   end
 end

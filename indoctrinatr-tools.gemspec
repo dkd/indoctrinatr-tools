@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Indoctrinatr::Tools::VERSION
   spec.authors       = ['Nicolai Reuschling']
   spec.email         = ['nicolai.reuschling@dkd.de']
-  spec.summary       = 'indoctrinatr-tools provides a set of command line tools for Indoctrinatr (an Open Source Software project by DKD Internet Service GmbH, Frankfurt am Main, Germany.)'
+  spec.summary       = 'indoctrinatr-tools provides a set of command line tools for Indoctrinatr (an Open Source Software project by dkd Internet Service GmbH, Frankfurt am Main, Germany.)'
   # spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ''
   spec.license       = 'MIT'
@@ -20,16 +20,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler',  '~> 1.6'
+  spec.add_development_dependency 'bundler',  '~> 1.7'
   spec.add_development_dependency 'rake',     '~> 10.3.2'
   spec.add_development_dependency 'rspec',    '~> 3.1'
   spec.add_development_dependency 'cucumber', '~> 1.3.17'
   spec.add_development_dependency 'aruba',    '~> 0.6.1'
-  spec.add_development_dependency 'rubocop',  '~> 0.24.1'
+  spec.add_development_dependency 'rubocop',  '~> 0.26.0'
   spec.add_development_dependency 'pry',      '~> 0.10.0'
 
-  spec.add_dependency 'gli',                 '~> 2.11.0'
-  spec.add_dependency 'rubyzip',             '~> 1.1.4'
+  spec.add_dependency 'gli',                 '~> 2.12.0'
+  spec.add_dependency 'rubyzip',             '~> 1.1.6'
   spec.add_dependency 'erubis',              '~> 2.7.0'
   spec.add_dependency 'to_latex',            '~> 0.5.0'
   spec.add_dependency 'RedCloth',            '~> 4.2'

@@ -1,11 +1,11 @@
 template_name: Hello World Template
-attributes:
+fields:
   -
-    name: location
-    data_type: String
+    name: variable1
+    presentation: text
     default_value: "World"
   -
-    name: adjective
-    data_type: List
+    name: variable2
+    presentation: dropdown
     default_value: "not enough"
-    available_options: "not enough, beautiful, a template"
+    available_options: "not enough, beautiful, your oyster, a template"

@@ -5,6 +5,10 @@ module Indoctrinatr
         Pathname.new(Dir.pwd).join template_pack_name
       end
 
+      def assets_path
+        path_name.join 'assets'
+      end
+
       def check_for_folder
         fail 'Please specify a template pack name.' if template_pack_name.empty?
         fail "A folder with name '#{template_pack_name}' does not exist." unless Dir.exist? path_name

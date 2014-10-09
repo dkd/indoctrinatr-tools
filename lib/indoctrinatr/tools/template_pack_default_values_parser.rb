@@ -20,15 +20,15 @@ module Indoctrinatr
         read_tex_file
         parse_tex_file
         write_tex_file
+        show_success
       end
 
       private
 
       def read_config_file
-        config_file_content = File.read config_file_path
-        @configuration = YAML.load config_file_content
+        @configuration = YAML.load_file config_file_path
         attributes_as_hashes_in_array = @configuration.fetch 'fields', []
-        attributes_as_hashes_in_array << { 'name' => 'template_asset_path', 'default_value' => path_name }
+        attributes_as_hashes_in_array << { 'name' => 'template_asset_path', 'default_value' => assets_path }
         @default_values = DefaultValues.new attributes_as_hashes_in_array
       end
 
@@ -42,6 +42,10 @@ module Indoctrinatr
 
       def write_tex_file
         File.write tex_with_default_values_file_path, parsed_tex_file_content
+      end
+
+      def show_success
+        puts "The template pack '#{template_pack_name}' has been successfully parsed with default values."
       end
     end
   end

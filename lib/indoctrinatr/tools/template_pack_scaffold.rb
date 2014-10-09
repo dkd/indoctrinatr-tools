@@ -1,4 +1,5 @@
 require 'indoctrinatr/tools/template_pack_helpers'
+require 'fileutils'
 
 module Indoctrinatr
   module Tools

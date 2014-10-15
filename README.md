@@ -14,6 +14,20 @@ After installation verify if you have a working `indoctrinatr` shell command.
 
 ## Usage
 
+Replace `project_name` with the name of your Template Pack:
+
+Command | Description
+---|---
+`indoctrinatr new project_name` | Creates a scaffold for a new Template Pack
+`indoctrinatr parse project_name` | Parses a XeTex file with ERB and default values
+`indoctrinatr pdf project_name` | Compiles PDF with default values
+`indoctrinatr pack project_name` | Creates a Template Pack from a given project folder
+`indoctrinatr demo` | Creates, parses, and compiles a demo project
+`indoctrinatr workflow` | Displays a suggested workflow
+`indoctrinatr bashcompletion` | Displays instructions for bash completion
+`indoctrinatr zshcompletion` | Displays instructions for zsh completion
+
+
 ## Build
 
 If you want to build the Rubygem yourself, run `rake build` to build and `rake install` to build and install the Indoctrinatr Tools gem.

@@ -60,7 +60,7 @@ command :new do |c|
   end
 end
 
-desc 'Parse tex file with ERB and default values of Template Pack'
+desc 'Parse XeTeX file with ERB and default values of Template Pack'
 arg_name 'template_pack_name'
 command :parse do |c|
   c.action do |_, _, args|

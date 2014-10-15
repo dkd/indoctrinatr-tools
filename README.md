@@ -34,7 +34,7 @@ If you want to build the Rubygem yourself, run `rake build` to build and `rake i
 
 ## Feedback
 
-What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a [line](opensource@dkd.de) and tell us how you use Indoctrinatr. You can also open a [GitHub Issue](https://github.com/dkd/indoctrinatr-tools/issues) if you experience any problems.
+What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensource@dkd.de>) and tell us how you use Indoctrinatr. You can also open a [GitHub Issue](https://github.com/dkd/indoctrinatr-tools/issues) if you experience any problems.
 
 ## Contributing
 

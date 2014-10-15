@@ -12,8 +12,8 @@ end
 
 desc 'Run demo'
 task :demo do
-  puts `indoctrinatr new demo`
-  puts `indoctrinatr parse demo`
-  puts `indoctrinatr pdf demo`
-  puts `indoctrinatr pack demo`
+  puts `bin/indoctrinatr new demo`
+  puts `bin/indoctrinatr parse demo`
+  puts `bin/indoctrinatr pdf demo`
+  puts `bin/indoctrinatr pack demo`
 end

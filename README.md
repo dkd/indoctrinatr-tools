@@ -6,6 +6,8 @@
 
 ## Installation
 
+[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools)
+
 We distribute Indoctrinatr Tools as a Rubygem. Please run:
 
     gem install indoctrinatr-tools

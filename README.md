@@ -6,13 +6,20 @@
 
 ## Installation
 
-[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools)
+[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools) Branch: master [![Travis CI Status: master](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=master)](https://travis-ci.org/dkd/indoctrinatr-tools) Branch: development  [![Travis CI Status: development](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=development)](https://travis-ci.org/dkd/indoctrinatr-tools)
 
-We distribute Indoctrinatr Tools as a Rubygem. Please run:
+1.  Install XeTeX:
 
+    Mac OS X: [MacTeX](https://tug.org/mactex/)
+ 
+    Debian/Ubuntu: `apt-get install texlive-full`
+
+2. We distribute Indoctrinatr Tools as a Rubygem. Please run:
+
+    ```shell
     gem install indoctrinatr-tools
-
-After installation verify if you have a working `indoctrinatr` shell command.
+    ```
+   After installation verify if you have a working `indoctrinatr` shell command.
 
 ## Usage
 

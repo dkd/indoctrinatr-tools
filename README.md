@@ -36,7 +36,6 @@ Command | Description
 `indoctrinatr bashcompletion` | Displays instructions for bash completion
 `indoctrinatr zshcompletion` | Displays instructions for zsh completion
 
-
 ## Build
 
 If you want to build the Rubygem yourself, run `rake build` to build and `rake install` to build and install the Indoctrinatr Tools gem.

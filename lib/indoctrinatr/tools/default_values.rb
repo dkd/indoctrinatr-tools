@@ -3,7 +3,7 @@ require 'redcloth'
 module Indoctrinatr
   module Tools
     class DefaultValues
-      def initialize attributes_as_hashes_in_array
+      def initialize attributes_as_hashes_in_array = []
         attributes_as_hashes_in_array.each do |attribute_hash|
           instance_variable_set("@#{attribute_hash['name']}", attribute_hash['default_value'])
 
@@ -18,7 +18,7 @@ module Indoctrinatr
       end
 
       def textilize textile
-        RedCloth.new(textile)
+        RedCloth.new(textile).to_latex
       end
 
       def retrieve_binding

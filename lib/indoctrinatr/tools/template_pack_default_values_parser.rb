@@ -28,7 +28,7 @@ module Indoctrinatr
       def read_config_file
         @configuration = YAML.load_file config_file_path
         attributes_as_hashes_in_array = @configuration.fetch 'fields', []
-        attributes_as_hashes_in_array << { 'name' => 'template_asset_path', 'default_value' => assets_path }
+        attributes_as_hashes_in_array << { 'name' => 'template_asset_path', 'default_value' => assets_path.to_s }
         @default_values = DefaultValues.new attributes_as_hashes_in_array
       end
 

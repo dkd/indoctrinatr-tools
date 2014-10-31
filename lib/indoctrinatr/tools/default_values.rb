@@ -18,7 +18,7 @@ module Indoctrinatr
       end
 
       def textilize textile
-        RedCloth.new(textile).to_latex
+        RedCloth.new(textile)
       end
 
       def retrieve_binding

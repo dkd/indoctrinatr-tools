@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec',    '~> 3.1'
   spec.add_development_dependency 'cucumber', '~> 1.3.17'
   spec.add_development_dependency 'aruba',    '~> 0.6.1'
-  spec.add_development_dependency 'rubocop',  '~> 0.26.0'
+  spec.add_development_dependency 'rubocop',  '~> 0.27.0'
   spec.add_development_dependency 'pry',      '~> 0.10.0'
 
   spec.add_dependency 'gli',                 '~> 2.12.0'

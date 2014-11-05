@@ -17,7 +17,7 @@ module Indoctrinatr
         end
       end
 
-      def textilize textile
+      def textile2latex textile
         RedCloth.new(textile).to_latex
       end
 

@@ -1,5 +1,6 @@
 require 'indoctrinatr/tools/template_pack_helpers'
 require 'indoctrinatr/tools/default_values'
+require 'indoctrinatr/tools/configuration_extractor'
 require 'erubis'
 require 'to_latex'
 
@@ -26,9 +27,8 @@ module Indoctrinatr
       private
 
       def read_config_file
-        @configuration = YAML.load_file config_file_path
-        attributes_as_hashes_in_array = @configuration.fetch 'fields', []
-        @default_values = DefaultValues.new assets_path.to_s, attributes_as_hashes_in_array
+        @configuration = ConfigurationExtractor.new(template_pack_name).call
+        @default_values = DefaultValues.new @configuration
       end
 
       def read_tex_file

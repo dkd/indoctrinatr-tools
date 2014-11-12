@@ -6,3 +6,7 @@ Style/RegexpLiteral:
   MaxSlashes: 0
 Style/Documentation:
   Enabled: false
+Metrics/MethodLength:
+  Max: 12
+Style/TrivialAccessors:
+  Enabled: false

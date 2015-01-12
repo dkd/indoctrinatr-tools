@@ -12,7 +12,7 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 
     Mac OS X: [MacTeX](https://tug.org/mactex/)
  
-    Debian/Ubuntu: `apt-get install texlive-full`
+    Debian/Ubuntu: `apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra`
 
 2. We distribute Indoctrinatr Tools as a Rubygem. Please run:
 

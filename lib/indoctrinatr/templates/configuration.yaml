@@ -1,4 +1,7 @@
 template_name: Hello World Template
+textual_description: "This is your first Indoctrinatr template.
+
+Edit is as you like. Read more at https://github.com/dkd/indoctrinatr."
 fields:
   -
     name: variable1

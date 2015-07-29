@@ -6,7 +6,7 @@
 
 ## Installation
 
-Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools) Branch: master [![Travis CI Status: master](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=master)](https://travis-ci.org/dkd/indoctrinatr-tools) Branch: development  [![Travis CI Status: development](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=development)](https://travis-ci.org/dkd/indoctrinatr-tools)
+Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools) Branch: master [![Travis CI Status: master](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=master)](https://travis-ci.org/dkd/indoctrinatr-tools) Branch: development  [![Travis CI Status: development](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=development)](https://travis-ci.org/dkd/indoctrinatr-tools) Coverage: [![Coverage Status](https://coveralls.io/repos/dkd/indoctrinatr-tools/badge.svg?branch=development&service=github)](https://coveralls.io/github/dkd/indoctrinatr-tools?branch=development)
 
 1.  Install XeTeX:
 

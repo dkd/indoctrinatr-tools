@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'indoctrinatr/tools/default_values'
 require 'indoctrinatr/tools/template_pack_configuration'
 

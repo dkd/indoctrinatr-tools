@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe 'configuration.yaml' do
   it 'should exist' do
     configuration_file = Pathname.new(__FILE__).join '..', '..', '..', '..', 'lib', 'indoctrinatr', 'templates', 'configuration.yaml'

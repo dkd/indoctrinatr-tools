@@ -3,7 +3,7 @@ require 'redcloth'
 module Indoctrinatr
   module Tools
     class DefaultValues
-      def initialize configuration # rubocop:disable Metrics/AbcSize
+      def initialize configuration
         @_configuration = configuration
         _build_from_configuration
       end

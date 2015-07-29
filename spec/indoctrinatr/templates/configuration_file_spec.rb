@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pathname'
 
 describe 'configuration.yaml' do
   it 'should exist' do

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pathname'
 
 describe 'template.tex.erb' do
   it 'should exist' do

@@ -48,6 +48,8 @@ What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensour
 
 We are also looking forward to your [GitHub Pull Requests](https://help.github.com/articles/using-pull-requests/).
 
+Manual testing: After cloning the repo, run `bundle exec bin/indoctrinatr` inside the directory for testing your own development changes.
+
 ## License
 
 Indoctrinatr and Indoctrinatr Tools are licensed under the terms and conditions of the [MIT License](http://en.wikipedia.org/wiki/MIT_License).

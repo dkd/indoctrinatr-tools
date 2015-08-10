@@ -21,6 +21,10 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
     ```
    After installation verify if you have a working `indoctrinatr` shell command.
 
+### LaTeX Requirements
+
+dirtree for the template documentation
+
 ## Usage
 
 Replace `project_name` with the name of your Template Pack:

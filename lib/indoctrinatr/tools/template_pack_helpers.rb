@@ -25,6 +25,10 @@ module Indoctrinatr
       def tex_with_default_values_file_path
         path_name.join template_pack_name + '_with_default_values.tex'
       end
+
+      def pack_technical_documentation_file_path
+        path_name.join template_pack_name + '_technical_documentation.pdf'
+      end
     end
   end
 end

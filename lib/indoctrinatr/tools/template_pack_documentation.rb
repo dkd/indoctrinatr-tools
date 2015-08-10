@@ -5,13 +5,13 @@ require 'indoctrinatr/tools/default_values'
 require 'indoctrinatr/tools/configuration_extractor'
 require 'erubis'
 require 'to_latex'
+require 'fileutils'
 
 module Indoctrinatr
   module Tools
     class TemplatePackDocumentation
-      # include TemplatePackHelpers
+      include TemplatePackHelpers
       include TemplateDocumentationHelpers
-      # include DirectoryHelpers
 
       attr_accessor :template_pack_name
 
@@ -27,10 +27,13 @@ module Indoctrinatr
         read_main_tex_file
         parse_content_tex_file
         parse_main_tex_file
-        write_tex_file
+        create_temp_compile_dir
+        write_content_tex_file
         write_main_tex_file
         copy_source_files
         compile_documentation_to_pdf
+        copy_doc_file_to_template_pack
+        delete_temp_dir
         show_success
       end
 
@@ -62,19 +65,23 @@ module Indoctrinatr
       end
 
       def parse_content_tex_file
-        @parsed_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(binding)
+        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(binding)
       end
 
       def parse_main_tex_file
         @parsed_main_tex_file_content = Erubis::Eruby.new(@main_tex_file_content).result(binding)
       end
 
-      def write_tex_file
-        File.write 'indoctrinatr-technical-documentation-content.tex', @parsed_tex_file_content
+      def create_temp_compile_dir
+        make_documentation_compile_dir_path_name
+      end
+
+      def write_content_tex_file
+        File.write content_tex_file_destination_path, @parsed_content_tex_file_content
       end
 
       def write_main_tex_file
-        File.write 'indoctrinatr-technical-documentation.tex', @parsed_main_tex_file_content
+        File.write main_tex_file_destination_path, @parsed_main_tex_file_content
       end
 
       def copy_source_files
@@ -83,11 +90,17 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        args = ['-xelatex', documentation_file_path.to_s] # idea: latexmk  '-interaction=batchmode'
-        system('latexmk', *args)
+        args = ['-xelatex', "-output-directory=#{documentation_compile_dir_path_name}", main_tex_file_destination_path.to_s]
+        system('latexmk', *args) # TODO: 'silent' mode
       end
 
-      # TODO: delete copied files, cleanup (latexmk -c)
+      def copy_doc_file_to_template_pack
+        FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
+      end
+
+      def delete_temp_dir
+        FileUtils.remove_entry_secure documentation_compile_dir_path_name
+      end
 
       def show_success
         puts "A documentation for '#{@template_pack_name}' has been successfully generated."

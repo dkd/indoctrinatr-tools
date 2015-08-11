@@ -89,8 +89,11 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        args = ['-xelatex', "-output-directory=#{documentation_compile_dir_path_name}", main_tex_file_destination_path.to_s]
-        system('latexmk', *args) # TODO: 'silent' mode
+        args = ['-xelatex',
+                '-shell-escape',
+                '-interaction=batchmode', # more silent output
+                "-output-directory=#{documentation_compile_dir_path_name}", main_tex_file_destination_path.to_s] # without this xelatex tries to use the current working directory
+        system('latexmk', *args) # latexmk instead of running 2.times
       end
 
       def copy_doc_file_to_template_pack

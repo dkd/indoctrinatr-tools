@@ -20,21 +20,25 @@ module Indoctrinatr
         @mydir = DirectoryHelpers.new
       end
 
-      def call
+      def call # rubocop:disable Metrics/AbcSize
         read_config_file
         read_template_files_content
         read_content_tex_file
         read_main_tex_file
         parse_content_tex_file
         parse_main_tex_file
+        # compilation process:
         create_temp_compile_dir
         write_content_tex_file
         write_main_tex_file
         copy_source_files
-        compile_documentation_to_pdf
-        copy_doc_file_to_template_pack
-        delete_temp_dir
-        show_success
+        if compile_documentation_to_pdf
+          copy_doc_file_to_template_pack
+          delete_temp_dir
+          show_success
+        else
+          show_error
+        end
       end
 
       private
@@ -93,7 +97,8 @@ module Indoctrinatr
                 '-shell-escape',
                 '-interaction=batchmode', # more silent output
                 "-output-directory=#{documentation_compile_dir_path_name}", main_tex_file_destination_path.to_s] # without this xelatex tries to use the current working directory
-        system('latexmk', *args) # latexmk instead of running 2.times
+        latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
+        latexmk_successful # false if error, nil if system command unknown
       end
 
       def copy_doc_file_to_template_pack
@@ -102,6 +107,10 @@ module Indoctrinatr
 
       def delete_temp_dir
         FileUtils.remove_entry_secure documentation_compile_dir_path_name
+      end
+
+      def show_error
+        puts 'LaTeX compilation failure! error code: ', $CHILD_STATUS
       end
 
       def show_success

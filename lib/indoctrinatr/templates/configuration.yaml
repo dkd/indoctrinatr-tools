@@ -13,4 +13,5 @@ fields:
     presentation: dropdown
     default_value: "not enough"
     available_options: "not enough, beautiful, your oyster, a template"
-    description: "The second variable"
+    description: "The second variable. The description name can be very long and should adequately describe what the variable is for etc. pp."
+    required: "true"

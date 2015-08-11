@@ -1,3 +1,4 @@
+% latex template author: Søren Schaffstein
 % let compiler know which file is the root file
 % !TEX root = indoctrinatr-technical-documentation.tex
 
@@ -26,9 +27,13 @@
 
 \section{Verwendete Variablen}
 		
-\begin{tabu}{ l l l X }
-	\textbf{Variable} & \textbf{Präsentation} & \textbf{Standardwert} & \textbf{Beschreibung} \\
+\begin{tabu}{ l l l l X }
+	\textbf{Variable} & \textbf{Präsentation} & \textbf{Standardwert} & \textbf{Required} & \textbf{Beschreibung} \\
 	<% @attributes.each do |attribute| %>
-		\texttt{<%= attribute['name'].to_latex %>} & <%= attribute['presentation'].to_latex %> & <%= attribute['default_value'].to_latex %> & <%= attribute['description'].to_latex -%>\\
+		\texttt{<%= attribute['name'].to_latex -%>}
+		& <%= attribute['presentation'].to_latex -%>
+		& <%= attribute['default_value'].to_latex -%>
+		& <%= 'true' if attribute['required'] == 'true' -%> <%# empty if false or not set. Wish by Søren for better readability-%>
+		& <%= attribute['description'].to_latex -%>\\
 	<% end %>
 \end{tabu}

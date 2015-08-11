@@ -40,14 +40,13 @@ module Indoctrinatr
       private
 
       def read_config_file
-        @configuration = ConfigurationExtractor.new(@template_pack_name).call
-        @attributes = @configuration.attributes_as_hashes_in_array # we need: name, presentation, default_value, description
-        # TODO: attributes have a required boolean field
-        @template_name = 'hardcoded default Name' # stub, should be read from configuration
+        configuration = ConfigurationExtractor.new(template_pack_name).call
+        @attributes = configuration.attributes_as_hashes_in_array # we need: name, presentation, default_value, description
+        @template_name = configuration.template_name
       end
 
       def read_template_files_content
-        filenames = @mydir.list_files_of_type @template_pack_name
+        filenames = @mydir.list_files_of_type template_pack_name
         @files = []
         filenames.each do |filename| # create array of hashes
           language = @mydir.get_programming_language filename
@@ -103,7 +102,7 @@ module Indoctrinatr
       end
 
       def show_success
-        puts "A documentation for '#{@template_pack_name}' has been successfully generated."
+        puts "A documentation for '#{template_pack_name}' has been successfully generated."
       end
     end
   end

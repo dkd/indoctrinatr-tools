@@ -2,10 +2,10 @@
 % let compiler know which file is the root file
 % !TEX root = indoctrinatr-technical-documentation.tex
 
-\chapter{Template-Struktur}
+\chapter{Template Structure}
 
 
-\section{Dateien im Template}
+\section{Files in Template}
 \dirtree{%
 	.1 /.
 	<% @mydir.print_dirtree_style(@template_pack_name).each do |item| %>
@@ -22,13 +22,10 @@
 
 <% end %>
 
-\chapter{Variablen- und Funktionsübersicht}
-
-
-\section{Verwendete Variablen}
+\chapter{Variables}
 		
 \begin{tabu}{ l l l l X }
-	\textbf{Variable} & \textbf{Präsentation} & \textbf{Standardwert} & \textbf{Required} & \textbf{Beschreibung} \\
+	\textbf{Variable} & \textbf{Presentation} & \textbf{Default Value} & \textbf{Required} & \textbf{Description} \\
 	<% @attributes.each do |attribute| %>
 		\texttt{<%= attribute['name'].to_latex -%>}
 		& <%= attribute['presentation'].to_latex -%>

@@ -1,7 +1,6 @@
+require 'indoctrinatr/tools/template_documentation_content'
 require 'indoctrinatr/tools/template_pack_helpers'
 require 'indoctrinatr/tools/template_documentation_helpers'
-require 'indoctrinatr/tools/directory_helpers'
-require 'indoctrinatr/tools/default_values'
 require 'indoctrinatr/tools/configuration_extractor'
 require 'erubis'
 require 'to_latex'
@@ -17,12 +16,10 @@ module Indoctrinatr
 
       def initialize template_pack_name
         @template_pack_name = template_pack_name
-        @mydir = DirectoryHelpers.new
       end
 
       def call # rubocop:disable Metrics/AbcSize
-        read_config_file
-        read_template_files_content
+        fill_documentation_content
         read_content_tex_file
         read_main_tex_file
         parse_content_tex_file
@@ -43,20 +40,9 @@ module Indoctrinatr
 
       private
 
-      def read_config_file
+      def fill_documentation_content
         configuration = ConfigurationExtractor.new(template_pack_name).call
-        @attributes = configuration.attributes_as_hashes_in_array # we need: name, presentation, default_value, description
-        @template_name = configuration.template_name
-      end
-
-      def read_template_files_content
-        filenames = @mydir.list_files_of_type template_pack_name
-        @files = []
-        filenames.each do |filename| # create array of hashes
-          language = @mydir.get_programming_language filename
-          @files << { name: filename, content: File.read(filename), language: language }
-        end
-        @files
+        @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
       end
 
       def read_content_tex_file
@@ -68,11 +54,11 @@ module Indoctrinatr
       end
 
       def parse_content_tex_file
-        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(binding)
+        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(@documentation_content.retrieve_binding)
       end
 
       def parse_main_tex_file
-        @parsed_main_tex_file_content = Erubis::Eruby.new(@main_tex_file_content).result(binding)
+        @parsed_main_tex_file_content = Erubis::Eruby.new(@main_tex_file_content).result(@documentation_content.retrieve_binding)
       end
 
       def create_temp_compile_dir

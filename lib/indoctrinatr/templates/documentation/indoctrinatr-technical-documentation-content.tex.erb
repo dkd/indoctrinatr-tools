@@ -14,10 +14,10 @@
 }
 
 <% @files.each do |file| %>
-\section{<%= file[:name].to_latex -%>}
+\section{<%= file.name.to_latex -%>}
 
-\begin{lstlisting}<%="[language=#{file[:language]}]" unless file[:language] == 'unspecified' %>
-<%= file[:content].gsub('\end{lstlisting}', '\end{lstlisting}'.to_latex) %><%# this escaping is important, so that lstlisting does not break. \begin lstlisting is ignored %>
+\begin{lstlisting}<%="[language=#{file.language}]" unless file.language == 'unspecified' %>
+<%= file.content.gsub('\end{lstlisting}', '\end{lstlisting}'.to_latex) %><%# this escaping is important, so that lstlisting does not break. \begin lstlisting is ignored %>
 \end{lstlisting}
 
 <% end %>

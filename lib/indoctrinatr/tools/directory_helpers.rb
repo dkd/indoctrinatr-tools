@@ -13,22 +13,6 @@ module Indoctrinatr
         # found and modified from http://stackoverflow.com/a/3504307/1796645
         Dir.glob("#{directory}/**/*.{#{types.join(',')}}") # recursively list files of type in types array
       end
-
-      def get_programming_language path_to_file
-        case File.extname(path_to_file)
-        when '.tex'
-          language = 'TeX'
-        when '.sty'
-          language = 'TeX'
-        when '.erb' # .erb files are just supposed to be tex.erb files. TODO: more correct
-          language = 'TeX'
-        when '.rb'
-          language = 'Ruby'
-        else # probably YAML
-          language = 'unspecified'
-        end
-        language
-      end
     end
   end
 end

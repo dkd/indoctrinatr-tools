@@ -1,6 +1,6 @@
 module Indoctrinatr
   module Tools
-    class DirectoryHelpers
+    module DirectoryHelpers
       def print_dirtree_style directory = '.'
         Dir.glob("#{directory}/**/*").inject [] do |entries, entry| # list entries recursively
           nesting = entry.count(File::SEPARATOR) + 1 # nesting starts with 2, because for \dirtree 1 is root

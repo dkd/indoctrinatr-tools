@@ -8,7 +8,7 @@
 \section{Files in Template}
 \dirtree{%
 	.1 /.
-	<% @mydir.print_dirtree_style(@template_pack_name).each do |item| %>
+	<% list_of_files.each do |item| %>
 	<%= item.to_latex %>
 	<% end %>
 }

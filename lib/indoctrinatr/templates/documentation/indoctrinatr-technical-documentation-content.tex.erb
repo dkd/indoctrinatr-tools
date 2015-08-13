@@ -8,7 +8,7 @@
 \dirtree{%
 	.1 /.
 	<% @mydir.print_dirtree_style(@template_pack_name).each do |item| %>
-	<%= item %>
+	<%= item.to_latex %>
 	<% end %>
 }
 

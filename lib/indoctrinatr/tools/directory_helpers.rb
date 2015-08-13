@@ -1,20 +1,12 @@
 module Indoctrinatr
   module Tools
     class DirectoryHelpers
-      def initialize
-        @dirtree_lines = []
-      end
-
-      # modified from http://compsci.ca/v3/viewtopic.php?t=13034
-      def print_dirtree_style dir = '.', nesting = 2 # nesting starts with 2, because for \dirtree 1 is root
-        Dir.foreach(dir) do |entry|
-          next if entry =~ /^\.{1,2}/   # Ignore ".", "..", or hidden files
-          @dirtree_lines.push ".#{nesting} #{entry}. ".to_latex # formatting for \dirtree: .<level><space><text-node>.<space>
-          if File.stat(d = "#{dir}#{File::SEPARATOR}#{entry}").directory?
-            print_dirtree_style(d, nesting + 1)
-          end
+      def print_dirtree_style directory = '.'
+        Dir.glob("#{directory}/**/*").inject [] do |entries, entry| # list entries recursively
+          nesting = entry.count(File::SEPARATOR) + 1 # nesting starts with 2, because for \dirtree 1 is root
+          name = entry.split(File::SEPARATOR).last
+          entries.push ".#{nesting} #{name}. " # formatting for \dirtree: .<level><space><text-node>.<space>
         end
-        @dirtree_lines
       end
 
       def list_files_of_type directory = '.', types = %w(erb rb yaml sty tex) # default file types for template docs

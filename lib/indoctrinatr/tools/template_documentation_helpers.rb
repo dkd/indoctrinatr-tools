@@ -45,6 +45,10 @@ module Indoctrinatr
         documentation_compile_dir_path_name.join 'indoctrinatr-technical-documentation.pdf'
       end
 
+      def latex_log_file
+        documentation_compile_dir_path_name.join 'indoctrinatr-technical-documentation.log'
+      end
+
       private
 
       def documentation_files_path

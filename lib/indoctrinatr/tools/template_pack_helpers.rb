@@ -29,6 +29,10 @@ module Indoctrinatr
       def pack_technical_documentation_file_path
         path_name.join template_pack_name + '_technical_documentation.pdf'
       end
+
+      def latex_log_file_destination
+        path_name.join template_pack_name + 'documentation_laTeX_failure.log'
+      end
     end
   end
 end

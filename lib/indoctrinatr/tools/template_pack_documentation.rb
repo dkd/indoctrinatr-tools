@@ -37,7 +37,7 @@ module Indoctrinatr
           delete_temp_dir
           show_success
         else
-          show_error
+          handle_latex_error
         end
       end
 
@@ -109,8 +109,9 @@ module Indoctrinatr
         FileUtils.remove_entry_secure documentation_compile_dir_path_name
       end
 
-      def show_error
-        puts 'LaTeX compilation failure! error code: ', $CHILD_STATUS
+      def handle_latex_error
+        puts "possible LaTeX compilation failure! see #{latex_log_file_destination} for details. " # idea: process $CHILD_STATUS
+        FileUtils.copy_file latex_log_file, latex_log_file_destination
       end
 
       def show_success

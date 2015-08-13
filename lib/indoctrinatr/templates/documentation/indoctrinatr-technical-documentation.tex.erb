@@ -10,12 +10,14 @@
 % use dkd-letter style to apply design styles
 \usepackage{indoctrinatr-technical-documentation}
 
+% include datetime2 for current date
+\usepackage{datetime2}
+
 
 %define labels to use in this document
 \newcommand{\dkd}{\emph{dkd}}
 \newcommand{\customDocumentTitle}{Documentation Indoctrinatr-Template for <%= @template_name -%>}
 \newcommand{\customKeywords}{Indoctrinatr, Template}
-\newcommand{\customDate}{1980-01-01} <%# TODO: get from current date %>
 
 
 % allow usage an inclusion of hyperlinks in the document
@@ -53,7 +55,7 @@
 				\hspace*{26.25mm}\=\hspace{26.25mm}\=\kill
 				% add document details separated by tabs
 				Document title: \>\customDocumentTitle{}\\
-				Date: \>\customDate{}\\
+				Date: \>\today\\ % use datetime2
 			\end{tabbing}
 		\end{flushleft}
 	\end{titlepage}

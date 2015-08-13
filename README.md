@@ -23,7 +23,9 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 
 ### LaTeX Requirements
 
-dirtree for the template documentation
+* for the template documentation
+  * `dirtree`
+  * `datetime2`
 
 ## Usage
 

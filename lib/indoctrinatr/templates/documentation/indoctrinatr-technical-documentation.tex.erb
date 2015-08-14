@@ -1,0 +1,88 @@
+% dkd technical documentation template
+% Author (LaTeX): Søren Schaffstein
+% Requires XeLaTeX to render!
+% !TEX program = XeLaTeX
+
+% create an A4 portrait format document with 10pt font size
+\documentclass[10pt,a4paper]{report}
+
+
+% use dkd-letter style to apply design styles
+\usepackage{indoctrinatr-technical-documentation}
+
+
+%define labels to use in this document
+\newcommand{\dkd}{\emph{dkd}}
+\newcommand{\customDocumentTitle}{Dokumentation Indoctrinatr-Template für <%= @template_name -%>}
+\newcommand{\customKeywords}{Indoctrinatr, Template}
+\newcommand{\customDate}{1980-01-01} <%# TODO: get from current date %>
+
+
+% allow usage an inclusion of hyperlinks in the document
+% IMPORTANT: package must be included last in the preamble
+\usepackage{hyperref}
+% define PDF metadata and link colors in document
+\hypersetup{
+	pdftitle={\customDocumentTitle},
+	pdfauthor={indoctrinatr-tools},
+	pdfkeywords={\customKeywords},
+	pdfproducer={LaTeX with hyperref},
+	pdfcreator={LaTeX},
+	linkcolor=lime-green,
+	citecolor=black,
+	filecolor=black,
+	urlcolor=lime-green,
+	colorlinks=true
+}
+
+
+\begin{document}
+	% define title page of the report
+	\begin{titlepage}
+		% set all text aligned left
+		\begin{flushleft}
+			% start with vertical space (use \vspace* at beginning of page)
+			\vspace*{52mm}
+			% set document title
+			{\fontsize{18}{19}\headlineFont \customDocumentTitle{}}
+			% add vertical space after document title
+			\vspace{18.5mm}
+			% add document details in a tabbed format
+			\begin{tabbing}
+				% define tabstop distances
+				\hspace*{26.25mm}\=\hspace{26.25mm}\=\kill
+				% add document details separated by tabs
+				Dokumententitel: \>\customDocumentTitle{}\\
+				Datum: \>\customDate{}\\
+			\end{tabbing}
+		\end{flushleft}
+	\end{titlepage}
+
+
+	% add table of contents
+	\tableofcontents
+
+	% include a LaTeX file with the actual documentation content
+	\input{indoctrinatr-technical-documentation-content.tex}
+	
+	% add prrendered templates in the appendix
+	\appendix
+	%\chapter{Template filled with sample data}
+	% remove default wallpaper
+	%\ClearWallPaper
+	% include the prerendered template
+	% pages=- selects all pages
+	%\includepdf[pages=-]{template_exampledata.pdf}
+	% restore wallpaper
+	%\ULCornerWallPaper{1}{indoctrinattr_letterpaper.pdf}
+	
+	%\chapter{Template filled with variable names}
+	% remove default wallpaper
+	%\ClearWallPaper
+	% include the prerendered template
+	% pages=- selects all pages
+	%\includepdf[pages=-]{template_documentation.pdf}
+	% restore wallpaper
+	%\ULCornerWallPaper{1}{indoctrinattr_letterpaper.pdf}
+
+\end{document}

@@ -1,0 +1,34 @@
+% let compiler know which file is the root file
+% !TEX root = indoctrinatr-technical-documentation.tex
+
+\chapter{Template-Struktur}
+
+
+\section{Dateien im Template}
+\dirtree{%
+	.1 /.
+	<% @mydir.print_dirtree_style(@template_pack_name).each do |item| %>
+	<%= item %>
+	<% end %>
+}
+
+<% @files.each do |file| %>
+\section{<%= file[:name].to_latex -%>}
+
+\begin{lstlisting}<%="[language=#{file[:language]}]" unless file[:language] == 'unspecified' %>
+<%= file[:content].gsub('\end{lstlisting}', '\end{lstlisting}'.to_latex) %><%# this escaping is important, so that lstlisting does not break. \begin lstlisting is ignored %>
+\end{lstlisting}
+
+<% end %>
+
+\chapter{Variablen- und Funktionsübersicht}
+
+
+\section{Verwendete Variablen}
+		
+\begin{tabu}{ l l l X }
+	\textbf{Variable} & \textbf{Präsentation} & \textbf{Standardwert} & \textbf{Beschreibung} \\
+	<% @attributes.each do |attribute| %>
+		\texttt{<%= attribute['name'].to_latex %>} & <%= attribute['presentation'].to_latex %> & <%= attribute['default_value'].to_latex %> & <%= attribute['description'].to_latex -%>\\
+	<% end %>
+\end{tabu}

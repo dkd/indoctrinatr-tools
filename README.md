@@ -21,6 +21,12 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
     ```
    After installation verify if you have a working `indoctrinatr` shell command.
 
+### LaTeX Requirements
+
+* for the template documentation
+  * `dirtree`
+  * `datetime2`
+
 ## Usage
 
 Replace `project_name` with the name of your Template Pack:
@@ -30,6 +36,7 @@ Command | Description
 `indoctrinatr new project_name` | Creates a scaffold for a new Template Pack
 `indoctrinatr parse project_name` | Parses a XeTex file with ERB and default values
 `indoctrinatr pdf project_name` | Compiles PDF with default values
+`indoctrinatr doc project_name` | Creates a technical documentation of your template pack
 `indoctrinatr pack project_name` | Creates a Template Pack from a given project folder
 `indoctrinatr demo` | Creates, parses, and compiles a demo project
 `indoctrinatr workflow` | Displays a suggested workflow
@@ -47,6 +54,8 @@ What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensour
 ## Contributing
 
 We are also looking forward to your [GitHub Pull Requests](https://help.github.com/articles/using-pull-requests/).
+
+Manual testing: After cloning the repo, run `bundle exec bin/indoctrinatr` inside the directory for testing your own development changes.
 
 ## License
 

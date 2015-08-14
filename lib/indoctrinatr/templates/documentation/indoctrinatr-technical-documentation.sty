@@ -1,0 +1,186 @@
+% Author: Søren Schaffstein
+% specify the page margins
+\usepackage[top=41mm, bottom=25mm, left=24mm, right=12.4mm]{geometry}
+
+
+% allow the usage of colour in the document
+\usepackage[cmyk,table]{xcolor}
+
+% define colors for use in the document
+\definecolor{lime-green}{cmyk}{0.25,0,0.83,0}
+\definecolor{hot-chocolate}{cmyk}{0,0.6,1,0.8}
+\definecolor{alarm-red}{cmyk}{0.15,0.95,1,0.05}
+\definecolor{light-gray}{cmyk}{0,0,0,0.1}
+% use colors with \textcolor{<declared-color>}{<text>}
+
+
+% define document language
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+
+% use dkd letterpaper in background 
+\usepackage{wallpaper}
+% use 2nd page letterpaper for all pages 
+\ULCornerWallPaper{1}{indoctrinatr_letterpaper.pdf}
+
+% define dkd fonts to use in this document
+% fontspec allows to use Mac OS X system fonts but requires the use of XeTeX
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text} % To support LaTeX quoting style
+\setmainfont{Frutiger LT Std 45 Light}
+
+
+% define appearance of headlines
+\usepackage{titlesec}
+% Specify different font for section headings
+\newfontfamily\mainFont[]{Frutiger LT Std 45 Light}
+\newfontfamily\headlineFont[]{Frutiger LT Std 65 Bold}
+%\newfontfamily\monoFont[]{Andale Mono}
+
+% Setting of font and size
+% {\fontsize{<font size>}{<line height>} \selectfont <Text>}
+% {\fontsize{40}{48} \selectfont Lorem ipsum}
+
+% \chapter can only be defined in document type report and only by using 
+% the advanced command \titleformat (\titleformat* does not work)
+% \titleformat{\chapter}[hang]{\large\bfseries}{\thechapter\quad}{0pt}{}
+% \titleformat{\section}[hang]{\large\bfseries}{\thesection\quad}{0pt}{}
+% \titleformat{\subsection}[hang]{\large\bfseries}{\thesubsection\quad}{0pt}{}
+% \titleformat{\subsubsection}[hang]{\large\bfseries}{\thesubsubsection\quad}{0pt}{}
+% \titleformat{\paragraph}[hang]{\large\bfseries}{\theparagraph\quad}{0pt}{}
+\titleformat{\chapter}[hang]{\fontsize{18}{19}\headlineFont}{\thechapter\quad}{0pt}{}
+\titleformat*{\section}{\fontsize{13}{15}\headlineFont}
+\titleformat*{\subsection}{\fontsize{11}{13}\headlineFont}
+\titleformat*{\subsubsection}{\fontsize{10}{13}\headlineFont}
+
+% define space before and after headlines
+% \titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}[<right-sep>]
+% \titlespacing{\chapter}{0pt}{-3em}{6pt}
+% \titlespacing{\section}{0pt}{6pt}{6pt}
+% \titlespacing{\subsection}{0pt}{6pt}{6pt}
+% \titlespacing{\subsubsection}{0pt}{6pt}{6pt}
+% \titlespacing{\paragraph}{0pt}{6pt}{6pt}
+\titlespacing{\chapter}{0mm}{8.0mm}{8.0mm}
+\titlespacing{\section}{0mm}{6.2mm}{2.0mm}
+\titlespacing{\subsection}{0mm}{6.2mm}{2.0mm}
+\titlespacing{\subsubsection}{0mm}{4.0mm}{0mm}
+
+
+% define appearance of bullet lists
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\bullet$}
+\renewcommand{\labelitemiv}{$\bullet$}
+
+
+% use package 'last page' to be able to access the "number of pages in document" with \pageref{LastPage}
+\usepackage{lastpage}
+
+% define headers and footers
+% use fancyhdr package for exact header and footer definition
+\usepackage{fancyhdr}
+% set \pagestyle{fancy} for "fancyhdr" package
+\pagestyle{fancy}
+
+% define position and height of header & footer
+% define distance from (page edge + 1in)
+\setlength{\topmargin}{-1.4mm}
+% define height of the header
+\setlength{\headheight}{3mm}
+% define distance after header to text
+\setlength{\headsep}{14.8mm}
+% define distance from text end to footer baseline
+\setlength{\footskip}{7mm}
+
+% clear default header settings
+\fancyhf{}
+% possible header and footer commands
+% \lhead[<ch-even>]{<ch-odd>}
+% \chead[<ch-even>]{<ch-odd>}
+% \rhead[<rh-even>]{<rh-odd>}
+% \lfoot[<lf-even>]{<lf-odd>}
+% \cfoot[<cf-even>]{<cf-odd>}
+% \rfoot[<rf-even>]{<rf-odd>}
+\lhead{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\customDocumentTitle{}}}
+\lfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\href{http://indoctrinatr.dkd.de}{indoctrinatr.dkd.de} powered by dkd Internet Service GmbH | Kaiserstraße 73 | 60329 Frankfurt | Germany}}
+\rfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{Page \thepage/\pageref{LastPage}}}
+% remove lines in headers and footers
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%redefine "plain" pagestyle to look like "fancy" so all pages look similar
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\lhead{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\customDocumentTitle{}}}
+	\lfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\href{http://indoctrinatr.dkd.de}{indoctrinatr.dkd.de} powered by dkd Internet Service GmbH | Kaiserstraße 73 | 60329 Frankfurt | Germany}}
+	\rfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{Page \thepage/\pageref{LastPage}}}
+	% remove lines in headers and footers
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+
+% allow formatting of program code
+\usepackage{listings}
+% configure the style of listings
+\lstset{
+	backgroundcolor=\color{light-gray},
+	basicstyle=\small,
+	numbers=left,
+	stepnumber=5,
+	breaklines=true,
+	defaultdialect=[LaTeX]TeX
+}
+% preload the language styles used in this documentation
+\lstloadlanguages{TeX, Ruby}
+
+
+% remove indentation of first line in paragraphs
+\setlength{\parindent}{0mm}
+
+% define empty space between paragraphs
+\setlength{\parskip}{2mm}
+
+% allow underlining and strikethrough of text
+\usepackage[normalem]{ulem}
+
+
+% use "csquotes" package to automatically create correct quotes
+\usepackage{csquotes}
+% define symbol used to create quotes
+\MakeOuterQuote{"}
+
+
+% package for better table creation
+\usepackage{tabu}
+% use "longtable" package to allow multi page tables
+\usepackage{longtable}
+
+
+% define horizontal lines for use in tables
+\newcommand{\tabletoprule}{\tabucline[1pt]{-}}
+\newcommand{\tablebottomrule}{\tabucline[1pt]{-}}
+\newcommand{\tablemiddlerule}{\tabucline[0.5pt]{-}}
+\newcommand{\tablesumrule}{\tabucline[0.5pt]{-}\tabucline[0.5pt]{-}}
+
+% increase spacing between table rows
+\tabulinesep=2mm
+
+% have alternating row colours in tables
+\rowcolors{1}{light-gray}{white} 
+
+% allow row spanning in tables
+\usepackage{multirow}
+
+
+% package for external pdf document inclusion
+\usepackage{pdfpages}
+
+
+% use "dirtree" package to show the directory tree of the Indoctrinatr-Template
+\usepackage{dirtree}
+
+% set space between dirtree lines
+\setlength{\DTbaselineskip}{5mm}
+

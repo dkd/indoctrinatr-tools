@@ -1,0 +1,36 @@
+% latex template author: Søren Schaffstein
+% let compiler know which file is the root file
+% !TEX root = indoctrinatr-technical-documentation.tex
+
+\chapter{Template Structure}
+
+
+\section{Files in Template}
+\dirtree{%
+	.1 /.
+	<% list_of_files.each do |item| %>
+	<%= item.to_latex %>
+	<% end %>
+}
+
+<% @files.each do |file| %>
+\section{<%= file.name.to_latex -%>}
+
+\begin{lstlisting}<%="[language=#{file.language}]" unless file.language == 'unspecified' %>
+<%= file.content.gsub('\end{lstlisting}', '\end{lstlisting}'.to_latex) %><%# this escaping is important, so that lstlisting does not break. \begin lstlisting is ignored %>
+\end{lstlisting}
+
+<% end %>
+
+\chapter{Variables}
+		
+\begin{tabu}{ l l l l X }
+	\textbf{Variable} & \textbf{Presentation} & \textbf{Default Value} & \textbf{Required} & \textbf{Description} \\
+	<% @attributes.each do |attribute| %>
+		\texttt{<%= attribute['name'].to_latex -%>}
+		& <%= attribute['presentation'].to_latex -%>
+		& <%= attribute['default_value'].to_latex -%>
+		& <%= 'true' if attribute['required'] == 'true' -%> <%# empty if false or not set. Wish by Søren for better readability-%>
+		& <%= attribute['description'].to_latex -%>\\
+	<% end %>
+\end{tabu}

@@ -22,7 +22,7 @@ module Indoctrinatr
 
       def compile_tex_file
         args = ['-shell-escape', '-interaction', 'batchmode', tex_with_default_values_file_path.to_s]
-        2.times { system('xelatex', *args) }
+        2.times { system('xelatex', *args) } # run two times for proper table-of-contents and page count handling. TODO: use latexmk
       end
 
       def rename_if_necessary

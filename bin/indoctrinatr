@@ -7,6 +7,7 @@ require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_packer'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
 require 'indoctrinatr/tools/template_pack_default_values_compiler'
+require 'indoctrinatr/tools/template_pack_documentation'
 
 include GLI::App
 
@@ -75,6 +76,15 @@ command :pdf do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
     Indoctrinatr::Tools::TemplatePackDefaultValuesCompiler.new(template_pack_name).call
+  end
+end
+
+desc 'Create a documentation from a given source folder'
+arg_name 'template_pack_name'
+command :doc do |c|
+  c.action do |_, _, args|
+    template_pack_name = args.join '_'
+    Indoctrinatr::Tools::TemplatePackDocumentation.new(template_pack_name).call
   end
 end
 

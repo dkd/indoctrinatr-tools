@@ -27,5 +27,6 @@ task :demo do
   puts `bin/indoctrinatr new demo`
   puts `bin/indoctrinatr parse demo`
   puts `bin/indoctrinatr pdf demo`
+  puts `bin/indoctrinatr doc demo`
   puts `bin/indoctrinatr pack demo`
 end

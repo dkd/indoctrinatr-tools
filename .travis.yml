@@ -13,7 +13,4 @@ script:
 addons:
   apt:
     packages:
-      - texlive 
-      - texlive-xetex 
-      - texlive-latex-extra 
-      - texlive-generic-extra
+      - texlive-full

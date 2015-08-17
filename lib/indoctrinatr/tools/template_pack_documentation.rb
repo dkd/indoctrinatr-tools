@@ -18,7 +18,7 @@ module Indoctrinatr
         @template_pack_name = template_pack_name
       end
 
-      def call # rubocop:disable Metrics/AbcSize
+      def call
         fill_documentation_content
         read_content_tex_file
         read_main_tex_file

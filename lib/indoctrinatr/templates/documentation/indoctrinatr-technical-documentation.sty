@@ -3,6 +3,12 @@
 \usepackage[top=41mm, bottom=25mm, left=24mm, right=12.4mm]{geometry}
 
 
+% define macros for headers and footers
+\newcommand{\customLHead}{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\customDocumentTitle{}}}
+\newcommand{\customLFoot}{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\href{http://indoctrinatr.dkd.de}{indoctrinatr.dkd.de} powered by dkd Internet Service GmbH | Kaiserstraße 73 | 60329 Frankfurt | Germany}}
+\newcommand{\customRFoot}{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{Page \thepage/\pageref{LastPage}}}
+
+
 % allow the usage of colour in the document
 \usepackage[cmyk,table]{xcolor}
 
@@ -24,19 +30,17 @@
 % use 2nd page letterpaper for all pages 
 \ULCornerWallPaper{1}{indoctrinatr_letterpaper.pdf}
 
-% define dkd fonts to use in this document
-% fontspec allows to use Mac OS X system fonts but requires the use of XeTeX
+% define fonts to use in this document
+% fontspec allows the use of system fonts but requires the use of XeTeX
 \usepackage{fontspec}
-\defaultfontfeatures{Mapping=tex-text} % To support LaTeX quoting style
-\setmainfont{Frutiger LT Std 45 Light}
+\setmainfont{Arial}
 
 
 % define appearance of headlines
 \usepackage{titlesec}
 % Specify different font for section headings
-\newfontfamily\mainFont[]{Frutiger LT Std 45 Light}
-\newfontfamily\headlineFont[]{Frutiger LT Std 65 Bold}
-%\newfontfamily\monoFont[]{Andale Mono}
+\newfontfamily\mainFont[]{Arial}
+\newfontfamily\headlineFont[]{Arial Bold}
 
 % Setting of font and size
 % {\fontsize{<font size>}{<line height>} \selectfont <Text>}
@@ -102,9 +106,9 @@
 % \lfoot[<lf-even>]{<lf-odd>}
 % \cfoot[<cf-even>]{<cf-odd>}
 % \rfoot[<rf-even>]{<rf-odd>}
-\lhead{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\customDocumentTitle{}}}
-\lfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\href{http://indoctrinatr.dkd.de}{indoctrinatr.dkd.de} powered by dkd Internet Service GmbH | Kaiserstraße 73 | 60329 Frankfurt | Germany}}
-\rfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{Page \thepage/\pageref{LastPage}}}
+\lhead{\customLHead{}}
+\lfoot{\customLFoot{}}
+\rfoot{\customRFoot{}}
 % remove lines in headers and footers
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -112,9 +116,10 @@
 %redefine "plain" pagestyle to look like "fancy" so all pages look similar
 \fancypagestyle{plain}{%
 	\fancyhf{}
-	\lhead{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\customDocumentTitle{}}}
-	\lfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{\href{http://indoctrinatr.dkd.de}{indoctrinatr.dkd.de} powered by dkd Internet Service GmbH | Kaiserstraße 73 | 60329 Frankfurt | Germany}}
-	\rfoot{\fontsize{7}{8}\mainFont \textcolor{hot-chocolate}{Page \thepage/\pageref{LastPage}}}
+	\lhead{\customLHead{}}
+	\lfoot{\customLFoot{}}
+	\rfoot{\customRFoot{}}
+
 	% remove lines in headers and footers
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
@@ -176,6 +181,10 @@
 
 % package for external pdf document inclusion
 \usepackage{pdfpages}
+
+
+% use "isodate" package for automatic formatting of dates
+\usepackage[iso,english]{isodate}
 
 
 % use "dirtree" package to show the directory tree of the Indoctrinatr-Template

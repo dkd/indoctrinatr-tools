@@ -24,7 +24,6 @@ module Indoctrinatr
         read_main_tex_file
         parse_content_tex_file
         parse_main_tex_file
-        # compilation process:
         create_temp_compile_dir
         write_content_tex_file
         write_main_tex_file

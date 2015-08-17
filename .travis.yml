@@ -6,7 +6,7 @@ rvm:
 cache:
   - bundler
   - apt
-before_script:
+before_install:
   - gem install bundler -v 1.10.6
 script:
   - bundle exec rake test_with_coveralls 

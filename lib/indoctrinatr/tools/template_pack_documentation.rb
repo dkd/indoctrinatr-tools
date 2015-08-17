@@ -41,7 +41,11 @@ module Indoctrinatr
 
       def fill_documentation_content
         configuration = ConfigurationExtractor.new(template_pack_name).call
-        @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
+        begin
+          @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
+        rescue IOError => ex
+          abort ex.message
+        end
       end
 
       def read_content_tex_file

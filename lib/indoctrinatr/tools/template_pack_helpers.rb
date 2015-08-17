@@ -1,6 +1,6 @@
 module Indoctrinatr
   module Tools
-    module TemplatePackHelpers
+    module TemplatePackHelpers # classes that use this model are required to have template_pack_name as instance variable
       def path_name
         Pathname.new(Dir.pwd).join template_pack_name
       end

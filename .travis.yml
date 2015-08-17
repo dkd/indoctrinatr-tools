@@ -8,7 +8,7 @@ cache:
   - bundler
   - apt
 before_install:
-  - apt-get install -qq texlive texlive-xetex texlive-latex-extra texlive-generic-extra
+  - sudo apt-get install -qq texlive texlive-xetex texlive-latex-extra texlive-generic-extra
   - gem install bundler -v 1.10.6
 script:
   - bundle exec cucumber --backtrace --verbose

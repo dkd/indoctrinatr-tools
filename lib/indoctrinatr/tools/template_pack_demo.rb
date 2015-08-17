@@ -15,6 +15,7 @@ module Indoctrinatr
         TemplatePackScaffold.new(template_pack_name).call
         TemplatePackDefaultValuesParser.new(template_pack_name).call
         TemplatePackDefaultValuesCompiler.new(template_pack_name).call
+        TemplatePackDocumentation.new(template_pack_name).call
         TemplatePackPacker.new(template_pack_name).call
       end
     end

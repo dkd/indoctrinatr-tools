@@ -8,6 +8,7 @@ require 'indoctrinatr/tools/template_pack_packer'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
 require 'indoctrinatr/tools/template_pack_default_values_compiler'
 require 'indoctrinatr/tools/template_pack_documentation'
+require 'indoctrinatr/tools/template_pack_error_checker'
 
 include GLI::App
 include Indoctrinatr::Tools
@@ -89,6 +90,15 @@ command :doc do |c|
     TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
     TemplatePackDefaultValuesCompiler.new(template_pack_name).call
     Indoctrinatr::Tools::TemplatePackDocumentation.new(template_pack_name).call
+  end
+end
+
+desc 'Check for errors in the given source folder'
+arg_name 'template_pack_name'
+command :check do |c|
+  c.action do |_, _, args|
+    template_pack_name = args.join '_'
+    Indoctrinatr::Tools::TemplatePackErrorChecker.new(template_pack_name).call
   end
 end
 

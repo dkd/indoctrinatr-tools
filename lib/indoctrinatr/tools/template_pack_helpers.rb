@@ -31,7 +31,7 @@ module Indoctrinatr
       end
 
       def latex_log_file_destination
-        path_name.join template_pack_name + 'documentation_laTeX_failure.log'
+        path_name.join template_pack_name + 'documentation_latex_failure.log'
       end
     end
   end

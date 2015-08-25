@@ -10,6 +10,7 @@ require 'indoctrinatr/tools/template_pack_default_values_compiler'
 require 'indoctrinatr/tools/template_pack_documentation'
 
 include GLI::App
+include Indoctrinatr::Tools
 
 program_desc 'Create and manage Template Packs for Indoctrinatr'
 version Indoctrinatr::Tools::VERSION
@@ -75,6 +76,7 @@ arg_name 'template_pack_name'
 command :pdf do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
+    TemplatePackDefaultValuesParser.new(template_pack_name).call
     Indoctrinatr::Tools::TemplatePackDefaultValuesCompiler.new(template_pack_name).call
   end
 end
@@ -84,6 +86,8 @@ arg_name 'template_pack_name'
 command :doc do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
+    TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
+    TemplatePackDefaultValuesCompiler.new(template_pack_name).call
     Indoctrinatr::Tools::TemplatePackDocumentation.new(template_pack_name).call
   end
 end

@@ -2,4 +2,4 @@ Feature: Running the "version" command
 
   Scenario:
     When I successfully run `indoctrinatr version`
-    Then the output should contain "0.9.0"
+    Then the output should contain "0.10.0"

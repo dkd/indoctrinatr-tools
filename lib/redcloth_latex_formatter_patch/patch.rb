@@ -22,7 +22,7 @@ module RedCloth
         end
       end
 
-      def table_close
+      def table_close(opts)
         output  = "\\begin{tabu}{ #{'l ' * @table[0].size}}\n"
         @table.each do |row|
           output << "    #{row.join(' & ')} \\\\\n"

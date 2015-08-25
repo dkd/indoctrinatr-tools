@@ -1,7 +1,7 @@
 Feature: Running the "demo" command
 
   Background:
-    Given the default aruba exit timeout is 20 seconds
+    Given the default aruba exit timeout is 60 seconds
 
   Scenario:
      When I successfully run `indoctrinatr demo`

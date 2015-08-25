@@ -1,7 +1,7 @@
 Feature: Running the "demo" command
 
   Background:
-    Given the default aruba timeout is 10 seconds
+    Given the default aruba timeout is 20 seconds
 
   Scenario:
      When I successfully run `indoctrinatr demo`

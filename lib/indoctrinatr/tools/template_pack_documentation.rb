@@ -79,6 +79,7 @@ module Indoctrinatr
       def copy_source_files
         FileUtils.copy_file source_latex_package_file_path, latex_package_destination_path
         FileUtils.copy_file source_letterpaper_file_path, letterpaper_file_destination_path
+        FileUtils.copy_file source_image_tools_package_file_path, image_tools_package_destination_path
       end
 
       def compile_documentation_to_pdf

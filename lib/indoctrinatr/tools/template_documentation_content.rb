@@ -36,7 +36,7 @@ module Indoctrinatr
         end
       end
 
-      def pdf_with_default_values_file_path # rubocop:disable Metrics/AbcSize
+      def pdf_with_default_values_file_path
         # TODO: this would make more sense in one of the Helpers modules, but we don't want to create a new dependency there. Move this when file path shenanigans are generally revised.
         # get file path for template with default values:
         default_values = DefaultValues.new @configuration

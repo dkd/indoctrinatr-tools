@@ -3,9 +3,9 @@ Given(/^I do not have (?:a|an) '(.*)' project$/) do |project_name|
 end
 
 Given(/^I have an Indoctrinatr project '(.*)'$/) do |project_name|
-  run_simple(Aruba::Platform.unescape("indoctrinatr new #{project_name}"), false)
+  step "I run the Indoctrinatr command 'new #{project_name}'"
 end
 
 When(/^I run the Indoctrinatr command '(.*)'$/) do |command|
-  step "When I successfully run `indoctrinatr #{command}`"
+  step "I successfully run `indoctrinatr #{command}`"
 end

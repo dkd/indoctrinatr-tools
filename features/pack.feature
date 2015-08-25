@@ -1,7 +1,7 @@
 Feature: Running the 'pack' command
 
   Background:
-    Given the default aruba timeout is 5 seconds
+    Given the default aruba exit timeout is 20 seconds
 
   Scenario:
     Given I have an Indoctrinatr project 'demo'

@@ -10,13 +10,10 @@
 % use dkd-letter style to apply design styles
 \usepackage{indoctrinatr-technical-documentation}
 
-% include datetime2 for current date
-\usepackage{datetime2}
-
 
 %define labels to use in this document
 \newcommand{\dkd}{\emph{dkd}}
-\newcommand{\customDocumentTitle}{Documentation Indoctrinatr-Template for <%= @template_name -%>}
+\newcommand{\customDocumentTitle}{Documentation for "<%= @template_name -%>"}
 \newcommand{\customKeywords}{Indoctrinatr, Template}
 
 
@@ -69,22 +66,24 @@
 	
 	% add prrendered templates in the appendix
 	\appendix
-	%\chapter{Template filled with sample data}
+	\chapter{Template filled with sample data}
 	% remove default wallpaper
-	%\ClearWallPaper
+	\ClearWallPaper
 	% include the prerendered template
 	% pages=- selects all pages
-	%\includepdf[pages=-]{template_exampledata.pdf}
+	\includepdf[pages=-]{<%= @default_values_pdf_path -%>} % template_with_default_values.pdf "#{@template_name}_with_default_values.pdf"
 	% restore wallpaper
-	%\ULCornerWallPaper{1}{indoctrinattr_letterpaper.pdf}
-	
+	\ULCornerWallPaper{1}{indoctrinatr_letterpaper.pdf}
+
+	% this feature is postponed, until LaTeX complications with image tags are resolved:
+	%
 	%\chapter{Template filled with variable names}
 	% remove default wallpaper
 	%\ClearWallPaper
 	% include the prerendered template
 	% pages=- selects all pages
-	%\includepdf[pages=-]{template_documentation.pdf}
+	%\includepdf[pages=-]{template_with_variable_names.pdf}
 	% restore wallpaper
-	%\ULCornerWallPaper{1}{indoctrinattr_letterpaper.pdf}
+	%\ULCornerWallPaper{1}{indoctrinatr_letterpaper.pdf}
 
 \end{document}

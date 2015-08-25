@@ -24,7 +24,6 @@ module Indoctrinatr
         read_main_tex_file
         parse_content_tex_file
         parse_main_tex_file
-        # compilation process:
         create_temp_compile_dir
         write_content_tex_file
         write_main_tex_file
@@ -42,7 +41,11 @@ module Indoctrinatr
 
       def fill_documentation_content
         configuration = ConfigurationExtractor.new(template_pack_name).call
-        @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
+        begin
+          @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
+        rescue IOError => ex
+          abort ex.message
+        end
       end
 
       def read_content_tex_file

@@ -1,6 +1,6 @@
 module Indoctrinatr
   module Tools
-    module TemplatePackHelpers
+    module TemplatePackHelpers # classes that use this model are required to have template_pack_name as instance variable
       def path_name
         Pathname.new(Dir.pwd).join template_pack_name
       end
@@ -31,7 +31,7 @@ module Indoctrinatr
       end
 
       def latex_log_file_destination
-        path_name.join template_pack_name + 'documentation_laTeX_failure.log'
+        path_name.join template_pack_name + 'documentation_latex_failure.log'
       end
     end
   end

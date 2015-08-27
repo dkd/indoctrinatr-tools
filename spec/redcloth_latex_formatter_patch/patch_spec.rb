@@ -24,7 +24,15 @@ describe 'patches for RedCloth::LATEX::Formatter' do
 
   it 'transforms a table to LaTeX tabu notation' do
     input = "|_.Headerspalte 1|_.Headerspalte 2|\n|Feld 1,1        |Feld 2,1        |\n|Feld 1,2        |Feld 2,2        |"
-    expected_result = "\\begin{tabu}{ l l }\n    Headerspalte 1 & Headerspalte 2 \\\\\n    Feld 1,1         & Feld 2,1         \\\\\n    Feld 1,2         & Feld 2,2         \\\\\n\\end{tabu}\n"
+    expected_result = "\\begin{tabu}{ l l }\n    Headerspalte 1 & Headerspalte 2 \\\\\n    \\tabletoprule\n    Feld 1,1         & Feld 2,1         \\\\\n    Feld 1,2         & Feld 2,2         \\\\\n    \\tablebottomrule\n\\end{tabu}\n"
     expect(RedCloth.new(input).to_latex).to eq expected_result
+  end
+
+  it 'transforms -text- to to LaTeX \st{}' do
+    expect(RedCloth.new('-no no no-').to_latex).to eq "\\st{no no no}\n\n"
+  end
+
+  it 'transforms *text* to to LaTeX \st{}' do
+    expect(RedCloth.new('-no no no-').to_latex).to eq "\\st{no no no}\n\n"
   end
 end

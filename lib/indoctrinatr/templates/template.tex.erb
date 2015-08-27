@@ -2,7 +2,14 @@
 \documentclass{article}
 
 \begin{document}
-		 \section{Hello <%= variable1 -%>}
-		 
-		 The <%= variable1 -%> is <%= variable2 -%>!
+	\section{Hello <%= variable1 -%>}
+	 
+	The <%= variable1 -%> is <%= variable2 -%>!
+ 
+	Today is \textbf{<%= date -%>}.
+	
+	% This is is the raw, unescaped input of \texttt{variable1}:
+	\begin{verbatim}
+		<%= raw_variable1 -%>
+	\end{verbatim}
 \end{document}

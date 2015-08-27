@@ -8,12 +8,8 @@ cache:
   - bundler
   - apt
 before_install:
-  - sudo apt-get install -qq texlive texlive-xetex texlive-latex-extra texlive-generic-extra
+  - sudo apt-get update && sudo wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu && sudo chmod +x ./install-tl-ubuntu && sudo ./install-tl-ubuntu
   - gem install bundler -v 1.10.6
 script:
-  - bundle exec cucumber --backtrace --verbose
-  - bundle exec rake test_with_coveralls 
-addons:
-  apt:
-    packages:
-      - texlive-full
+  - bundle exec indoctrinatr demo
+  - bundle exec rake test_with_coveralls

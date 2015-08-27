@@ -18,7 +18,7 @@ module Indoctrinatr
         configuration.default_file_name = "#{template_pack_name}_with_default_values.pdf"
         configuration.output_file_name = config_file.fetch('output_file_name', "#{template_pack_name}_with_default_values.pdf")
         configuration.template_name = config_file.fetch 'template_name'
-        configuration.textual_description = config_file.fetch 'textual_description'
+        configuration.textual_description = config_file.fetch('textual_description'), ''
         configuration.attributes_as_hashes_in_array = config_file.fetch 'fields', []
         configuration
       end

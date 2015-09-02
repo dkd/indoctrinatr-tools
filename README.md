@@ -11,9 +11,9 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 1.  Install XeTeX:
 
     Mac OS X: [MacTeX](https://tug.org/mactex/)
- 
+
     Debian/Ubuntu:
-    
+
     ```shell
     apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra
     ```

@@ -50,7 +50,7 @@ end
 desc 'Create, compile and pack a demo project'
 command :demo do |c|
   c.action do
-    Indoctrinatr::Tools::TemplatePackDemo.new('demo').call
+    TemplatePackDemo.new('demo').call
   end
 end
 
@@ -59,7 +59,7 @@ arg_name 'template-pack-name'
 command :new do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
-    Indoctrinatr::Tools::TemplatePackScaffold.new(template_pack_name).call
+    TemplatePackScaffold.new(template_pack_name).call
   end
 end
 
@@ -68,7 +68,7 @@ arg_name 'template_pack_name'
 command :parse do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
-    Indoctrinatr::Tools::TemplatePackDefaultValuesParser.new(template_pack_name).call
+    TemplatePackDefaultValuesParser.new(template_pack_name).call
   end
 end
 
@@ -78,7 +78,7 @@ command :pdf do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
     TemplatePackDefaultValuesParser.new(template_pack_name).call
-    Indoctrinatr::Tools::TemplatePackDefaultValuesCompiler.new(template_pack_name).call
+    TemplatePackDefaultValuesCompiler.new(template_pack_name).call
   end
 end
 
@@ -89,7 +89,7 @@ command :doc do |c|
     template_pack_name = args.join '_'
     TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
     TemplatePackDefaultValuesCompiler.new(template_pack_name).call
-    Indoctrinatr::Tools::TemplatePackDocumentation.new(template_pack_name).call
+    TemplatePackDocumentation.new(template_pack_name).call
   end
 end
 
@@ -98,7 +98,7 @@ arg_name 'template_pack_name'
 command :check do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
-    Indoctrinatr::Tools::TemplatePackErrorChecker.new(template_pack_name).call
+    TemplatePackErrorChecker.new(template_pack_name).call
   end
 end
 
@@ -107,7 +107,7 @@ arg_name 'template_pack_name'
 command :pack do |c|
   c.action do |_, _, args|
     template_pack_name = args.join '_'
-    Indoctrinatr::Tools::TemplatePackPacker.new(template_pack_name).call
+    TemplatePackPacker.new(template_pack_name).call
   end
 end
 

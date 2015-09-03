@@ -5,4 +5,5 @@ Feature: Running the "workflow" command
     Then the output should contain "new"
     Then the output should contain "parse"
     Then the output should contain "pdf"
+    Then the output should contain "check"
     Then the output should contain "pack"

@@ -41,6 +41,7 @@ Command | Description
 `indoctrinatr parse project_name` | Parses a XeTex file with ERB and default values
 `indoctrinatr pdf project_name` | Compiles PDF with default values
 `indoctrinatr doc project_name` | Creates a technical documentation of your template pack
+`indoctrinatr check project_name` | Analyzes your Template Pack for errors
 `indoctrinatr pack project_name` | Creates a Template Pack from a given project folder
 `indoctrinatr demo` | Creates, parses, and compiles a demo project
 `indoctrinatr workflow` | Displays a suggested workflow

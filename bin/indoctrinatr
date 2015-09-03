@@ -40,7 +40,10 @@ command :workflow do |c|
 4. Run in shell: indoctrinatr pdf demo
    Compiles PDF from demo_with_default_values.tex
 
-5. Run in shell: indoctrinatr pack demo
+5. Run in shell: indoctrinatr check demo
+   Analyzes your Template Pack for potential errors
+
+6. Run in shell: indoctrinatr pack demo
    Creates demo.zip with all required file for upload to Indoctrinatr server
 
 '

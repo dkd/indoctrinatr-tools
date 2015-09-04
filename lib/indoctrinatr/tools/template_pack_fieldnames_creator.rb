@@ -1,5 +1,6 @@
 require 'indoctrinatr/tools/template_pack_helpers'
-require 'indoctrinatr/tools/default_values'
+# require 'indoctrinatr/tools/default_values'
+require 'indoctrinatr/tools/field_name_values'
 require 'indoctrinatr/tools/configuration_extractor'
 require 'erubis'
 require 'to_latex'
@@ -31,8 +32,8 @@ module Indoctrinatr
 
       def read_config_file
         @configuration = ConfigurationExtractor.new(template_pack_name).call
-        @field_name_values = DefaultValues.new @configuration
-        field_name_values._variable_names_as_values
+        @field_name_values = FieldNameValues.new @configuration
+        field_name_values._field_names_as_values
       end
 
       def read_tex_file

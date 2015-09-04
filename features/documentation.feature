@@ -1,7 +1,7 @@
 Feature: Running the 'doc' command
 
   Background:
-    Given the default aruba exit timeout is 20 seconds
+    Given the default aruba exit timeout is 40 seconds
 
   Scenario: creating documentation for given project
     Given I do not have a 'demo' project

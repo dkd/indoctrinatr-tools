@@ -57,7 +57,7 @@ module Indoctrinatr
       end
 
       def parse_content_tex_file
-        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(@documentation_content.retrieve_binding)
+        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(@documentation_content.retrieve_binding) # TODO: more useful error messages for user on errors
       end
 
       def parse_main_tex_file

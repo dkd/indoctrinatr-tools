@@ -31,6 +31,6 @@
 		& <%= attribute['presentation'].to_latex -%>
 		& <%= attribute['default_value'].to_latex -%>
 		& <%= 'true' if attribute['required'] == 'true' -%> <%# empty if false or not set. Wish by Søren for better readability-%>
-		& <%= attribute['description'].to_latex -%>\\
+		& <%= attribute['description'].to_latex if attribute['description'] -%>\\ <%# if condition to ignore errors on empty description field -%>
 	<% end %>
 \end{tabu}

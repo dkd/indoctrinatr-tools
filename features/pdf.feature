@@ -8,3 +8,4 @@ Feature: Running the 'pdf' command
      When I successfully run `indoctrinatr parse demo`
       And I run `indoctrinatr pdf demo`
      Then a file named "demo_with_default_values.pdf" should exist
+    # there is not (an easy) way to use the current timestamp. Therefore the template for the 'new' command should not be static

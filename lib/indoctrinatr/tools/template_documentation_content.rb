@@ -36,7 +36,7 @@ module Indoctrinatr
         end
       end
 
-      def pdf_with_default_values_file_path
+      def pdf_with_default_values_file_path # rubocop:disable Metrics/AbcSize
         # TODO: this would make more sense in one of the Helpers modules, but we don't want to create a new dependency there. Move this when file path shenanigans are generally revised.
         # get file path for template with default values:
         default_values = DefaultValues.new @configuration
@@ -44,7 +44,8 @@ module Indoctrinatr
         if default_values.customized_output_file_name == default_values.default_file_name
           Pathname.new(Dir.pwd).join default_values.customized_output_file_name
         else
-          Pathname.new(Dir.pwd).join default_values.output_file_name
+          Pathname.new(Dir.pwd).join eval('"' + default_values.output_file_name + '"') # rubocop:disable Lint/Eval
+          # usage of eval to execute the interpolation of a custom filename string with interpolation - e.g. a filename with the current date
         end
       end
     end

@@ -25,7 +25,10 @@
 \chapter{Variables}
 		
 \begin{longtabu}{ l l X l X }
+	\tabletoprule
 	\textbf{Variable} & \textbf{Presentation} & \textbf{Default Value} & \textbf{Required} & \textbf{Description} \\
+	\tabletoprule
+	\endhead
 	<% @attributes.each do |attribute| %>
 		\texttt{<%= attribute['name'].to_latex -%>}
 		& <%= attribute['presentation'].to_latex -%>

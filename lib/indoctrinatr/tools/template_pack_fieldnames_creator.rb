@@ -22,10 +22,13 @@ module Indoctrinatr
         read_tex_file
         parse_tex_file
         write_tex_file
-        compile_tex_file
+        if compile_documentation_to_pdf
+          show_success
+        else
+          handle_latex_error
+        end
         # TODO: rename if necessary?
         # TODO: delete the tex file?
-        show_success
       end
 
       private
@@ -45,12 +48,23 @@ module Indoctrinatr
       end
 
       def write_tex_file
+        # TODO: include dkd-image-tools.sty and copy them to the doc directory
         File.write tex_with_fieldname_values_file_path, parsed_tex_file_content
       end
 
-      def compile_tex_file
-        args = ['-shell-escape', '-interaction', 'batchmode', tex_with_fieldname_values_file_path.to_s]
-        2.times { system('xelatex', *args) } # run two times for proper table-of-contents and page count handling. TODO: use latexmk
+      def compile_documentation_to_pdf
+        args = ['-xelatex',
+                '-shell-escape',
+                '-interaction=batchmode', # more silent output
+                # "-output-directory=#{documentation_compile_dir_path_name}",  # without this xelatex tries to use the current working directory
+                tex_with_fieldname_values_file_path.to_s]
+        latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
+        latexmk_successful # false if error, nil if system command unknown
+      end
+
+      def handle_latex_error
+        puts 'possible LaTeX compilation failure!' # see #{latex_log_file_destination} for details. " # idea: process $CHILD_STATUS
+        # FileUtils.copy_file latex_log_file, latex_log_file_destination
       end
 
       def show_success

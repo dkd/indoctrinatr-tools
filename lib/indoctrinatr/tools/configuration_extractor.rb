@@ -11,7 +11,7 @@ module Indoctrinatr
         @template_pack_name = template_pack_name
       end
 
-      def call # rubocop:disable Metrics/AbcSize
+      def call
         config_file = YAML.load_file config_file_path
         configuration = TemplatePackConfiguration.new
         configuration.template_asset_path = assets_path.to_s

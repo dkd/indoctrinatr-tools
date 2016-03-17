@@ -2,6 +2,7 @@ require 'indoctrinatr/tools/template_documentation_content'
 require 'indoctrinatr/tools/template_pack_helpers'
 require 'indoctrinatr/tools/template_documentation_helpers'
 require 'indoctrinatr/tools/configuration_extractor'
+require 'indoctrinatr/tools/pdf_generator'
 require 'erubis'
 require 'to_latex'
 require 'fileutils'
@@ -11,6 +12,7 @@ module Indoctrinatr
     class TemplatePackDocumentation
       include TemplatePackHelpers
       include TemplateDocumentationHelpers
+      include PdfGenerator
 
       attr_accessor :template_pack_name
 
@@ -83,12 +85,7 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        args = ['-xelatex',
-                '-shell-escape',
-                '-interaction=batchmode', # more silent output
-                "-output-directory=#{documentation_compile_dir_path_name}", main_tex_file_destination_path.to_s] # without this xelatex tries to use the current working directory
-        latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
-        latexmk_successful # false if error, nil if system command unknown
+        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name
       end
 
       def copy_doc_file_to_template_pack

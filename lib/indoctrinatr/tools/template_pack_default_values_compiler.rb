@@ -1,10 +1,12 @@
 require 'indoctrinatr/tools/configuration_extractor'
+require 'indoctrinatr/tools/pdf_generator'
 require 'fileutils'
 
 module Indoctrinatr
   module Tools
     class TemplatePackDefaultValuesCompiler
       include TemplatePackHelpers
+      include PdfGenerator
 
       attr_accessor :template_pack_name
 
@@ -21,12 +23,11 @@ module Indoctrinatr
       private
 
       def compile_tex_file
-        args = ['-shell-escape', '-interaction', 'batchmode', tex_with_default_values_file_path.to_s]
-        2.times { system('xelatex', *args) } # run two times for proper table-of-contents and page count handling. TODO: use latexmk
+        make_pdf tex_with_default_values_file_path
       end
 
       def rename_if_necessary
-        configuration = ConfigurationExtractor.new(template_pack_name).call
+        configuration = ConfigurationExtractor.new(template_pack_name).call # TODO: avoid repeated calling of the ConfigurationExtrator
         @default_values = DefaultValues.new configuration
         return if @default_values.customized_output_file_name == @default_values.default_file_name
 

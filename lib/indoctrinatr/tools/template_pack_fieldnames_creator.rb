@@ -1,7 +1,7 @@
 require 'indoctrinatr/tools/template_pack_helpers'
-# require 'indoctrinatr/tools/default_values'
 require 'indoctrinatr/tools/field_name_values'
 require 'indoctrinatr/tools/configuration_extractor'
+require 'indoctrinatr/tools/pdf_generator'
 require 'erubis'
 require 'to_latex'
 
@@ -22,7 +22,7 @@ module Indoctrinatr
         read_tex_file
         parse_tex_file
         write_tex_file
-        if compile_documentation_to_pdf
+        if compile_tex_file
           show_success
         else
           handle_latex_error
@@ -51,14 +51,8 @@ module Indoctrinatr
         File.write tex_with_fieldname_values_file_path, parsed_tex_file_content
       end
 
-      def compile_documentation_to_pdf
-        args = ['-xelatex',
-                '-shell-escape',
-                '-interaction=batchmode', # more silent output
-                # "-output-directory=#{documentation_compile_dir_path_name}",  # without this xelatex tries to use the current working directory
-                tex_with_fieldname_values_file_path.to_s]
-        latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
-        latexmk_successful # false if error, nil if system command unknown
+      def compile_tex_file
+        make_pdf tex_with_fieldname_values_file_path
       end
 
       def handle_latex_error

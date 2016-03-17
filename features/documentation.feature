@@ -8,4 +8,4 @@ Feature: Running the 'doc' command
     When I successfully run `indoctrinatr new demo`
     And I successfully run `indoctrinatr doc demo`
     Then the output should match /A documentation for 'demo' has been successfully generated/
-    Then a file named "demo/demo_technical_documentation.pdf" should exist
+    Then a file named "demo/doc/demo_technical_documentation.pdf" should exist

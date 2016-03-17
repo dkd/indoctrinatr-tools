@@ -89,6 +89,8 @@ module Indoctrinatr
       end
 
       def copy_doc_file_to_template_pack
+        # All the documentation shall go into template_pack/doc
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
         FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
       end
 

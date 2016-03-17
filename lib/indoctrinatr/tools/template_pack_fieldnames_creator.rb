@@ -9,6 +9,7 @@ module Indoctrinatr
   module Tools
     class TemplatePackFieldnamesCreator
       include TemplatePackHelpers
+      include PdfGenerator
 
       attr_accessor :template_pack_name, :configuration, :field_name_values, :tex_file_content, :parsed_tex_file_content
 

@@ -49,11 +49,14 @@ module Indoctrinatr
 
       def write_tex_file
         # TODO: include dkd-image-tools.sty and copy them to the doc directory
+        # Create directory to avoid file creation errors
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
+        Dir.mkdir(pack_documentation_examples_dir_path) unless Dir.exist?(pack_documentation_examples_dir_path)
         File.write tex_with_fieldname_values_file_path, parsed_tex_file_content
       end
 
       def compile_tex_file
-        make_pdf tex_with_fieldname_values_file_path
+        make_pdf tex_with_fieldname_values_file_path, pack_documentation_examples_dir_path
       end
 
       def handle_latex_error

@@ -41,9 +41,9 @@ module Indoctrinatr
         default_values = DefaultValues.new @configuration
         # if there is a change in where the pdf command (compiler class) saves it's output, this logic needs to be updated
         if default_values.customized_output_file_name == default_values.default_file_name
-          Pathname.new(Dir.pwd).join default_values.customized_output_file_name
+          Pathname.new(Dir.pwd).join pack_documentation_examples_dir_path + default_values.customized_output_file_name
         else
-          Pathname.new(Dir.pwd).join eval('"' + default_values.output_file_name + '"') # rubocop:disable Lint/Eval
+          Pathname.new(Dir.pwd).join pack_documentation_examples_dir_path + eval('"' + default_values.output_file_name + '"') # rubocop:disable Lint/Eval
           # usage of eval to execute the interpolation of a custom filename string with interpolation - e.g. a filename with the current date
         end
       end

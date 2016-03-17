@@ -6,4 +6,4 @@ Feature: Running the 'pdf_with_field_names' command
   Scenario: for a given 'demo' project
     Given I have an Indoctrinatr project 'demo'
     And I run `indoctrinatr pdf_with_field_names demo`
-    Then a file named "demo_with_fieldname_values.pdf" should exist
+    Then a file named "demo/doc/examples/demo_with_fieldname_values.pdf" should exist

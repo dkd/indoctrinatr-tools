@@ -23,15 +23,19 @@ module Indoctrinatr
       end
 
       def tex_with_default_values_file_path
-        path_name.join template_pack_name + '_with_default_values.tex'
+        pack_documentation_examples_dir_path.join template_pack_name + '_with_default_values.tex'
       end
 
       def tex_with_fieldname_values_file_path
-        path_name.join template_pack_name + '_with_fieldname_values.tex'
+        pack_documentation_examples_dir_path.join template_pack_name + '_with_fieldname_values.tex'
       end
 
       def pack_documentation_dir_path
         path_name.join 'doc'
+      end
+
+      def pack_documentation_examples_dir_path
+        pack_documentation_dir_path.join 'examples'
       end
 
       def pack_technical_documentation_file_path

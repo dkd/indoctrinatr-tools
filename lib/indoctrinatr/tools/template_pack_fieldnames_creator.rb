@@ -7,7 +7,7 @@ require 'to_latex'
 
 module Indoctrinatr
   module Tools
-    class TemplatePackFieldnamesCreator # TODO: rename to field_names
+    class TemplatePackFieldnamesCreator
       include TemplatePackHelpers
 
       attr_accessor :template_pack_name, :configuration, :field_name_values, :tex_file_content, :parsed_tex_file_content
@@ -28,7 +28,6 @@ module Indoctrinatr
           handle_latex_error
         end
         # TODO: rename if necessary?
-        # TODO: delete the tex file?
       end
 
       private
@@ -68,7 +67,10 @@ module Indoctrinatr
       end
 
       def show_success
-        puts "The template pack '#{template_pack_name}' has been successfully parsed to use the variable names"
+        args = ['-c']
+        system('latexmk', *args) # cleanup the files
+        puts "The template pack '#{template_pack_name}' has been successfully parsed with the variable names"
+        puts 'Please check the .tex file and modify it to your needs and compile it again'
       end
     end
   end

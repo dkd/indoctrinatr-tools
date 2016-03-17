@@ -23,8 +23,8 @@ module Indoctrinatr
       private
 
       def create_folder
-        fail 'Please specify a template pack name.' if template_pack_name.empty?
-        fail "A folder with name '#{template_pack_name}' already exists." if Dir.exist? path_name
+        fail 'Please specify a template pack name.' if template_pack_name.empty? # rubocop:disable Style/SignalException
+        fail "A folder with name '#{template_pack_name}' already exists." if Dir.exist? path_name # rubocop:disable Style/SignalException
 
         Dir.mkdir path_name
       end

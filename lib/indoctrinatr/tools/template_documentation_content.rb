@@ -20,7 +20,7 @@ module Indoctrinatr
         @files = read_template_files_content
         @default_values_pdf_path = pdf_with_default_values_file_path
         # should have been generated automatically, error if something went wrong with it:
-        fail IOError, "template with default values does not exist in current directory. Run indoctrinatr pdf #{template_pack_name}" unless File.exist? @default_values_pdf_path
+        fail IOError, "template with default values does not exist in current directory. Run indoctrinatr pdf #{template_pack_name}" unless File.exist? @default_values_pdf_path # rubocop:disable Style/SignalException
       end
 
       def retrieve_binding

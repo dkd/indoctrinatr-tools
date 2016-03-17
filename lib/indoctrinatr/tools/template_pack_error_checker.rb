@@ -57,8 +57,6 @@ module Indoctrinatr
         end
       end
 
-      private
-
       def check_field_attribute attribute_hash, field_identifier, key # false if something wrong, otherwise returns the key value
         unless attribute_hash.key? key
           puts "The #{field_identifier} has no #{key} type set!"

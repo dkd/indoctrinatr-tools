@@ -29,6 +29,7 @@ module Indoctrinatr
       def read_config_file
         @configuration = ConfigurationExtractor.new(template_pack_name).call
         @default_values = DefaultValues.new @configuration
+        @default_values._use_default_values
       end
 
       def read_tex_file

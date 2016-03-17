@@ -8,10 +8,11 @@ module Indoctrinatr
       PICTURE_FILE_ENDINGS = %w(.png .jpeg .jpg .bmp .gif .pdf).freeze
       def _field_names_as_values # rubocop:disable Metrics/AbcSize
         @_configuration.attributes_as_hashes_in_array.each do |attribute_hash|
-          # work around to_latex not escaping the < and > chars ??? legacy comment?
-          # the * character does not produce any issues when it's used in arguments of LaTeX commands
-          # initially the intention was to use texttt, but that had this problem.
-          instance_variable_set("@_#{attribute_hash['name']}", "***#{attribute_hash['name'].to_latex}***")
+          # Usage of \textless to avoid issues with the < > characters.
+          # Usage of * character because it does not produce any issues when it's used in arguments of LaTeX commands.
+          # Initially the intention was to use texttt, but that had this problem.
+          instance_variable_set("@_#{attribute_hash['name']}",
+                                "\\textless***#{attribute_hash['name'].to_latex}***\\textgreater")
 
           define_singleton_method "raw_#{attribute_hash['name']}".to_sym do
             "raw\\_#{instance_variable_get("@_#{attribute_hash['name']}")}"

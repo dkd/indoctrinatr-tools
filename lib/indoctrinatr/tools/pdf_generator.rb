@@ -17,6 +17,19 @@ module Indoctrinatr
         latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
         latexmk_successful
       end
+
+      # Cleans up LaTeX helper files in a specific directory
+      # @param working_directory a Pathname that points the directory that should get cleaned up
+      # @return false if error, nil if system command unknown
+      def latex_cleanup working_directory
+        # latexmk -c apparently cannot cleanup a specified subdirectory. So we have to change the working directory,
+        # run the cleanup command in it and then change back to the directory that we were in. http://tex.stackexchange.com/q/301366/17834
+        current_dir = Dir.getwd
+        Dir.chdir working_directory.to_s
+        latexmk_successful = system 'latexmk -c'
+        Dir.chdir current_dir # should be the same as ../../.. # Dir.chdir '../../..'
+        latexmk_successful
+      end
     end
   end
 end

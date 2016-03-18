@@ -57,6 +57,7 @@ module Indoctrinatr
 
       def compile_tex_file
         make_pdf tex_with_fieldname_values_file_path, pack_documentation_examples_dir_path
+        latex_cleanup pack_documentation_examples_dir_path
       end
 
       def handle_latex_error

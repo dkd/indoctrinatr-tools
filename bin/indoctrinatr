@@ -98,11 +98,14 @@ end
 desc 'Create a documentation from a given source folder'
 arg_name 'template_pack_name'
 command :doc do |c|
-  c.action do |_, _, args|
+  c.desc 'Keep generated aux files'
+  c.switch [:keepauxfiles]
+  c.action do |_, options, args|
     template_pack_name = args.join '_'
+    keep_aux_files = options[:keepauxfiles]
     TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
     TemplatePackDefaultValuesCompiler.new(template_pack_name).call
-    TemplatePackDocumentation.new(template_pack_name).call
+    TemplatePackDocumentation.new(template_pack_name, keep_aux_files).call
   end
 end
 

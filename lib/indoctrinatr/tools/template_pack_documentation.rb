@@ -16,8 +16,9 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name
+      def initialize template_pack_name, no_clean_up_after = false
         @template_pack_name = template_pack_name
+        @no_clean_up_after = no_clean_up_after
       end
 
       def call

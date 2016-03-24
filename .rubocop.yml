@@ -1,3 +1,6 @@
+AllCops:
+  Exclude:
+    - tmp/**/*
 Metrics/LineLength:
   Max: 240
 Style/MethodDefParentheses:

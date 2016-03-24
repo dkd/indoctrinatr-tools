@@ -7,6 +7,7 @@ require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_packer'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
 require 'indoctrinatr/tools/template_pack_default_values_compiler'
+require 'indoctrinatr/tools/template_pack_fieldnames_creator'
 require 'indoctrinatr/tools/template_pack_documentation'
 require 'indoctrinatr/tools/template_pack_error_checker'
 
@@ -82,6 +83,15 @@ command :pdf do |c|
     template_pack_name = args.join '_'
     TemplatePackDefaultValuesParser.new(template_pack_name).call
     TemplatePackDefaultValuesCompiler.new(template_pack_name).call
+  end
+end
+
+desc 'Compile PDF with Variable Names as values'
+arg_name 'template_pack_name'
+command :pdf_with_field_names do |c|
+  c.action do |_, _, args|
+    template_pack_name = args.join '_'
+    TemplatePackFieldnamesCreator.new(template_pack_name).call
   end
 end
 

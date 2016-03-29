@@ -33,7 +33,7 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
-          delete_temp_dir
+          delete_temp_dir unless @no_clean_up_after
           show_success
         else
           handle_latex_error
@@ -86,7 +86,7 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, false
+        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, !@no_clean_up_after
       end
 
       def copy_doc_file_to_template_pack

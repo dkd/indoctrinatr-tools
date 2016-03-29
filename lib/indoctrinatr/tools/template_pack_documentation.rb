@@ -21,7 +21,7 @@ module Indoctrinatr
         @no_clean_up_after = no_clean_up_after
       end
 
-      def call
+      def call # rubocop:disable Metrics/AbcSize
         fill_documentation_content
         read_content_tex_file
         read_main_tex_file
@@ -33,6 +33,7 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
+          copy_helper_files_to_template_pack if @no_clean_up_after # needs to run before temp dir is deleted
           delete_temp_dir unless @no_clean_up_after
           show_success
         else
@@ -87,6 +88,13 @@ module Indoctrinatr
 
       def compile_documentation_to_pdf
         make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, !@no_clean_up_after
+      end
+
+      def copy_helper_files_to_template_pack
+        helper_files_to_copy = [latex_log_file, content_tex_file_destination_path, main_tex_file_destination_path].freeze
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
+        FileUtils.copy helper_files_to_copy, pack_documentation_dir_path
+        puts 'TeX files and log file have been copied to doc subdirectory of your template_pack'
       end
 
       def copy_doc_file_to_template_pack

@@ -10,8 +10,9 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name
+      def initialize template_pack_name, no_clean_up_after = false
         @template_pack_name = template_pack_name
+        @no_clean_up_after = no_clean_up_after
       end
 
       def call
@@ -23,7 +24,7 @@ module Indoctrinatr
       private
 
       def compile_tex_file
-        make_pdf tex_with_default_values_file_path, pack_documentation_examples_dir_path
+        make_pdf tex_with_default_values_file_path, pack_documentation_examples_dir_path, !@no_clean_up_after
       end
 
       def rename_if_necessary

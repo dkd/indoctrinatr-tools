@@ -85,7 +85,7 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name
+        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, false
       end
 
       def copy_doc_file_to_template_pack

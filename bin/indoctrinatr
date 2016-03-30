@@ -110,7 +110,7 @@ command :doc do |c|
     template_pack_name = args.join '_'
     keep_aux_files = options[:keepauxfiles]
     TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
-    TemplatePackDefaultValuesCompiler.new(template_pack_name).call
+    TemplatePackDefaultValuesCompiler.new(template_pack_name, keep_aux_files).call
     TemplatePackDocumentation.new(template_pack_name, keep_aux_files).call
   end
 end

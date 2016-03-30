@@ -21,7 +21,7 @@ module Indoctrinatr
         @no_clean_up_after = no_clean_up_after
       end
 
-      def call # rubocop:disable Metrics/AbcSize
+      def call # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         fill_documentation_content
         read_content_tex_file
         read_main_tex_file
@@ -33,10 +33,13 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
-          copy_helper_files_to_template_pack if @no_clean_up_after # needs to run before temp dir is deleted
+          copy_helper_files_to_template_pack if @no_clean_up_after
+          show_temp_directory if @no_clean_up_after
           delete_temp_dir unless @no_clean_up_after
           show_success
         else
+          copy_helper_files_to_template_pack if @no_clean_up_after
+          show_temp_directory if @no_clean_up_after
           handle_latex_error
         end
       end
@@ -101,6 +104,10 @@ module Indoctrinatr
         # All the documentation shall go into template_pack/doc
         Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
         FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
+      end
+
+      def show_temp_directory
+        puts "Look into the directory #{documentation_temp_dir} to see all files related to the technical documentation compilation"
       end
 
       def delete_temp_dir

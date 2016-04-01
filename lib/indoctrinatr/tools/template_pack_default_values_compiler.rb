@@ -21,6 +21,12 @@ module Indoctrinatr
         rename_if_necessary
       end
 
+      def pdf_exists?
+        check_for_folder
+        file_path = pdf_with_default_values_file_path ConfigurationExtractor.new(template_pack_name).call
+        File.exist? file_path
+      end
+
       private
 
       def compile_tex_file

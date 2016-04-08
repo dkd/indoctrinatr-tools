@@ -21,7 +21,7 @@ module Indoctrinatr
         @keep_aux_files = keep_aux_files
       end
 
-      def call # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         fill_documentation_content
         read_content_tex_file
         read_main_tex_file
@@ -33,13 +33,18 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
-          copy_helper_files_to_template_pack if @keep_aux_files
-          show_temp_directory if @keep_aux_files
-          delete_temp_dir unless @keep_aux_files
+          if @keep_aux_files
+            copy_helper_files_to_template_pack
+            show_temp_directory
+          else
+            delete_temp_dir
+          end
           show_success
         else
-          copy_helper_files_to_template_pack if @keep_aux_files
-          show_temp_directory if @keep_aux_files
+          if @keep_aux_files
+            copy_helper_files_to_template_pack
+            show_temp_directory
+          end
           handle_latex_error
         end
       end

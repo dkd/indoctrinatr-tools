@@ -10,8 +10,9 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name
+      def initialize template_pack_name, keep_aux_files = false
         @template_pack_name = template_pack_name
+        @keep_aux_files = keep_aux_files
       end
 
       def call
@@ -23,7 +24,7 @@ module Indoctrinatr
       private
 
       def compile_tex_file
-        make_pdf tex_with_default_values_file_path, pack_documentation_examples_dir_path
+        make_pdf tex_with_default_values_file_path, pack_documentation_examples_dir_path, !@keep_aux_files
       end
 
       def rename_if_necessary

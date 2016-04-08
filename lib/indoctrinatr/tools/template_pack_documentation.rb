@@ -16,11 +16,12 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name
+      def initialize template_pack_name, keep_aux_files = false
         @template_pack_name = template_pack_name
+        @keep_aux_files = keep_aux_files
       end
 
-      def call
+      def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         fill_documentation_content
         read_content_tex_file
         read_main_tex_file
@@ -32,9 +33,18 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
-          delete_temp_dir
+          if @keep_aux_files
+            copy_helper_files_to_template_pack
+            show_temp_directory
+          else
+            delete_temp_dir
+          end
           show_success
         else
+          if @keep_aux_files
+            copy_helper_files_to_template_pack
+            show_temp_directory
+          end
           handle_latex_error
         end
       end
@@ -85,13 +95,24 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, false
+        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, !@keep_aux_files
+      end
+
+      def copy_helper_files_to_template_pack
+        helper_files_to_copy = [latex_log_file, content_tex_file_destination_path, main_tex_file_destination_path].freeze
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
+        FileUtils.copy helper_files_to_copy, pack_documentation_dir_path
+        puts 'TeX files and log file have been copied to doc subdirectory of your template_pack'
       end
 
       def copy_doc_file_to_template_pack
         # All the documentation shall go into template_pack/doc
         Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
         FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
+      end
+
+      def show_temp_directory
+        puts "Look into the directory #{documentation_temp_dir} to see all files related to the technical documentation compilation"
       end
 
       def delete_temp_dir

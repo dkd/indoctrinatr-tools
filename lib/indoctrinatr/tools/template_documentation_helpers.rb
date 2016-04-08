@@ -57,6 +57,11 @@ module Indoctrinatr
         documentation_compile_dir_path_name.join 'indoctrinatr-technical-documentation.log'
       end
 
+      # Accessor method to the attribute for classes that include this module
+      def documentation_temp_dir
+        documentation_compile_dir_path_name
+      end
+
       private
 
       def documentation_files_path

@@ -16,9 +16,9 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name, no_clean_up_after = false
+      def initialize template_pack_name, keep_aux_files = false
         @template_pack_name = template_pack_name
-        @no_clean_up_after = no_clean_up_after
+        @keep_aux_files = keep_aux_files
       end
 
       def call # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -33,13 +33,13 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
-          copy_helper_files_to_template_pack if @no_clean_up_after
-          show_temp_directory if @no_clean_up_after
-          delete_temp_dir unless @no_clean_up_after
+          copy_helper_files_to_template_pack if @keep_aux_files
+          show_temp_directory if @keep_aux_files
+          delete_temp_dir unless @keep_aux_files
           show_success
         else
-          copy_helper_files_to_template_pack if @no_clean_up_after
-          show_temp_directory if @no_clean_up_after
+          copy_helper_files_to_template_pack if @keep_aux_files
+          show_temp_directory if @keep_aux_files
           handle_latex_error
         end
       end
@@ -90,7 +90,7 @@ module Indoctrinatr
       end
 
       def compile_documentation_to_pdf
-        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, !@no_clean_up_after
+        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, !@keep_aux_files
       end
 
       def copy_helper_files_to_template_pack

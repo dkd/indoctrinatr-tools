@@ -13,9 +13,9 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name, :configuration, :field_name_values, :tex_file_content, :parsed_tex_file_content
 
-      def initialize template_pack_name, no_clean_up_after = false
+      def initialize template_pack_name, keep_aux_files = false
         @template_pack_name = template_pack_name
-        @no_clean_up_after = no_clean_up_after
+        @keep_aux_files = keep_aux_files
       end
 
       def call
@@ -57,7 +57,7 @@ module Indoctrinatr
       end
 
       def compile_tex_file
-        make_pdf tex_with_fieldname_values_file_path, pack_documentation_examples_dir_path, !@no_clean_up_after
+        make_pdf tex_with_fieldname_values_file_path, pack_documentation_examples_dir_path, !@keep_aux_files
       end
 
       def handle_latex_error
@@ -66,8 +66,6 @@ module Indoctrinatr
       end
 
       def show_success
-        args = ['-c']
-        system('latexmk', *args) # cleanup the files
         puts "The template pack '#{template_pack_name}' has been successfully parsed with the variable names"
         puts 'Please check the .tex file and modify it to your needs and compile it again'
       end

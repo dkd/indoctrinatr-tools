@@ -51,6 +51,8 @@ Command | Description
 
 The commands `pdf`, `pdf_with_field_names` and `doc` have a `keep-aux-files` option. This is helpful if you run in into LaTeX errors, want to inspect the .log file and run LaTeX for yourself again.
 
+The command `doc` does not overwrite existing examples. This means that you can customize the examples that are appended in the documentation.
+
 ## Build
 
 If you want to build the Rubygem yourself, run `rake build` to build and `rake install` to build and install the Indoctrinatr Tools gem.

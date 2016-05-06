@@ -1,4 +1,4 @@
-rvm use 2.1
+rvm use 2.1.9
 
 alias brake='bundle exec'
 alias rubocop='bundle exec rubocop'

@@ -109,12 +109,6 @@ command :doc do |c|
   c.action do |_, options, args|
     template_pack_name = args.join '_'
     keep_aux_files = options[:'keep-aux-files']
-    default_values_compiler = TemplatePackDefaultValuesCompiler.new(template_pack_name, keep_aux_files)
-    # This gives user the option to customize the DefaultValues Example that is appended at the end of the documentation
-    unless default_values_compiler.pdf_exists?
-      TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
-      default_values_compiler.call
-    end
     TemplatePackDocumentation.new(template_pack_name, keep_aux_files).call
   end
 end

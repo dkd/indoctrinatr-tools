@@ -40,8 +40,12 @@ module Indoctrinatr
         end
       end
 
+      def pdf_with_fieldname_values_file_path
+        "#{pack_documentation_examples_dir_path.join template_pack_name}_with_fieldname_values.pdf"
+      end
+
       def tex_with_fieldname_values_file_path
-        pack_documentation_examples_dir_path.join template_pack_name + '_with_fieldname_values.tex'
+        "#{pack_documentation_examples_dir_path.join template_pack_name}_with_fieldname_values.tex"
       end
 
       def pack_documentation_dir_path

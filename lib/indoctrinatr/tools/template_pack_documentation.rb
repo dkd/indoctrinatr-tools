@@ -14,7 +14,7 @@ module Indoctrinatr
       include TemplateDocumentationHelpers
       include PdfGenerator
 
-      attr_accessor :template_pack_name
+      attr_accessor :template_pack_name, :keep_aux_files
 
       def initialize template_pack_name, keep_aux_files = false
         @template_pack_name = template_pack_name

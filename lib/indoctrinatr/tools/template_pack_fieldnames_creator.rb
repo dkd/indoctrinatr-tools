@@ -26,10 +26,16 @@ module Indoctrinatr
         write_tex_file
         if compile_tex_file
           show_success
+          true
         else
           handle_latex_error
+          false
         end
-        # TODO: rename if necessary?
+      end
+
+      def pdf_exists?
+        check_for_folder
+        File.exist? pdf_with_fieldname_values_file_path
       end
 
       private
@@ -49,7 +55,6 @@ module Indoctrinatr
       end
 
       def write_tex_file
-        # TODO: include dkd-image-tools.sty and copy them to the doc directory
         # Create directory to avoid file creation errors
         Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
         Dir.mkdir(pack_documentation_examples_dir_path) unless Dir.exist?(pack_documentation_examples_dir_path)

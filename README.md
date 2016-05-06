@@ -27,7 +27,9 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 
 ### LaTeX Requirements
 
+* `latexmk`
 * for the template documentation
+  * Tested against TeX Live 2014
   * `dirtree`
   * `datetime2`
 
@@ -51,6 +53,8 @@ Command | Description
 
 The commands `pdf`, `pdf_with_field_names` and `doc` have a `keep-aux-files` option. This is helpful if you run in into LaTeX errors, want to inspect the .log file and run LaTeX for yourself again.
 
+The command `doc` does not overwrite existing examples. This means that you can customize the examples that are appended in the documentation.
+
 ## Build
 
 If you want to build the Rubygem yourself, run `rake build` to build and `rake install` to build and install the Indoctrinatr Tools gem.
@@ -64,6 +68,7 @@ What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensour
 We are also looking forward to your [GitHub Pull Requests](https://help.github.com/articles/using-pull-requests/).
 
 Manual testing: After cloning the repo, run `bundle exec bin/indoctrinatr` inside the directory for testing your own development changes.
+Automatic testing: run `rake test_with_coveralls`
 
 ## License
 

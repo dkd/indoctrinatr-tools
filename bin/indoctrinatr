@@ -109,24 +109,7 @@ command :doc do |c|
   c.action do |_, options, args|
     template_pack_name = args.join '_'
     keep_aux_files = options[:'keep-aux-files']
-    default_values_compiler = TemplatePackDefaultValuesCompiler.new(template_pack_name, keep_aux_files)
-    # This gives user the option to customize the DefaultValues Example that is appended at the end of the documentation
-    unless default_values_compiler.pdf_exists?
-      TemplatePackDefaultValuesParser.new(template_pack_name).call
-      default_values_compiler.call
-    end
-    fieldnames_creator = TemplatePackFieldnamesCreator.new(template_pack_name, keep_aux_files)
-    # This gives user the option to customize the FieldNameValues Example that is appended in the documentation
-    include_fieldnames = if fieldnames_creator.pdf_exists?
-                           true
-                         elsif fieldnames_creator.call != false # generate the example PDF
-                           puts 'INFO: Example with field names has been automatically generated for the documentation' # More user information and for testing
-                           true
-                         else
-                           puts 'ERROR: Example with field names could not be created and is not included in documentation'
-                           false
-                         end
-    TemplatePackDocumentation.new(template_pack_name, keep_aux_files, include_fieldnames).call
+    TemplatePackDocumentation.new(template_pack_name, keep_aux_files).call
   end
 end
 

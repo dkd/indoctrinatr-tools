@@ -27,7 +27,9 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 
 ### LaTeX Requirements
 
+* `latexmk`
 * for the template documentation
+  * Tested against TeX Live 2014
   * `dirtree`
   * `datetime2`
 
@@ -66,6 +68,7 @@ What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensour
 We are also looking forward to your [GitHub Pull Requests](https://help.github.com/articles/using-pull-requests/).
 
 Manual testing: After cloning the repo, run `bundle exec bin/indoctrinatr` inside the directory for testing your own development changes.
+Automatic testing: run `rake test_with_coveralls`
 
 ## License
 

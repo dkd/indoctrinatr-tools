@@ -14,7 +14,7 @@ module Indoctrinatr
 
       # Overwrite the initialize method because the content is built up much more complex than for the other
       # ContentForTexFile children.
-      def initialize template_pack_name, configuration
+      def initialize template_pack_name, configuration, include_fieldnames = false
         @configuration = configuration
         @template_pack_name = template_pack_name
         @list_of_files = print_dirtree_style @template_pack_name
@@ -22,6 +22,7 @@ module Indoctrinatr
         @template_name = configuration.template_name
         @files = read_template_files_content
         @default_values_pdf_path = pdf_with_default_values_file_path configuration
+        @pdf_with_field_names_path = include_fieldnames ? pdf_with_fieldname_values_file_path : nil
         # should have been generated automatically or be already existing, error if something went wrong with it:
         fail IOError, "template with default values does not exist in current directory. Run indoctrinatr pdf #{template_pack_name}" unless File.exist? @default_values_pdf_path # rubocop:disable Style/SignalException
       end
@@ -34,9 +35,6 @@ module Indoctrinatr
           files.push TemplateDocumentationSourceFile.new filename
         end
       end
-
-      # TODO: get path for PDF with field_names
-      # TODO: include PDF with field_names *if* it has been successfully generated
     end
   end
 end

@@ -28,8 +28,13 @@ module Indoctrinatr
           show_success
         else
           handle_latex_error
+          false
         end
-        # TODO: rename if necessary?
+      end
+
+      def pdf_exists?
+        check_for_folder
+        File.exist? pdf_with_fieldname_values_file_path
       end
 
       private

@@ -14,11 +14,12 @@ module Indoctrinatr
       include TemplateDocumentationHelpers
       include PdfGenerator
 
-      attr_accessor :template_pack_name
+      attr_accessor :template_pack_name, :keep_aux_files, :include_fieldnames_pdf
 
-      def initialize template_pack_name, keep_aux_files = false
+      def initialize template_pack_name, keep_aux_files = false, include_fieldnames_pdf = false
         @template_pack_name = template_pack_name
         @keep_aux_files = keep_aux_files
+        @include_fieldnames_pdf = include_fieldnames_pdf
       end
 
       def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -54,7 +55,7 @@ module Indoctrinatr
       def fill_documentation_content
         configuration = ConfigurationExtractor.new(template_pack_name).call
         begin
-          @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
+          @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration, include_fieldnames_pdf
         rescue IOError => ex
           abort ex.message
         end

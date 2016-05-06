@@ -112,10 +112,19 @@ command :doc do |c|
     default_values_compiler = TemplatePackDefaultValuesCompiler.new(template_pack_name, keep_aux_files)
     # This gives user the option to customize the DefaultValues Example that is appended at the end of the documentation
     unless default_values_compiler.pdf_exists?
-      TemplatePackDefaultValuesParser.new(template_pack_name).call # hierarchy - these files are needed. Unfortunately GLI::App does not offer to run other commands
+      TemplatePackDefaultValuesParser.new(template_pack_name).call
       default_values_compiler.call
     end
-    TemplatePackDocumentation.new(template_pack_name, keep_aux_files).call
+    fieldnames_creator = TemplatePackFieldnamesCreator.new(template_pack_name, keep_aux_files)
+    # This gives user the option to customize the FieldNameValues Example that is appended in the documentation
+    include_fieldnames = if fieldnames_creator.pdf_exists?
+                           true
+                         elsif fieldnames_creator.call != false # generate the example PDF
+                           true
+                         else
+                           false
+                         end
+    TemplatePackDocumentation.new(template_pack_name, keep_aux_files, include_fieldnames).call
   end
 end
 

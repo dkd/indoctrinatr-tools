@@ -76,6 +76,10 @@
 	% include the prerendered template
 	% pages=- selects all pages
 	\includepdf[pages=-]{<%= @default_values_pdf_path -%>} % template_with_default_values.pdf "#{@template_name}_with_default_values.pdf"
+	<% if @pdf_with_field_names_path %>
+		\chapter{Templated filled with field names}
+		\includepdf[pages=-]{<%= @pdf_with_field_names_path -%>}
+	<% end %>
 	% restore wallpaper
 	\ULCornerWallPaper{1}{indoctrinatr_letterpaper.pdf}
 

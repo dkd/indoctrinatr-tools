@@ -120,8 +120,10 @@ command :doc do |c|
     include_fieldnames = if fieldnames_creator.pdf_exists?
                            true
                          elsif fieldnames_creator.call != false # generate the example PDF
+                           puts 'INFO: Example with field names has been automatically generated for the documentation' # More user information and for testing
                            true
                          else
+                           puts 'ERROR: Example with field names could not be created and is not included in documentation'
                            false
                          end
     TemplatePackDocumentation.new(template_pack_name, keep_aux_files, include_fieldnames).call

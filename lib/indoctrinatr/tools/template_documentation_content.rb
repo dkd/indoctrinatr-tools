@@ -30,6 +30,7 @@ module Indoctrinatr
 
       def read_template_files_content
         filenames = list_files_of_type template_pack_name
+        filenames.reject! { |f| f.include?(pack_documentation_examples_dir_path.relative_path_from(Pathname.new(Dir.pwd)).to_s) }
         filenames.inject [] do |files, filename|
           files.push TemplateDocumentationSourceFile.new filename
         end

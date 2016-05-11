@@ -1,15 +1,15 @@
 sudo: true
 language: ruby
 rvm:
+  - '2.3'
   - '2.2'
   - '2.1'
-  - '2.0'
 cache:
   - bundler
   - apt
 before_install:
   - sudo apt-get update && sudo wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu && sudo chmod +x ./install-tl-ubuntu && sudo ./install-tl-ubuntu
-  - gem install bundler -v 1.10.6
+  - gem install bundler -v 1.12.3
 script:
   - bundle exec indoctrinatr demo
   - bundle exec rake test_with_coveralls

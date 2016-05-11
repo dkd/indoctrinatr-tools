@@ -6,9 +6,9 @@ require 'indoctrinatr/tools/version'
 Gem::Specification.new do |spec|
   spec.name          = 'indoctrinatr-tools'
   spec.version       = Indoctrinatr::Tools::VERSION
-  spec.authors       = ['Nicolai Reuschling']
-  spec.email         = ['nicolai.reuschling@dkd.de']
-  spec.summary       = 'indoctrinatr-tools provides a set of command line tools for Indoctrinatr (an Open Source Software project by dkd Internet Service GmbH, Frankfurt am Main, Germany.)'
+  spec.authors       = ['Nicolai Reuschling', 'Luka Lüdicke']
+  spec.email         = ['nicolai.reuschling@dkd.de', 'luka.luedicke@dkd.de']
+  spec.summary       = 'indoctrinatr-tools provides a set of command line tools for Indoctrinatr (an Open Source Software project by dkd Internet Service GmbH, Frankfurt am Main, Germany).'
   # spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ''
   spec.license       = 'MIT'

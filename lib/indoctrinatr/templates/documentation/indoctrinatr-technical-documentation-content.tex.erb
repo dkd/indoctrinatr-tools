@@ -22,15 +22,20 @@
 
 <% end %>
 
-\chapter{Variables}
-		
-\begin{tabu}{ l l X l X }
-	\textbf{Variable} & \textbf{Presentation} & \textbf{Default Value} & \textbf{Required} & \textbf{Description} \\
-	<% @attributes.each do |attribute| %>
-		\texttt{<%= attribute['name'].to_latex -%>}
-		& <%= attribute['presentation'].to_latex -%>
-		& <%= attribute['default_value'].to_latex -%>
-		& <%= 'true' if attribute['required'] == 'true' -%> <%# empty if false or not set. Wish by Søren for better readability-%>
-		& <%= attribute['description'].to_latex -%>\\
-	<% end %>
-\end{tabu}
+\begin{landscape}
+  \chapter{Variables}
+
+  \begin{longtabu}{ l l X l X }
+    \tabletoprule
+    \textbf{Variable} & \textbf{Presentation} & \textbf{Default Value} & \textbf{Required} & \textbf{Description} \\
+    \tabletoprule
+    \endhead
+    <% @attributes.each do |attribute| %>
+      \texttt{<%= attribute['name'].to_latex -%>}
+      & <%= attribute['presentation'].to_latex if attribute['presentation'] -%>
+      & <%= attribute['default_value'].to_latex -%>
+      & <%= 'true' if attribute['required'] == 'true' -%> <%# empty if false or not set. Wish by Søren for better readability-%>
+      & <%= attribute['description'].to_latex if attribute['description'] -%>\\ <%# if condition to ignore errors on empty description field -%>
+    <% end %>
+  \end{longtabu}
+\end{landscape}

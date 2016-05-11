@@ -12,18 +12,18 @@ module Indoctrinatr
       private
 
       def set_programming_language
-        case File.extname(@name)
-        when '.tex'
-          language = 'TeX'
-        when '.sty'
-          language = 'TeX'
-        when '.erb' # .erb files are just supposed to be tex.erb files. TODO: more correct
-          language = 'TeX'
-        when '.rb'
-          language = 'Ruby'
-        else # probably YAML
-          language = 'unspecified'
-        end
+        language =  case File.extname(@name)
+                    when '.tex'
+                      'TeX'
+                    when '.sty'
+                      'TeX'
+                    when '.erb' # .erb files are just supposed to be tex.erb files. TODO: more correct
+                      'TeX'
+                    when '.rb'
+                      'Ruby'
+                    else # probably YAML
+                      'unspecified'
+                    end
         language
       end
     end

@@ -3,7 +3,8 @@ require 'redcloth'
 module RedCloth
   module Formatters
     module LATEX
-      { h1: 'chapter',
+      {
+        h1: 'chapter',
         h2: 'section',
         h3: 'subsection',
         h4: 'subsubsection'

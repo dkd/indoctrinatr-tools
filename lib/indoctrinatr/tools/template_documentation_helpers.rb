@@ -17,6 +17,10 @@ module Indoctrinatr
         documentation_files_path.join 'indoctrinatr-technical-documentation.sty'
       end
 
+      def source_image_tools_package_file_path
+        documentation_files_path.join 'dkd-image-tools.sty'
+      end
+
       def source_letterpaper_file_path
         documentation_files_path.join 'indoctrinatr_letterpaper.pdf'
       end
@@ -27,6 +31,10 @@ module Indoctrinatr
 
       def latex_package_destination_path
         documentation_compile_dir_path_name.join 'indoctrinatr-technical-documentation.sty'
+      end
+
+      def image_tools_package_destination_path
+        documentation_compile_dir_path_name.join 'dkd-image-tools.sty'
       end
 
       def letterpaper_file_destination_path
@@ -47,6 +55,11 @@ module Indoctrinatr
 
       def latex_log_file
         documentation_compile_dir_path_name.join 'indoctrinatr-technical-documentation.log'
+      end
+
+      # Accessor method to the attribute for classes that include this module
+      def documentation_temp_dir
+        documentation_compile_dir_path_name
       end
 
       private

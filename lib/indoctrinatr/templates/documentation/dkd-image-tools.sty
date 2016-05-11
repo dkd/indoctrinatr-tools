@@ -1,0 +1,72 @@
+% Author Søren Schaffstein
+% package "dkd-image-tools"
+% this package provides some image handling tools to make handling of images easier
+
+% include required libraries (tikz, xstring, xparse, graphicx)
+
+%use "graphicx" for including images 
+\usepackage{graphicx}
+
+
+% use "tikz" package for drawing
+\usepackage{tikz}
+
+
+% use "xparse" package to allow command definitions with mutliple optional arguments
+\usepackage{xparse}
+
+
+% use "xstring" package to allow string comparisons
+\usepackage{xstring}
+
+
+
+% creates a placeholder for images with the given dimensions and name
+% usage: 	\imagePlaceholder{<width>}{<height>}{<image name>}[<message>]
+% usage example: \imagePlaceholder{\textwidth}{120mm}{sunset.jpg}[Image not found:]
+\DeclareDocumentCommand{\imagePlaceholder}{ m m m O{} }{%
+	\begin{tikzpicture}[x=#1, y=#2]
+		\draw (0,0) rectangle (1,1);
+		\draw[color=light-gray] (0,0) -- (1,1);
+		\draw[color=light-gray] (0,1) -- (1,0);
+		\node at (0.5, 0.7) {\Large\texttt{#4}};
+		\node at (0.5, 0.5) {\Large\texttt{#3}};
+	\end{tikzpicture}
+}
+
+
+% defines an image placement command that checks if the file exists and places a placeholder if not
+% usage: 	\placeImage{<image name>}[<width>]
+% usage example: \placeImage{sunset.png}[0.5\textwidth]
+\DeclareDocumentCommand{\placeImage}{ m O{\textwidth} }{%
+	% check if filename is not blank (don't return anything if filename is blank)
+	\IfStrEq{#1}{}{}{%
+		\IfFileExists{#1}{%
+			\includegraphics[width=#2]{images/#1}
+		}{%
+			\imagePlaceholder{#2}{#2}{#1}[Image not found:]
+		}
+	}
+}
+
+
+
+% defines a figure placement command that checks if the file exists and places a placeholder if not
+% usage: 	\placeFigure{<image name>}[<caption>][<figure label>][<width>]
+% usage example: \placeFigure{sunset.png}[This is a beautiful sunset!][fig:sun][0.5\textwidth]
+\DeclareDocumentCommand{\placeFigure}{ m O{} O{} O{\textwidth} }{%
+	% check if filename is not blank (don't return anything if filename is blank)
+	\IfStrEq{#1}{}{}{%
+		\begin{figure}[htbp]
+			\placeImage{#1}[#4]
+			% place caption if one was given
+			\IfStrEq{#2}{}{}{%
+				\caption{#2}
+			}
+			% place a label if one was given
+			\IfStrEq{#3}{}{}{%
+				\label{#3} 
+			}
+		\end{figure}
+	}
+}

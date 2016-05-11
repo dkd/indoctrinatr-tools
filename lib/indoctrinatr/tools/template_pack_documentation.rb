@@ -2,6 +2,7 @@ require 'indoctrinatr/tools/template_documentation_content'
 require 'indoctrinatr/tools/template_pack_helpers'
 require 'indoctrinatr/tools/template_documentation_helpers'
 require 'indoctrinatr/tools/configuration_extractor'
+require 'indoctrinatr/tools/pdf_generator'
 require 'erubis'
 require 'to_latex'
 require 'fileutils'
@@ -11,14 +12,16 @@ module Indoctrinatr
     class TemplatePackDocumentation
       include TemplatePackHelpers
       include TemplateDocumentationHelpers
+      include PdfGenerator
 
-      attr_accessor :template_pack_name
+      attr_accessor :template_pack_name, :keep_aux_files
 
-      def initialize template_pack_name
+      def initialize template_pack_name, keep_aux_files = false
         @template_pack_name = template_pack_name
+        @keep_aux_files = keep_aux_files
       end
 
-      def call
+      def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         fill_documentation_content
         read_content_tex_file
         read_main_tex_file
@@ -30,9 +33,18 @@ module Indoctrinatr
         copy_source_files
         if compile_documentation_to_pdf
           copy_doc_file_to_template_pack
-          delete_temp_dir
+          if @keep_aux_files
+            copy_helper_files_to_template_pack
+            show_temp_directory
+          else
+            delete_temp_dir
+          end
           show_success
         else
+          if @keep_aux_files
+            copy_helper_files_to_template_pack
+            show_temp_directory
+          end
           handle_latex_error
         end
       end
@@ -57,7 +69,7 @@ module Indoctrinatr
       end
 
       def parse_content_tex_file
-        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(@documentation_content.retrieve_binding)
+        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(@documentation_content.retrieve_binding) # TODO: more useful error messages for user on errors
       end
 
       def parse_main_tex_file
@@ -79,19 +91,28 @@ module Indoctrinatr
       def copy_source_files
         FileUtils.copy_file source_latex_package_file_path, latex_package_destination_path
         FileUtils.copy_file source_letterpaper_file_path, letterpaper_file_destination_path
+        FileUtils.copy_file source_image_tools_package_file_path, image_tools_package_destination_path
       end
 
       def compile_documentation_to_pdf
-        args = ['-xelatex',
-                '-shell-escape',
-                '-interaction=batchmode', # more silent output
-                "-output-directory=#{documentation_compile_dir_path_name}", main_tex_file_destination_path.to_s] # without this xelatex tries to use the current working directory
-        latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
-        latexmk_successful # false if error, nil if system command unknown
+        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, !@keep_aux_files
+      end
+
+      def copy_helper_files_to_template_pack
+        helper_files_to_copy = [latex_log_file, content_tex_file_destination_path, main_tex_file_destination_path].freeze
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
+        FileUtils.copy helper_files_to_copy, pack_documentation_dir_path
+        puts 'TeX files and log file have been copied to doc subdirectory of your template_pack'
       end
 
       def copy_doc_file_to_template_pack
+        # All the documentation shall go into template_pack/doc
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
         FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
+      end
+
+      def show_temp_directory
+        puts "Look into the directory #{documentation_temp_dir} to see all files related to the technical documentation compilation"
       end
 
       def delete_temp_dir

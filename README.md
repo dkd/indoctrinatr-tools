@@ -11,9 +11,9 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 1.  Install XeTeX:
 
     Mac OS X: [MacTeX](https://tug.org/mactex/)
- 
+
     Debian/Ubuntu:
-    
+
     ```shell
     apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra
     ```
@@ -27,7 +27,9 @@ Rubygem: [![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http:
 
 ### LaTeX Requirements
 
+* `latexmk`
 * for the template documentation
+  * Tested against TeX Live 2014
   * `dirtree`
   * `datetime2`
 
@@ -40,12 +42,18 @@ Command | Description
 `indoctrinatr new project_name` | Creates a scaffold for a new Template Pack
 `indoctrinatr parse project_name` | Parses a XeTex file with ERB and default values
 `indoctrinatr pdf project_name` | Compiles PDF with default values
+`indoctrinatr pdf_with_field_names project_name` | Generates PDF with the field names as values
 `indoctrinatr doc project_name` | Creates a technical documentation of your template pack
+`indoctrinatr check project_name` | Analyzes your Template Pack for errors
 `indoctrinatr pack project_name` | Creates a Template Pack from a given project folder
 `indoctrinatr demo` | Creates, parses, and compiles a demo project
 `indoctrinatr workflow` | Displays a suggested workflow
 `indoctrinatr bashcompletion` | Displays instructions for bash completion
 `indoctrinatr zshcompletion` | Displays instructions for zsh completion
+
+The commands `pdf`, `pdf_with_field_names` and `doc` have a `keep-aux-files` option. This is helpful if you run in into LaTeX errors, want to inspect the .log file and run LaTeX for yourself again.
+
+The command `doc` does not overwrite existing examples. This means that you can customize the examples that are appended in the documentation.
 
 ## Build
 
@@ -60,6 +68,7 @@ What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensour
 We are also looking forward to your [GitHub Pull Requests](https://help.github.com/articles/using-pull-requests/).
 
 Manual testing: After cloning the repo, run `bundle exec bin/indoctrinatr` inside the directory for testing your own development changes.
+Automatic testing: run `rake test_with_coveralls`
 
 ## License
 
@@ -69,6 +78,6 @@ Indoctrinatr and Indoctrinatr Tools are licensed under the terms and conditions 
 
 [![dkd](assets/images/dkd_logo.png)](https://dkd.de/)
 
-* Luka Lüdicke
+* Luka Lüdicke (development)
 * Nicolai Reuschling (development)
 * Søren Schaffstein (idea, product management)

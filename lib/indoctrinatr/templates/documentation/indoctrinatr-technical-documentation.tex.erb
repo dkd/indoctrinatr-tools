@@ -9,7 +9,11 @@
 
 % use dkd-letter style to apply design styles
 \usepackage{indoctrinatr-technical-documentation}
+% use custom image macros to show image placeholders
+\usepackage{dkd-image-tools}
 
+% use "pdflscape" package to be able to have several landscape pages in the document
+\usepackage{pdflscape}
 
 %define labels to use in this document
 \newcommand{\dkd}{\emph{dkd}}
@@ -72,6 +76,10 @@
 	% include the prerendered template
 	% pages=- selects all pages
 	\includepdf[pages=-]{<%= @default_values_pdf_path -%>} % template_with_default_values.pdf "#{@template_name}_with_default_values.pdf"
+	<% if @pdf_with_field_names_path %>
+		\chapter{Templated filled with field names}
+		\includepdf[pages=-]{<%= @pdf_with_field_names_path -%>}
+	<% end %>
 	% restore wallpaper
 	\ULCornerWallPaper{1}{indoctrinatr_letterpaper.pdf}
 

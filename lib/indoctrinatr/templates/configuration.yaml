@@ -1,5 +1,4 @@
 template_name: Hello World Template
-output_file_name: '#{Time.now.year}-#{Time.now.month}-#{Time.now.day}_Note.pdf'
 textual_description: |
   This is your first _Indoctrinatr_ template. You can use _Textile_ syntax here to *highlight* important information.
 

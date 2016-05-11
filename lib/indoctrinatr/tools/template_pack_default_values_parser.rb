@@ -29,6 +29,7 @@ module Indoctrinatr
       def read_config_file
         @configuration = ConfigurationExtractor.new(template_pack_name).call
         @default_values = DefaultValues.new @configuration
+        @default_values._use_default_values
       end
 
       def read_tex_file
@@ -40,6 +41,9 @@ module Indoctrinatr
       end
 
       def write_tex_file
+        # Create directory to avoid file creation errors
+        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
+        Dir.mkdir(pack_documentation_examples_dir_path) unless Dir.exist?(pack_documentation_examples_dir_path)
         File.write tex_with_default_values_file_path, parsed_tex_file_content
       end
 

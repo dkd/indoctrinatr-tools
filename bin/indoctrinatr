@@ -61,11 +61,17 @@ command :demo do |c|
   end
 end
 
+pre do |global_options, _, _, args|
+  # modify template_pack_name argument. This removes a trailing '/' that we get when users use tab completion
+  global_options['template_pack_name'] = File.split(args[0])[1] unless args.empty?
+  true # pre condition returns false when nothing is done
+end
+
 desc 'Create a scaffold for a new Template Pack'
 arg_name 'template-pack-name'
 command :new do |c|
-  c.action do |_, _, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, _, _|
+    template_pack_name = global_options['template_pack_name']
     TemplatePackScaffold.new(template_pack_name).call
   end
 end
@@ -73,8 +79,8 @@ end
 desc 'Parse XeTeX file with ERB and default values of Template Pack'
 arg_name 'template_pack_name'
 command :parse do |c|
-  c.action do |_, _, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, _, _|
+    template_pack_name = global_options['template_pack_name']
     TemplatePackDefaultValuesParser.new(template_pack_name).call
   end
 end
@@ -84,8 +90,8 @@ arg_name 'template_pack_name'
 command :pdf do |c|
   c.desc 'Keep generated aux files'
   c.switch [:'keep-aux-files']
-  c.action do |_, options, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, options, _|
+    template_pack_name = global_options['template_pack_name']
     keep_aux_files = options[:'keep-aux-files']
     TemplatePackDefaultValuesParser.new(template_pack_name).call
     TemplatePackDefaultValuesCompiler.new(template_pack_name, keep_aux_files).call
@@ -97,8 +103,8 @@ arg_name 'template_pack_name'
 command :pdf_with_field_names do |c|
   c.desc 'Keep generated aux files'
   c.switch [:'keep-aux-files']
-  c.action do |_, options, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, options, _|
+    template_pack_name = global_options['template_pack_name']
     keep_aux_files = options[:'keep-aux-files']
     TemplatePackFieldnamesCreator.new(template_pack_name, keep_aux_files).call
   end
@@ -109,8 +115,8 @@ arg_name 'template_pack_name'
 command :doc do |c|
   c.desc 'Keep generated aux files'
   c.switch [:'keep-aux-files']
-  c.action do |_, options, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, options, _|
+    template_pack_name = global_options['template_pack_name']
     keep_aux_files = options[:'keep-aux-files']
     TemplatePackDocumentation.new(template_pack_name, keep_aux_files).call
   end
@@ -119,8 +125,8 @@ end
 desc 'Check for errors in the given source folder'
 arg_name 'template_pack_name'
 command :check do |c|
-  c.action do |_, _, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, _, _|
+    template_pack_name = global_options['template_pack_name']
     TemplatePackErrorChecker.new(template_pack_name).call
   end
 end
@@ -128,8 +134,8 @@ end
 desc 'Create a Template Pack from a given source folder'
 arg_name 'template_pack_name'
 command :pack do |c|
-  c.action do |_, _, args|
-    template_pack_name = args.join '_'
+  c.action do |global_options, _, _|
+    template_pack_name = global_options['template_pack_name']
     TemplatePackPacker.new(template_pack_name).call
   end
 end

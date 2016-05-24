@@ -1,0 +1,26 @@
+template_name: Hello World Template
+output_file_name: '#{Time.now.year}_hello_world.pdf'
+textual_description: |
+  This is your first _Indoctrinatr_ template. You can use _Textile_ syntax here to *highlight* important information.
+
+    Edit this template as you like. Read more at https://github.com/dkd/indoctrinatr.
+fields:
+  -
+    name: variable1
+    label: Who is it?
+    presentation: text
+    default_value: "World"
+    description: "The first variable"
+  -
+    name: date
+    label: Date
+    presentation: date
+    default_value: '#{Time.now.year}-#{Time.now.month}-#{Time.now.day}'
+  -
+    name: variable2
+    label: Type of World
+    required: "true"
+    presentation: dropdown
+    default_value: "not enough"
+    available_options: "not enough, beautiful, your oyster, a template"
+    description: "The second variable. The description name can be very long and should adequately describe what the variable is for etc. pp."

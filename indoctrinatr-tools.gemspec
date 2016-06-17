@@ -20,10 +20,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler',   '~> 1.10'
-  spec.add_development_dependency 'rake',      '~> 11.1'
+  spec.add_development_dependency 'bundler',   '~> 1.12'
+  spec.add_development_dependency 'rake',      '~> 11.2'
   spec.add_development_dependency 'rspec',     '~> 3.4'
-  spec.add_development_dependency 'cucumber',  '~> 2.3'
+  spec.add_development_dependency 'cucumber',  '~> 2.4'
   spec.add_development_dependency 'aruba',     '~> 0.9'
   spec.add_development_dependency 'rubocop',   '~> 0.40'
   spec.add_development_dependency 'pry',       '~> 0.10'

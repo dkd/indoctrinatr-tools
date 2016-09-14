@@ -1,5 +1,11 @@
 # indoctrinatr-tools
 
+## v0.14.0 (2016-09-14)
+
+### changes
+
+* updated dependencies
+
 ## v0.13.0 (2016-05-27)
 
 ### features

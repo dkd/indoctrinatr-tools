@@ -35,5 +35,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'to_latex', '~> 0.5'
   spec.add_dependency 'RedCloth', '~> 4.3'
 
+  spec.cert_chain  = ['certs/dkd-reuschling.pem']
+  spec.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $0 =~ /gem\z/
+
   spec.requirements << 'LaTeX development enviroment'
 end

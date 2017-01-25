@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - tmp/**/*
+    - vendor/**/*
 Metrics/LineLength:
   Max: 240
 Style/MethodDefParentheses:

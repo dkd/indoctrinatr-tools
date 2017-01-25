@@ -3,7 +3,7 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'indoctrinatr/tools/version'
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name          = 'indoctrinatr-tools'
   spec.version       = Indoctrinatr::Tools::VERSION
   spec.authors       = ['Nicolai Reuschling', 'Luka Lüdicke']
@@ -20,12 +20,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler',   '~> 1.13'
-  spec.add_development_dependency 'rake',      '~> 11.2'
+  spec.add_development_dependency 'bundler',   '~> 1.14'
+  spec.add_development_dependency 'rake',      '~> 12.0'
   spec.add_development_dependency 'rspec',     '~> 3.5'
   spec.add_development_dependency 'cucumber',  '~> 2.4'
   spec.add_development_dependency 'aruba',     '~> 0.14'
-  spec.add_development_dependency 'rubocop',   '~> 0.42'
+  spec.add_development_dependency 'rubocop',   '~> 0.47'
   spec.add_development_dependency 'pry',       '~> 0.10'
   spec.add_development_dependency 'coveralls', '~> 0.8'
 

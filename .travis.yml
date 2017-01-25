@@ -12,5 +12,6 @@ before_install:
   - gem install bundler --version 1.14.3 --no-document
 
 script:
+  - bundle exec rubocop --version
   - bundle exec rubocop
-  - bundle exec indoctrinatr demo
+  - bundle exec indoctrinatr new demo

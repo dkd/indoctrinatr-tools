@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'indoctrinatr/tools/version'
@@ -13,7 +14,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.homepage      = ''
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = '~> 2.0'
+  spec.required_ruby_version = '~> 2.3'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -25,12 +26,13 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'rspec',     '~> 3.5'
   spec.add_development_dependency 'cucumber',  '~> 2.4'
   spec.add_development_dependency 'aruba',     '~> 0.14'
-  spec.add_development_dependency 'rubocop',   '~> 0.47'
+  spec.add_development_dependency 'rubocop',   '~> 0.48'
+  spec.add_development_dependency 'rubocop-rspec', '~> 1.15'
   spec.add_development_dependency 'pry',       '~> 0.10'
   spec.add_development_dependency 'coveralls', '~> 0.8'
 
-  spec.add_dependency 'gli',      '~> 2.12'
-  spec.add_dependency 'rubyzip',  '~> 1.1'
+  spec.add_dependency 'gli',      '~> 2.16'
+  spec.add_dependency 'rubyzip',  '~> 1.2'
   spec.add_dependency 'erubis',   '~> 2.7'
   spec.add_dependency 'to_latex', '~> 0.5'
   spec.add_dependency 'RedCloth', '~> 4.3'

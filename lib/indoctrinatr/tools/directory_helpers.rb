@@ -9,7 +9,7 @@ module Indoctrinatr
         end
       end
 
-      def list_files_of_type directory = '.', types = %w(erb rb yaml sty tex) # default file types for template docs
+      def list_files_of_type directory = '.', types = %w[erb rb yaml sty tex] # default file types for template docs
         # found and modified from http://stackoverflow.com/a/3504307/1796645
         Dir.glob("#{directory}/**/*.{#{types.join(',')}}") # recursively list files of type in types array
       end

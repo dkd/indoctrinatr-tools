@@ -1,15 +1,17 @@
 sudo: false
 language: ruby
 rvm:
-  - '2.2.6'
+  - '2.4.1'
+  - '2.3.4'
+  - '2.2.7'
   - '2.1.10'
-cache:
-  - bundler
+  - '2.1.9'
+cache: bundler
 
 before_install:
-  - gem install bundler --version 1.14.3 --no-document
+  - gem install bundler --no-document
 
 script:
   - bundle exec rubocop --version
-  - bundle exec rubocop
+  - bundle exec rubocop --display-cop-names --extra-details 
   - bundle exec indoctrinatr new demo

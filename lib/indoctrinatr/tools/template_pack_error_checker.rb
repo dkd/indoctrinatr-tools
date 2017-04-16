@@ -7,8 +7,8 @@ module Indoctrinatr
 
       # class wide constants
       # needs to match indoctrinatr's TemplateField model
-      VALID_PRESENTATIONS = %w(text textarea checkbox radiobutton dropdown date range file).freeze
-      REQUIRES_AVAILABLE_OPTIONS = %w(dropdown checkbox radiobutton).freeze
+      VALID_PRESENTATIONS = %w[text textarea checkbox radiobutton dropdown date range file].freeze
+      REQUIRES_AVAILABLE_OPTIONS = %w[dropdown checkbox radiobutton].freeze
 
       attr_accessor :template_pack_name, :config_file
       def initialize template_pack_name

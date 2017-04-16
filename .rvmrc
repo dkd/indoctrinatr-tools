@@ -1,5 +1,0 @@
-rvm use 2.1.9
-
-alias brake='bundle exec'
-alias rubocop='bundle exec rubocop'
-alias cucumber='brake cucumber'

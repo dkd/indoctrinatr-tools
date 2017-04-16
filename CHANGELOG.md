@@ -1,5 +1,12 @@
 # indoctrinatr-tools
 
+## v0.15.0 (2017-04-16)
+
+### changes
+
+* updated dependencies
+* removed support for Ruby v2.1
+
 ## v0.14.0 (2016-09-14)
 
 ### changes

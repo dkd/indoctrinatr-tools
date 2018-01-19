@@ -28,7 +28,8 @@ module Indoctrinatr
         false
       end
 
-      def check_config_file_syntax # YAML syntax check
+      # YAML syntax check
+      def check_config_file_syntax
         puts 'Checking YAML syntax...'
         YAML.parse_file config_file_path
         puts 'YAML syntax ok!'
@@ -57,7 +58,8 @@ module Indoctrinatr
         end
       end
 
-      def check_field_attribute attribute_hash, field_identifier, key # false if something wrong, otherwise returns the key value
+      # false if something wrong, otherwise returns the key value
+      def check_field_attribute attribute_hash, field_identifier, key
         unless attribute_hash.key? key
           puts "The #{field_identifier} has no #{key} type set!"
           return false

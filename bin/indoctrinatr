@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require 'gli'
 require 'indoctrinatr/tools/version'
 require 'indoctrinatr/tools/template_pack_demo'
@@ -11,8 +10,10 @@ require 'indoctrinatr/tools/template_pack_fieldnames_creator'
 require 'indoctrinatr/tools/template_pack_documentation'
 require 'indoctrinatr/tools/template_pack_error_checker'
 
+# rubocop:disable Style/MixinUsage
 include GLI::App
 include Indoctrinatr::Tools
+# rubocop:enable Style/MixinUsage
 
 program_desc 'Create and manage Template Packs for Indoctrinatr'
 version Indoctrinatr::Tools::VERSION
@@ -28,29 +29,29 @@ end
 desc 'Display the suggested workflow'
 command :workflow do |c|
   c.action do
-    puts 'The workflow for a project (e.g. demo) typically looks like this:
+    puts <<~HEREDOC
+      The workflow for a project (e.g. demo) typically looks like this:
 
-1. Run in shell: indoctrinatr new demo
-   Creates a new Indoctrinatr Template Pack in the folder demo
+      1. Run in shell: indoctrinatr new demo
+         Creates a new Indoctrinatr Template Pack in the folder demo
 
-2. Edit demo.tex.erb and configuration.yaml according to needs
+      2. Edit demo.tex.erb and configuration.yaml according to needs
 
-3. Run in shell: indoctrinatr parse demo
-   Parses tex file demo_with_default_values.tex with ERB and default values from configuration.yaml
+      3. Run in shell: indoctrinatr parse demo
+         Parses tex file demo_with_default_values.tex with ERB and default values from configuration.yaml
 
-4. Run in shell: indoctrinatr pdf demo
-   Compiles PDF from demo_with_default_values.tex
+      4. Run in shell: indoctrinatr pdf demo
+         Compiles PDF from demo_with_default_values.tex
 
-5. Run in shell: indoctrinatr check demo
-   Analyzes your Template Pack for potential errors
+      5. Run in shell: indoctrinatr check demo
+         Analyzes your Template Pack for potential errors
 
-6. Run in shell: indoctrinatr doc demo
-   Creates a technical documentation for the Template Pack
+      6. Run in shell: indoctrinatr doc demo
+         Creates a technical documentation for the Template Pack
 
-7. Run in shell: indoctrinatr pack demo
-   Creates demo.zip with all required file for upload to Indoctrinatr server
-
-'
+      7. Run in shell: indoctrinatr pack demo
+         Creates demo.zip with all required file for upload to Indoctrinatr server
+    HEREDOC
   end
 end
 
@@ -143,19 +144,18 @@ end
 desc 'Display instructions for bash completion'
 command :bashcompletion do |c|
   c.action do
-    puts 'Add this to your .bashrc (and open up a new shell):
-
-complete -F get_indoctrinatr_targets indoctrinatr
-function get_indoctrinatr_targets()
-{
-    if [ -z $2 ] ; then
-        COMPREPLY=(`indoctrinatr help -c`)
-    else
-        COMPREPLY=(`indoctrinatr help -c $2`)
-    fi
-}
-
-'
+    puts <<~HEREDOC
+      Add this to your .bashrc (and open up a new shell):
+      complete -F get_indoctrinatr_targets indoctrinatr
+      function get_indoctrinatr_targets()
+      {
+          if [ -z $2 ] ; then
+              COMPREPLY=(`indoctrinatr help -c`)
+          else
+              COMPREPLY=(`indoctrinatr help -c $2`)
+          fi
+      }
+    HEREDOC
   end
 end
 
@@ -164,11 +164,9 @@ desc 'Display instructions for zsh completion'
 command :zshcompletion do |c|
   c.action do
     puts 'Add this to your .zshrc (and open up a new shell):
-
 if [[ -n ${ZSH_VERSION-} ]]; then
   autoload -U +X bashcompinit && bashcompinit
 fi
-
 complete -F get_indoctrinatr_commands indoctrinatr
 function get_indoctrinatr_commands()
 {
@@ -177,7 +175,6 @@ function get_indoctrinatr_commands()
   clean_params=${help_params//-*([^ ])?( )}
   COMPREPLY=(`$binary help -c $clean_params`)
 }
-
 '
   end
 end

@@ -2,7 +2,8 @@ require 'indoctrinatr/tools/default_values'
 
 module Indoctrinatr
   module Tools
-    module TemplatePackHelpers # classes that use this model are required to have template_pack_name as instance variable
+    # classes that use this model are required to have template_pack_name as instance variable
+    module TemplatePackHelpers
       def path_name
         Pathname.new(Dir.pwd).join template_pack_name
       end

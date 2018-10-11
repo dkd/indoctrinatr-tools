@@ -2,7 +2,7 @@ require: rubocop-rspec
 
 AllCops:
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
   Exclude:
     - tmp/**/*
     - vendor/**/*

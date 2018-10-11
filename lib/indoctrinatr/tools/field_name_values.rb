@@ -33,6 +33,7 @@ module Indoctrinatr
         attributes_as_hashes.each do |attribute_hash|
           # search for typical picture file endings
           next unless detect_picture_file_names attribute_hash['default_value']
+
           instance_variable_set("@_#{attribute_hash['name']}", attribute_hash['default_value'])
 
           define_singleton_method "raw_#{attribute_hash['name']}".to_sym do

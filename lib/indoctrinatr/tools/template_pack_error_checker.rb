@@ -24,6 +24,7 @@ module Indoctrinatr
 
       def check_config_file_existence
         return true if File.exist? config_file_path
+
         puts 'The file configuration.yaml does not exist in the template_pack directory'
         false
       end
@@ -75,6 +76,7 @@ module Indoctrinatr
       def check_presentation attribute_hash, identifier
         presentation = check_field_attribute attribute_hash, identifier, 'presentation'
         return false unless presentation
+
         # check if it is one of the options
         puts "Not an allowed presentation option set for #{identifier}" unless VALID_PRESENTATIONS.include? presentation
         check_available_options attribute_hash, identifier, presentation if REQUIRES_AVAILABLE_OPTIONS.include? presentation

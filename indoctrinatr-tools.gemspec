@@ -1,4 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'indoctrinatr/tools/version'
 
@@ -12,7 +12,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.homepage      = ''
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = '~> 2.3'
+  spec.required_ruby_version = '~> 2.5'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -20,9 +20,9 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'aruba',     '~> 0.14'
-  spec.add_development_dependency 'bundler',   '~> 1.16.1'
+  spec.add_development_dependency 'bundler',   '~> 1.16.6'
   spec.add_development_dependency 'coveralls', '~> 0.8'
-  spec.add_development_dependency 'cucumber',  '~> 2.4'
+  spec.add_development_dependency 'cucumber',  '~> 3.0'
   spec.add_development_dependency 'pry',       '~> 0.11'
   spec.add_development_dependency 'rake',      '~> 12.1'
   spec.add_development_dependency 'rspec',     '~> 3.7'

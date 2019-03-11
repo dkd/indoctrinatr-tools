@@ -1,11 +1,12 @@
 require: rubocop-rspec
 
 AllCops:
-AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.5
   Exclude:
     - tmp/**/*
     - vendor/**/*
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Metrics/LineLength:
   Max: 240
 Style/MethodDefParentheses:

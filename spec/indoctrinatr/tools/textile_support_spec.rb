@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'indoctrinatr/tools/default_values'
 require 'indoctrinatr/tools/template_pack_configuration'
 
-context "support for Textile with 'textilize' function" do
+context "when supporting Textile with 'textilize' function" do
   let(:configuration) do
     c = Indoctrinatr::Tools::TemplatePackConfiguration.new
     c.attributes_as_hashes_in_array = []

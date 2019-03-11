@@ -19,7 +19,7 @@ module Indoctrinatr
       end
 
       def customized_output_file_name
-        @_customized_output_file_name ||= eval('"' + @_output_file_name + '"') # rubocop:disable Security/Eval
+        @_customized_output_file_name ||= eval('"' + @_output_file_name + '"') # rubocop:disable Security/Eval, Naming/MemoizedInstanceVariableName
       end
 
       def template_asset_path

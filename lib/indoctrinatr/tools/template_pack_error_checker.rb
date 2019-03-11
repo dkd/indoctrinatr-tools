@@ -24,11 +24,13 @@ module Indoctrinatr
 
       def check_config_file_existence
         return true if File.exist? config_file_path
+
         puts 'The file configuration.yaml does not exist in the template_pack directory'
         false
       end
 
-      def check_config_file_syntax # YAML syntax check
+      # YAML syntax check
+      def check_config_file_syntax
         puts 'Checking YAML syntax...'
         YAML.parse_file config_file_path
         puts 'YAML syntax ok!'
@@ -57,7 +59,8 @@ module Indoctrinatr
         end
       end
 
-      def check_field_attribute attribute_hash, field_identifier, key # false if something wrong, otherwise returns the key value
+      # false if something wrong, otherwise returns the key value
+      def check_field_attribute attribute_hash, field_identifier, key
         unless attribute_hash.key? key
           puts "The #{field_identifier} has no #{key} type set!"
           return false
@@ -73,6 +76,7 @@ module Indoctrinatr
       def check_presentation attribute_hash, identifier
         presentation = check_field_attribute attribute_hash, identifier, 'presentation'
         return false unless presentation
+
         # check if it is one of the options
         puts "Not an allowed presentation option set for #{identifier}" unless VALID_PRESENTATIONS.include? presentation
         check_available_options attribute_hash, identifier, presentation if REQUIRES_AVAILABLE_OPTIONS.include? presentation

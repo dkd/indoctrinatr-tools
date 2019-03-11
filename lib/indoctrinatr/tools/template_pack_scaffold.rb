@@ -46,11 +46,11 @@ module Indoctrinatr
       end
 
       def source_config_file_path
-        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'configuration.yaml')
+        Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'configuration.yaml')
       end
 
       def source_tex_file_path
-        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'template.tex.erb')
+        Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'template.tex.erb')
       end
     end
   end

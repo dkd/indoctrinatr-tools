@@ -65,7 +65,7 @@ module Indoctrinatr
       private
 
       def documentation_files_path
-        Pathname.new(File.expand_path(File.dirname(__FILE__))).join('..', 'templates', 'documentation')
+        Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'documentation')
       end
     end
   end

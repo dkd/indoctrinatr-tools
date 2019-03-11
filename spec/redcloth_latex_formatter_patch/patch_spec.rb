@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'redcloth_latex_formatter_patch/patch'
 
-context 'patches for RedCloth::LATEX::Formatter' do
+context 'with patches for RedCloth::LATEX::Formatter' do
   it 'tranforms a h1. headline to LaTeX chapter notation' do
     text = 'h1. Headline'
     expect(RedCloth.new(text).to_latex).to eq "\\chapter{Headline}\n\n"

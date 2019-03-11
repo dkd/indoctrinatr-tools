@@ -6,7 +6,7 @@
 
 ## Installation
 
-[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools) [![Coverage Status](https://coveralls.io/repos/dkd/indoctrinatr-tools/badge.svg?branch=development&service=github)](https://coveralls.io/github/dkd/indoctrinatr-tools?branch=development) [![Dependency Status](https://gemnasium.com/badges/github.com/dkd/indoctrinatr-tools.svg)](https://gemnasium.com/github.com/dkd/indoctrinatr-tools) master [![Travis CI Status: master](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=master)](https://travis-ci.org/dkd/indoctrinatr-tools) development  [![Travis CI Status: development](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=development)](https://travis-ci.org/dkd/indoctrinatr-tools)
+[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools) [![Coverage Status](https://coveralls.io/repos/dkd/indoctrinatr-tools/badge.svg?branch=development&service=github)](https://coveralls.io/github/dkd/indoctrinatr-tools?branch=development)  master [![Travis CI Status: master](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=master)](https://travis-ci.org/dkd/indoctrinatr-tools) development  [![Travis CI Status: development](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=development)](https://travis-ci.org/dkd/indoctrinatr-tools)
 
 
 1.  Install XeTeX:

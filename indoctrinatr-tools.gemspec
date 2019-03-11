@@ -20,7 +20,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'aruba',     '~> 0.14'
-  spec.add_development_dependency 'bundler',   '~> 1.16.6'
+  spec.add_development_dependency 'bundler',   '~> 2.0'
   spec.add_development_dependency 'coveralls', '~> 0.8'
   spec.add_development_dependency 'cucumber',  '~> 3.0'
   spec.add_development_dependency 'pry',       '~> 0.11'

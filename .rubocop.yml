@@ -1,7 +1,6 @@
 require: rubocop-rspec
 
 AllCops:
-AllCops:
   TargetRubyVersion: 2.5
   Exclude:
     - tmp/**/*

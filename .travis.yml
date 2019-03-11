@@ -6,9 +6,12 @@ rvm:
 cache: bundler
 
 before_install:
-  - gem install bundler --version=2.0.1 --no-document
+  - gem install bundler --version=2.0.1 --no-doc
+  - gem install bundler-audit --no-doc
 
 script:
+
+  - bundle-audit check --update
   - bundle exec rubocop --version
   - bundle exec rubocop --display-cop-names --extra-details 
   - bundle exec indoctrinatr new demo

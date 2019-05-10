@@ -35,9 +35,9 @@ module Indoctrinatr
         YAML.parse_file config_file_path
         puts 'YAML syntax ok!'
         true
-      rescue YAML::SyntaxError => exception # no program abort when this exception is thrown
+      rescue YAML::SyntaxError => e # no program abort when this exception is thrown
         puts 'YAML syntax error in configuration.yaml, see error for details:'
-        puts exception.message
+        puts e.message
         false
       end
 

@@ -55,8 +55,8 @@ module Indoctrinatr
         configuration = ConfigurationExtractor.new(template_pack_name).call
         begin
           @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
-        rescue IOError => ex
-          abort ex.message
+        rescue IOError => e
+          abort e.message
         end
       end
 

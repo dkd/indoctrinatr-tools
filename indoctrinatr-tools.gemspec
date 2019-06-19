@@ -2,7 +2,7 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'indoctrinatr/tools/version'
 
-Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
+Gem::Specification.new do |spec|
   spec.name          = 'indoctrinatr-tools'
   spec.version       = Indoctrinatr::Tools::VERSION
   spec.authors       = ['Nicolai Reuschling', 'Luka Lüdicke']
@@ -27,6 +27,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'rake',      '~> 12.1'
   spec.add_development_dependency 'rspec',     '~> 3.7'
   spec.add_development_dependency 'rubocop',   '~> 0.52'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.3'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.22'
 
   spec.add_dependency 'erubis',   '~> 2.7'

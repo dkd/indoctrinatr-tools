@@ -1,7 +1,13 @@
-require: rubocop-rspec
+require:
+  - rubocop-performance
+  - rubocop-rspec
 
 AllCops:
   TargetRubyVersion: 2.5
+  TargetRailsVersion: 5.2
+  ExtraDetails: true
+  DisplayStyleGuide: true
+  DisplayCopNames: true
   Exclude:
     - tmp/**/*
     - vendor/**/*

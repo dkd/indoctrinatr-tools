@@ -24,16 +24,16 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'coveralls', '~> 0.8'
   spec.add_development_dependency 'cucumber',  '~> 3.0'
   spec.add_development_dependency 'pry',       '~> 0.11'
-  spec.add_development_dependency 'rake',      '~> 12.1'
+  spec.add_development_dependency 'rake',      '~> 13.0'
   spec.add_development_dependency 'rspec',     '~> 3.7'
-  spec.add_development_dependency 'rubocop',   '~> 0.52'
+  spec.add_development_dependency 'rubocop',   '~> 0.79'
   spec.add_development_dependency 'rubocop-performance', '~> 1.3'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.22'
 
   spec.add_dependency 'erubis',   '~> 2.7'
   spec.add_dependency 'gli',      '~> 2.16'
   spec.add_dependency 'RedCloth', '~> 4.3'
-  spec.add_dependency 'rubyzip',  '~> 1.2'
+  spec.add_dependency 'rubyzip',  '~> 2'
   spec.add_dependency 'to_latex', '~> 0.5'
 
   spec.cert_chain  = ['certs/dkd-reuschling.pem']

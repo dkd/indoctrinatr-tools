@@ -1,5 +1,11 @@
 # indoctrinatr-tools
 
+## v0.15.0 (2020-02-14)
+
+### changes
+
+* updated infrastructure
+
 ## v0.15.0 (2017-04-16)
 
 ### changes

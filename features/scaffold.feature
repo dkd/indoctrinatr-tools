@@ -8,7 +8,7 @@ Feature: Running the 'new' command
       And a directory named "demo/assets" should exist
       And the following files should exist:
         | demo/configuration.yaml |
-        | demo/demo.tex.erb |
+        | demo/demo.tex.erb       |
 
   Scenario: with an empty name
     Given I do not have a 'demo' project

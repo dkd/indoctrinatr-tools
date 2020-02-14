@@ -2,11 +2,12 @@ sudo: false
 language: ruby
 cache: bundler
 rvm:
+  - 2.7
   - 2.6
   - 2.5
 
 before_install:
-  - gem install bundler --version=2.0.2 --no-doc
+  - gem install bundler --version=2.1.4 --no-doc
   - gem install bundler-audit --no-doc
 
 script:

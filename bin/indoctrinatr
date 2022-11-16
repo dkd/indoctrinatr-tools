@@ -178,6 +178,7 @@ require 'dry/cli'
 # exit run(ARGV)
 
 require 'indoctrinatr/tools/template_pack_scaffold'
+require 'indoctrinatr/tools/template_pack_default_values_parser'
 
 module Indoctrinatr
   module Tools
@@ -210,6 +211,24 @@ module Indoctrinatr
         end
       end
 
+      class Parse < Dry::CLI::Command
+        desc 'Parse XeTeX file with ERB and default values of Template Pack'
+
+        argument :template_pack_name, desc: "Name of template pack"
+        def call(template_pack_name:, **)
+          TemplatePackDefaultValuesParser.new(template_pack_name).call
+        end
+      end
+      # desc 'Parse XeTeX file with ERB and default values of Template Pack'
+      # arg_name 'template_pack_name'
+      # command :parse do |c|
+      #   c.action do |global_options, _, _|
+      #     template_pack_name = global_options['template_pack_name']
+      #     TemplatePackDefaultValuesParser.new(template_pack_name).call
+      #   end
+      # end
+
+      register 'parse', Parse
       register "version", Version, aliases: ["v", "-v", "--version"]
       register "new", Scaffold
     end

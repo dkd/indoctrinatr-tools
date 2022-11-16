@@ -12,9 +12,10 @@ module Indoctrinatr
       end
 
       def call
-        config_file = YAML.load_file config_file_path
+
+        config_file = YAML.load_file ((Pathname.new(Dir.pwd).join template_pack_name).join 'configuration.yaml')
         configuration = TemplatePackConfiguration.new
-        configuration.template_asset_path = assets_path.to_s
+        configuration.template_asset_path = (path_name(template_pack_name).join 'assets').to_s
         configuration.default_file_name = "#{template_pack_name}_with_default_values.pdf"
         configuration.output_file_name = config_file.fetch('output_file_name', "#{template_pack_name}_with_default_values.pdf")
         configuration.template_name = config_file.fetch 'template_name'

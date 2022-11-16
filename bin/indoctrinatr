@@ -22,13 +22,6 @@ require 'dry/cli'
 # version Indoctrinatr::Tools::VERSION
 # config_file '.indoctrinatr.rc'
 
-# desc 'Display current version'
-# command :version do |c|
-#   c.action do
-#     puts Indoctrinatr::Tools::VERSION
-#   end
-# end
-
 # desc 'Display the suggested workflow'
 # command :workflow do |c|
 #   c.action do
@@ -187,6 +180,17 @@ require 'dry/cli'
 module Indoctrinatr
   module Tools
     module Commands
+      extend Dry::CLI::Registry
+
+      class Version <  Dry::CLI::Command
+        desc 'Print version of indoctrinatr-tools.'
+
+        def call(*)
+          puts Indoctrinatr::Tools::VERSION
+        end
+      end
+
+      register "version", Version, aliases: ["v", "-v", "--version"]
     end
   end
 end

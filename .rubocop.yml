@@ -3,19 +3,19 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.5
+  NewCops: enable
+  TargetRubyVersion: 3.1
   ExtraDetails: true
   DisplayStyleGuide: true
   DisplayCopNames: true
   Exclude:
     - tmp/**/*
     - vendor/**/*
+    - lib/redcloth_latex_formatter_patch/**/*
 Style/FrozenStringLiteralComment:
   Enabled: false
 Layout/LineLength:
   Max: 240
-Style/MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
 Style/Documentation:
   Enabled: false
 Metrics/MethodLength:

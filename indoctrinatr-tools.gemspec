@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = ''
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = '~> 2.5'
+  spec.required_ruby_version = '~> 3.0'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -36,8 +36,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubyzip',  '~> 2'
   spec.add_dependency 'to_latex', '~> 0.5'
 
-  spec.cert_chain  = ['certs/dkd-reuschling.pem']
-  spec.signing_key = File.expand_path('~/.ssh/gem-private_key.pem') if $PROGRAM_NAME.end_with?('gem')
+  # spec.cert_chain  = ['certs/dkd-reuschling.pem']
+  # spec.signing_key = File.expand_path('~/.ssh/gem-private_key.pem') if $PROGRAM_NAME.end_with?('gem')
 
   spec.requirements << 'LaTeX development enviroment'
 end

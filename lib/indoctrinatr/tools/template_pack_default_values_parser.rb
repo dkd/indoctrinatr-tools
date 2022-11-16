@@ -7,58 +7,71 @@ require 'to_latex'
 module Indoctrinatr
   module Tools
     class TemplatePackDefaultValuesParser
-      include TemplatePackHelpers
+      include Dry::Transaction
 
-      attr_accessor :template_pack_name, :configuration, :default_values, :tex_file_content, :parsed_tex_file_content
-
-      def initialize template_pack_name
-        @template_pack_name = template_pack_name
-      end
-
-      def call
-        setup
-        fail 'Please specify a template pack name.' if template_pack_name.empty? # rubocop:disable Style/SignalException
-        fail "A folder with name '#{template_pack_name}' does not exist." unless Dir.exist? path_name(template_pack_name) # rub
-        read_config_file
-        read_tex_file
-        parse_tex_file
-        write_tex_file
-        show_success
-      end
+      step :setup
+      step :check_setup
+      step :read_config_file
+      step :read_tex_file
+      step :parse_tex_file
+      step :write_tex_file
 
       private
 
-      def setup
-        @path_name = Pathname.new(Dir.pwd).join template_pack_name
-        @pack_documentation_dir_path = @path_name.join 'doc'
-        @pack_documentation_examples_dir_path = @pack_documentation_dir_path.join 'examples'
-        @tex_with_default_values_file_path = @pack_documentation_examples_dir_path.join template_pack_name + '_with_default_values.tex'
-      end
-      def read_config_file
-        @configuration = ConfigurationExtractor.new(template_pack_name).call
-        @default_values = DefaultValues.new @configuration
-        @default_values._use_default_values
-      end
-
-      def read_tex_file
-        @tex_file_content = File.read tex_file_path(template_pack_name)
-      end
-
-      def parse_tex_file
-        @parsed_tex_file_content = Erubis::Eruby.new(@tex_file_content).result(default_values.retrieve_binding)
+      def setup(template_pack_name)
+        path_name = Pathname.new(Dir.pwd).join template_pack_name
+        pack_documentation_dir_path = path_name.join 'doc'
+        pack_documentation_examples_dir_path = pack_documentation_dir_path.join('examples')
+        tex_with_default_values_file_path = pack_documentation_examples_dir_path.join(template_pack_name + '_with_default_values.tex')
+        Success(
+          {
+            template_pack_name: template_pack_name,
+            path_name: path_name,
+            pack_documentation_dir_path: pack_documentation_dir_path,
+            pack_documentation_examples_dir_path: pack_documentation_examples_dir_path,
+            tex_with_default_values_file_path: tex_with_default_values_file_path
+          }
+        )
       end
 
-      def write_tex_file
+      def check_setup(config)
+        return Failure('Please specify a template pack name.') if config[:template_pack_name].empty? # rubocop:disable Style/SignalException
+        return Failure ("A folder with name '#{config[:template_pack_name]}' does not exist.") unless Dir.exist? config[:path_name]# rub
+        Success(config)
+      end
+      def read_config_file(config)
+        configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
+        default_values = DefaultValues.new configuration
+        default_values._use_default_values
+        config[:default_values] = default_values
+        Success(config)
+      rescue => e
+        Failure(e.message)
+      end
+
+      def read_tex_file(config)
+        tex_file_path = config[:path_name].join (config[:template_pack_name] + '.tex.erb')
+        config[:tex_file_content] = File.read tex_file_path
+        Success(config)
+      rescue => e
+        Failure(e.message)
+      end
+
+      def parse_tex_file(config)
+        config[:parsed_tex_file_content] = Erubis::Eruby.new(config[:tex_file_content]).result(config[:default_values].retrieve_binding)
+        Success(config)
+      rescue => e
+        Failure(e.message)
+      end
+
+      def write_tex_file(config)
         # Create directory to avoid file creation errors
-        Dir.mkdir(@pack_documentation_dir_path) unless Dir.exist?(@pack_documentation_dir_path)
-        Dir.mkdir(@pack_documentation_examples_dir_path) unless Dir.exist?(@pack_documentation_examples_dir_path)
-        binding.irb
-        File.write @tex_with_default_values_file_path, parsed_tex_file_content
-
-      end
-
-      def show_success
-        puts "The template pack '#{template_pack_name}' has been successfully parsed with default values."
+        Dir.mkdir(config[:pack_documentation_dir_path]) unless Dir.exist?(config[:pack_documentation_dir_path])
+        Dir.mkdir(config[:pack_documentation_examples_dir_path]) unless Dir.exist?(config[:pack_documentation_examples_dir_path])
+        File.write config[:tex_with_default_values_file_path], config[:parsed_tex_file_content]
+        Success()
+      rescue => e
+        Failure(e.message)
       end
     end
   end

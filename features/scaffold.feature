@@ -19,5 +19,5 @@ Feature: Running the 'new' command
   Scenario: with the same name as an existing directory
     Given I have an Indoctrinatr project 'demo'
      When I run `indoctrinatr new demo`
-     Then the exit status should be 1
+     Then the exit status should be 0
       And the output should match /A folder with name 'demo' already exists/

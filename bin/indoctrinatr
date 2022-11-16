@@ -178,6 +178,7 @@ require 'dry/cli'
 require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
 require 'indoctrinatr/tools/template_pack_default_values_compiler'
+
 module Indoctrinatr
   module Tools
     module Commands
@@ -231,16 +232,18 @@ module Indoctrinatr
 
         argument :template_pack_name, desc: "Name of template pack"
         option :keep_aux_files, default: false, values: [true, false], desc: 'The option to keep aux files'
+
         def call(template_pack_name:, **options)
-        #    TemplatePackDefaultValuesParser.new.call(template_pack_name) do |result|
-        #    result.success do
-        #
-        #    end
-        #    result.failure do |message|
-        #      puts message
-        #    end
-        #  end
-          TemplatePackDefaultValuesCompiler.new.call(template_pack_name, options.fetch(:keep_aux_files))
+          TemplatePackDefaultValuesParser.new.call(template_pack_name) do |result|
+            result.success do
+            end
+            result.failure do |message|
+              puts message
+            end
+          end
+          binding.irb
+          TemplatePackDefaultValuesCompiler.new.call(template_pack_name: template_pack_name, keep_aux_files: options.fetch(:keep_aux_files)) do |result|
+          end
         end
       end
 

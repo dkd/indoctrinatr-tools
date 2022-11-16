@@ -9,6 +9,7 @@ module Indoctrinatr
       include PdfGenerator
       include Dry::Transaction
 
+      step :setup
       step :check_for_folder
       step :check_setup
       step :compile_tex_file
@@ -22,7 +23,7 @@ module Indoctrinatr
 
       private
 
-      def setup(template_pack_name, keep_aux_files)
+      def setup(template_pack_name:, keep_aux_files:)
         path_name = Pathname.new(Dir.pwd).join template_pack_name
         pack_documentation_dir_path = path_name.join 'doc'
         pack_documentation_examples_dir_path = pack_documentation_dir_path.join('examples')
@@ -42,6 +43,7 @@ module Indoctrinatr
         return Failure ("A folder with name '#{config[:template_pack_name]}' does not exist.") unless Dir.exist? config[:path_name]# rub
         Success(config)
       end
+
       def compile_tex_file(config)
         make_pdf config[:tex_with_default_values_file_path], config[:pack_documentation_examples_dir_path], !config[:keep_aux_files]
         Success(config)

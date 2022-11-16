@@ -39,7 +39,7 @@ module Indoctrinatr
       end
 
       def create_folder(config)
-        Dir.mkdir_p config[:path_name]
+        FileUtils.mkdir_p config[:path_name]
         Success(config)
       rescue Errno::EROFS
         Failure('Could not write to target directory!')
@@ -48,7 +48,7 @@ module Indoctrinatr
       end
 
       def create_asset_folder(config)
-        Dir.mkdir_p config[:assets_path]
+        FileUtils.mkdir_p config[:assets_path]
         Success(config)
       rescue StandardError => e
         Failure(e.message)

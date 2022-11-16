@@ -100,14 +100,14 @@ module Indoctrinatr
 
       def copy_helper_files_to_template_pack
         helper_files_to_copy = [latex_log_file, content_tex_file_destination_path, main_tex_file_destination_path].freeze
-        Dir.mkdir_p(pack_documentation_dir_path)
+        FileUtils.mkdir_p(pack_documentation_dir_path)
         FileUtils.copy helper_files_to_copy, pack_documentation_dir_path
         puts 'TeX files and log file have been copied to doc subdirectory of your template_pack'
       end
 
       def copy_doc_file_to_template_pack
         # All the documentation shall go into template_pack/doc
-        Dir.mkdir_p(pack_documentation_dir_path)
+        FileUtils.mkdir_p(pack_documentation_dir_path)
         FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
       end
 

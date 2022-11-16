@@ -68,8 +68,8 @@ module Indoctrinatr
 
       def write_tex_file(config)
         # Create directory to avoid file creation errors
-        Dir.mkdir_p(config[:pack_documentation_dir_path])
-        Dir.mkdir_p(config[:pack_documentation_examples_dir_path])
+        FileUtils.mkdir_p(config[:pack_documentation_dir_path])
+        FileUtils.mkdir_p(config[:pack_documentation_examples_dir_path])
         File.write config[:tex_with_default_values_file_path], config[:parsed_tex_file_content]
         Success()
       rescue StandardError => e

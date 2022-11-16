@@ -56,8 +56,8 @@ module Indoctrinatr
 
       def write_tex_file
         # Create directory to avoid file creation errors
-        Dir.mkdir_p(pack_documentation_dir_path)
-        Dir.mkdir_p(pack_documentation_examples_dir_path)
+        FileUtils.mkdir_p(pack_documentation_dir_path)
+        FileUtils.mkdir_p(pack_documentation_examples_dir_path)
         File.write tex_with_fieldname_values_file_path, parsed_tex_file_content
       end
 

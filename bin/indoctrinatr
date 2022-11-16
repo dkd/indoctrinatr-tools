@@ -179,7 +179,7 @@ require 'dry/cli'
 
 require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
-
+require 'indoctrinatr/tools/template_pack_default_values_compiler'
 module Indoctrinatr
   module Tools
     module Commands
@@ -227,18 +227,43 @@ module Indoctrinatr
           end
         end
       end
-      # desc 'Parse XeTeX file with ERB and default values of Template Pack'
+
+      class Pdf < Dry::CLI::Command
+        desc 'Keep generated aux files'
+
+        argument :template_pack_name, desc: "Name of template pack"
+        option :keep_aux_files, default: false, values: [true, false], desc: 'The option to keep aux files'
+        def call(template_pack_name:, **options)
+        #    TemplatePackDefaultValuesParser.new.call(template_pack_name) do |result|
+        #    result.success do
+        #
+        #    end
+        #    result.failure do |message|
+        #      puts message
+        #    end
+        #  end
+          TemplatePackDefaultValuesCompiler.new.call(template_pack_name, options.fetch(:keep_aux_files))
+        end
+      end
+
+
+      # desc 'Compile PDF with default values'
       # arg_name 'template_pack_name'
-      # command :parse do |c|
-      #   c.action do |global_options, _, _|
+      # command :pdf do |c|
+      #   c.desc 'Keep generated aux files'
+      #   c.switch [:'keep-aux-files']
+      #   c.action do |global_options, options, _|
       #     template_pack_name = global_options['template_pack_name']
+      #     keep_aux_files = options[:'keep-aux-files']
       #     TemplatePackDefaultValuesParser.new(template_pack_name).call
+      #     TemplatePackDefaultValuesCompiler.new(template_pack_name, keep_aux_files).call
       #   end
       # end
 
       register 'parse', Parse
       register "version", Version, aliases: ["v", "-v", "--version"]
       register "new", Scaffold
+      register 'pdf', Pdf
     end
   end
 end

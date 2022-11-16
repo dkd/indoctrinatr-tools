@@ -14,7 +14,7 @@ module Indoctrinatr
 
       def check_for_folder
         fail 'Please specify a template pack name.' if template_pack_name.empty? # rubocop:disable Style/SignalException
-        fail "A folder with name '#{template_pack_name}' does not exist." unless Dir.exist? path_name # rubocop:disable Style/SignalException
+        fail "A folder with name '#{template_pack_name}' does not exist." unless Dir.exist? path_name(template_pack_name) # rubocop:disable Style/SignalException
       end
 
       def config_file_path(template_pack_name)

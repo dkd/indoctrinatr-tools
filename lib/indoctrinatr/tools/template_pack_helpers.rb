@@ -4,7 +4,7 @@ module Indoctrinatr
   module Tools
     # classes that use this model are required to have template_pack_name as instance variable
     module TemplatePackHelpers
-      def path_name
+      def path_name(template_pack_name)
         Pathname.new(Dir.pwd).join template_pack_name
       end
 
@@ -17,12 +17,12 @@ module Indoctrinatr
         fail "A folder with name '#{template_pack_name}' does not exist." unless Dir.exist? path_name # rubocop:disable Style/SignalException
       end
 
-      def config_file_path
-        path_name.join 'configuration.yaml'
+      def config_file_path(template_pack_name)
+        path_name(template_pack_name).join 'configuration.yaml'
       end
 
-      def tex_file_path
-        path_name.join template_pack_name + '.tex.erb'
+      def tex_file_path(template_pack_name)
+        path_name(template_pack_name).join template_pack_name + '.tex.erb'
       end
 
       def tex_with_default_values_file_path

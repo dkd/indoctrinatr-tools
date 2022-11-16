@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'erubis',   '~> 2.7'
   spec.add_dependency 'dry-cli',  '~> 0.6'
+  spec.add_dependency 'dry-transaction', '~> 0.13'
   spec.add_dependency 'RedCloth', '~> 4.3'
   spec.add_dependency 'rubyzip',  '~> 2'
   spec.add_dependency 'to_latex', '~> 0.5'

@@ -1,56 +1,70 @@
 require 'indoctrinatr/tools/template_pack_helpers'
 require 'fileutils'
+require 'dry/transaction'
 
 module Indoctrinatr
   module Tools
     class TemplatePackScaffold
-      include TemplatePackHelpers
+      include Dry::Transaction
 
-      attr_accessor :template_pack_name
-
-      def initialize template_pack_name
-        @template_pack_name = template_pack_name
-      end
-
-      def call
-        create_folder
-        create_asset_folder
-        copy_configuration_file
-        copy_tex_file
-        show_success
-      end
+      step :setup
+      step :validate_setup
+      step :create_folder
+      step :create_asset_folder
+      step :copy_configuration_file
+      step :copy_tex_file
 
       private
 
-      def create_folder
-        fail 'Please specify a template pack name.' if template_pack_name.nil? || template_pack_name.empty? # rubocop:disable Style/SignalException
-        fail "A folder with name '#{template_pack_name}' already exists." if Dir.exist? path_name # rubocop:disable Style/SignalException
-
-        Dir.mkdir path_name
+      def setup(template_pack_name)
+        path_name = Pathname.new(Dir.pwd).join(template_pack_name)
+        Success(
+          {
+            template_pack_name: template_pack_name,
+            path_name: path_name,
+            source_config_file_path: Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'configuration.yaml'),
+            source_tex_file_path: Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'template.tex.erb'),
+            assets_path: path_name.join('assets'),
+            config_file_path: path_name.join('configuration.yaml'),
+            tex_file_path: path_name.join(template_pack_name + '.tex.erb')
+          }
+        )
       end
 
-      def create_asset_folder
-        Dir.mkdir path_name.join('assets')
+      def validate_setup(config)
+        return Failure('Please specify a template pack name.') if config[:template_pack_name].nil? || config[:template_pack_name].empty?
+        return Failure("A folder with name '#{config[:template_pack_name]}' already exists.") if Dir.exist? config[:path_name]
+        Success(config)
       end
 
-      def copy_configuration_file
-        FileUtils.copy_file source_config_file_path, config_file_path
+      def create_folder(config)
+        Dir.mkdir config[:path_name]
+        Success(config)
+      rescue Errno::EROFS
+        Failure('Could not write to target directory!')
+      rescue => e
+        Failure(e.message)
       end
 
-      def copy_tex_file
-        FileUtils.copy_file source_tex_file_path, tex_file_path
+      def create_asset_folder(config)
+        Dir.mkdir config[:assets_path]
+        Success(config)
+      rescue => e
+        Failure(e.message)
       end
 
-      def show_success
-        puts "A template pack scaffold was created in folder '#{template_pack_name}'. Happy templating…"
+      def copy_configuration_file(config)
+        FileUtils.copy_file config[:source_config_file_path], config[:config_file_path]
+        Success(config)
+      rescue => e
+        Failure(e.message)
       end
 
-      def source_config_file_path
-        Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'configuration.yaml')
-      end
-
-      def source_tex_file_path
-        Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'template.tex.erb')
+      def copy_tex_file(config)
+        FileUtils.copy_file config[:source_tex_file_path], config[:tex_file_path]
+        Success()
+      rescue => e
+        Failure(e.message)
       end
     end
   end

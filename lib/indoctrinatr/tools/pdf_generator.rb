@@ -5,7 +5,7 @@ module Indoctrinatr
       # Compiles a PDF from a tex file with XeLaTeX
       # @param tex_file a Pathname that points to the tex file
       # @return false if error, nil if system command unknown
-      def make_pdf tex_file, output_dir = nil, cleanup = true
+      def make_pdf(tex_file, output_dir = nil, cleanup: true)
         args = ['-xelatex',
                 '-shell-escape',
                 '-interaction=batchmode', # more silent output
@@ -22,7 +22,7 @@ module Indoctrinatr
       # Cleans up LaTeX helper files in a specific directory
       # @param working_directory a Pathname that points the directory that should get cleaned up
       # @return false if error, nil if system command unknown
-      def latex_cleanup working_directory
+      def latex_cleanup(working_directory)
         # latexmk -c apparently cannot cleanup a specified subdirectory. So we have to change the working directory,
         # run the cleanup command in it and then change back to the directory that we were in. http://tex.stackexchange.com/q/301366/17834
         current_dir = Dir.getwd

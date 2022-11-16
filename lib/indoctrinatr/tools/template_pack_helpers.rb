@@ -30,7 +30,7 @@ module Indoctrinatr
       end
 
       # get file path for PDF example with default values:
-      def pdf_with_default_values_file_path configuration # rubocop:disable Metrics/AbcSize
+      def pdf_with_default_values_file_path(configuration) # rubocop:disable Metrics/AbcSize
         default_values = DefaultValues.new configuration
         # if there is a change in where the pdf command (DefaultValuesCompiler) saves it's output, this logic needs to be updated
         if default_values.customized_output_file_name == default_values.default_file_name

@@ -5,12 +5,12 @@ module Indoctrinatr
     class ContentForTexFiles
       # a class that DefaultValues, TemplateDocumentationContent, and field_names_as_variables should inherit from
       # or to be precise: When we want use variables in an indoctrinatr tex.erb file, we should use this class
-      def initialize configuration
+      def initialize(configuration)
         @_configuration = configuration
         _build_from_configuration
       end
 
-      def textile2latex textile
+      def textile2latex(textile)
         RedCloth.new(textile).to_latex
       end
 

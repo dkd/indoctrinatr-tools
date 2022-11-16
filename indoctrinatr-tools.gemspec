@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'aruba',     '~> 0.14'
@@ -29,12 +28,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '~> 1.3'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.22'
 
-  spec.add_dependency 'erubis',   '~> 2.7'
   spec.add_dependency 'dry-cli',  '~> 0.6'
   spec.add_dependency 'dry-transaction', '~> 0.13'
+  spec.add_dependency 'erubis',   '~> 2.7'
   spec.add_dependency 'RedCloth', '~> 4.3'
   spec.add_dependency 'rubyzip',  '~> 2'
   spec.add_dependency 'to_latex', '~> 0.5'
 
   spec.requirements << 'LaTeX development enviroment'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

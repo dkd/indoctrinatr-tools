@@ -13,7 +13,7 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name, :configuration, :field_name_values, :tex_file_content, :parsed_tex_file_content
 
-      def initialize template_pack_name, keep_aux_files = false
+      def initialize(template_pack_name, keep_aux_files = false)
         @template_pack_name = template_pack_name
         @keep_aux_files = keep_aux_files
       end
@@ -56,13 +56,13 @@ module Indoctrinatr
 
       def write_tex_file
         # Create directory to avoid file creation errors
-        Dir.mkdir(pack_documentation_dir_path) unless Dir.exist?(pack_documentation_dir_path)
-        Dir.mkdir(pack_documentation_examples_dir_path) unless Dir.exist?(pack_documentation_examples_dir_path)
+        Dir.mkdir_p(pack_documentation_dir_path)
+        Dir.mkdir_p(pack_documentation_examples_dir_path)
         File.write tex_with_fieldname_values_file_path, parsed_tex_file_content
       end
 
       def compile_tex_file
-        make_pdf tex_with_fieldname_values_file_path, pack_documentation_examples_dir_path, !@keep_aux_files
+        make_pdf tex_with_fieldname_values_file_path, pack_documentation_examples_dir_path, make_pdf: !@keep_aux_files
       end
 
       def handle_latex_error

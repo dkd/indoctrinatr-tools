@@ -8,7 +8,7 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name
+      def initialize(template_pack_name)
         @template_pack_name = template_pack_name
       end
 
@@ -41,7 +41,7 @@ module Indoctrinatr
         Pathname.new(Dir.pwd).join "#{template_pack_name}.zip"
       end
 
-      def internal_file_name file_name
+      def internal_file_name(file_name)
         template_pack_name + '/' + file_name.sub(path_name.to_s, '')[1..-1] # remove leading /
       end
     end

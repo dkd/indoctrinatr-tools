@@ -7,13 +7,12 @@ module Indoctrinatr
 
       attr_reader :template_pack_name
 
-      def initialize template_pack_name
+      def initialize(template_pack_name)
         @template_pack_name = template_pack_name
       end
 
       def call
-
-        config_file = YAML.load_file ((Pathname.new(Dir.pwd).join template_pack_name).join 'configuration.yaml')
+        config_file = YAML.load_file((Pathname.new(Dir.pwd).join template_pack_name).join('configuration.yaml'))
         configuration = TemplatePackConfiguration.new
         configuration.template_asset_path = (path_name(template_pack_name).join 'assets').to_s
         configuration.default_file_name = "#{template_pack_name}_with_default_values.pdf"

@@ -7,7 +7,7 @@ module Indoctrinatr
 
       attr_accessor :template_pack_name
 
-      def initialize template_pack_name
+      def initialize(template_pack_name)
         @template_pack_name = template_pack_name
       end
 

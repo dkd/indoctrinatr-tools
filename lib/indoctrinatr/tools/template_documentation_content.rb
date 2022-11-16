@@ -14,7 +14,8 @@ module Indoctrinatr
 
       # Overwrite the initialize method because the content is built up much more complex than for the other
       # ContentForTexFile children.
-      def initialize template_pack_name, configuration
+      def initialize(template_pack_name, configuration)
+        super
         @configuration = configuration
         @template_pack_name = template_pack_name
         @list_of_files = print_dirtree_style @template_pack_name

@@ -29,7 +29,7 @@ module Indoctrinatr
 
       # The LaTeX compilation would fail if the \includegraphics tries to include a file that does not exist.
       # Because of that it makes sense to simply use the default values again if user sets file names.
-      def overwrite_picture_file_names_output attributes_as_hashes # rubocop:disable Metrics/AbcSize
+      def overwrite_picture_file_names_output(attributes_as_hashes) # rubocop:disable Metrics/AbcSize
         attributes_as_hashes.each do |attribute_hash|
           # search for typical picture file endings
           next unless detect_picture_file_names attribute_hash['default_value']
@@ -48,7 +48,7 @@ module Indoctrinatr
 
       # Indoctrinatr has no picture data type. This means that the only way to check for pictures is to check for
       # file endings. If an user has obscure file type the possibility list would have to get updated.
-      def detect_picture_file_names string_to_check
+      def detect_picture_file_names(string_to_check)
         PICTURE_FILE_ENDINGS.any? do |picture_file_ending|
           string_to_check.downcase.include? picture_file_ending # http://stackoverflow.com/a/3686568
         end

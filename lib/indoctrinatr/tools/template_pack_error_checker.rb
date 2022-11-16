@@ -11,7 +11,8 @@ module Indoctrinatr
       REQUIRES_AVAILABLE_OPTIONS = %w[dropdown checkbox radiobutton].freeze
 
       attr_accessor :template_pack_name, :config_file
-      def initialize template_pack_name
+
+      def initialize(template_pack_name)
         @template_pack_name = template_pack_name
       end
 
@@ -60,7 +61,7 @@ module Indoctrinatr
       end
 
       # false if something wrong, otherwise returns the key value
-      def check_field_attribute attribute_hash, field_identifier, key
+      def check_field_attribute(attribute_hash, field_identifier, key)
         unless attribute_hash.key? key
           puts "The #{field_identifier} has no #{key} type set!"
           return false
@@ -73,7 +74,7 @@ module Indoctrinatr
         end
       end
 
-      def check_presentation attribute_hash, identifier
+      def check_presentation(attribute_hash, identifier)
         presentation = check_field_attribute attribute_hash, identifier, 'presentation'
         return false unless presentation
 
@@ -83,7 +84,7 @@ module Indoctrinatr
         check_presentation_range attribute_hash, identifier, presentation if presentation == 'range'
       end
 
-      def check_available_options attribute_hash, identifier, presentation_type
+      def check_available_options(attribute_hash, identifier, presentation_type)
         unless attribute_hash.key? 'available_options'
           puts "The #{identifier} has no available_options (needed for #{presentation_type} presentation)"
           return false
@@ -98,7 +99,7 @@ module Indoctrinatr
         end
       end
 
-      def check_presentation_range attribute_hash, identifier, presentation
+      def check_presentation_range(attribute_hash, identifier, presentation)
         puts "The #{identifier} has no start_of_range field (needed for #{presentation} presentation)" unless attribute_hash.key? 'start_of_range'
         puts "The #{identifier} has no end_of_range field (needed for #{presentation} presentation)" unless attribute_hash.key? 'end_of_range'
         # TODO: check for content

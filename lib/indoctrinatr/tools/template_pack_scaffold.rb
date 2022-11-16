@@ -20,8 +20,8 @@ module Indoctrinatr
         path_name = Pathname.new(Dir.pwd).join(template_pack_name)
         Success(
           {
-            template_pack_name: template_pack_name,
-            path_name: path_name,
+            template_pack_name:,
+            path_name:,
             source_config_file_path: Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'configuration.yaml'),
             source_tex_file_path: Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'template.tex.erb'),
             assets_path: path_name.join('assets'),
@@ -34,36 +34,37 @@ module Indoctrinatr
       def validate_setup(config)
         return Failure('Please specify a template pack name.') if config[:template_pack_name].nil? || config[:template_pack_name].empty?
         return Failure("A folder with name '#{config[:template_pack_name]}' already exists.") if Dir.exist? config[:path_name]
+
         Success(config)
       end
 
       def create_folder(config)
-        Dir.mkdir config[:path_name]
+        Dir.mkdir_p config[:path_name]
         Success(config)
       rescue Errno::EROFS
         Failure('Could not write to target directory!')
-      rescue => e
+      rescue StandardError => e
         Failure(e.message)
       end
 
       def create_asset_folder(config)
-        Dir.mkdir config[:assets_path]
+        Dir.mkdir_p config[:assets_path]
         Success(config)
-      rescue => e
+      rescue StandardError => e
         Failure(e.message)
       end
 
       def copy_configuration_file(config)
         FileUtils.copy_file config[:source_config_file_path], config[:config_file_path]
         Success(config)
-      rescue => e
+      rescue StandardError => e
         Failure(e.message)
       end
 
       def copy_tex_file(config)
         FileUtils.copy_file config[:source_tex_file_path], config[:tex_file_path]
         Success()
-      rescue => e
+      rescue StandardError => e
         Failure(e.message)
       end
     end

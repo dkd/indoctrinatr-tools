@@ -11,7 +11,7 @@ module Indoctrinatr
         @_default_file_name
       end
 
-      def _use_default_values # rubocop:disable Metrics/AbcSize
+      def _use_default_values
         @_configuration.attributes_as_hashes_in_array.each do |attribute_hash|
           instance_variable_set("@_#{attribute_hash['name']}", attribute_hash['default_value'])
 

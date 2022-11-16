@@ -13,12 +13,10 @@ require 'dry/cli'
 # require 'indoctrinatr/tools/template_pack_documentation'
 # require 'indoctrinatr/tools/template_pack_error_checker'
 
-# # rubocop:disable Style/MixinUsage
+#
 # include GLI::App
 # include Indoctrinatr::Tools
-# # rubocop:enable Style/MixinUsage
-
-# program_desc 'Create and manage Template Packs for Indoctrinatr'
+# # program_desc 'Create and manage Template Packs for Indoctrinatr'
 # version Indoctrinatr::Tools::VERSION
 # config_file '.indoctrinatr.rc'
 
@@ -196,7 +194,7 @@ module Indoctrinatr
       class Scaffold < Dry::CLI::Command
         desc 'Scaffold new project'
 
-        argument :template_pack_name, desc: "Name of template pack"
+        argument :template_pack_name, desc: 'Name of template pack'
 
         def call(template_pack_name:, **)
           TemplatePackScaffold.new.call(template_pack_name) do |result|
@@ -214,7 +212,7 @@ module Indoctrinatr
       class Parse < Dry::CLI::Command
         desc 'Parse XeTeX file with ERB and default values of Template Pack'
 
-        argument :template_pack_name, desc: "Name of template pack"
+        argument :template_pack_name, desc: 'Name of template pack'
         def call(template_pack_name:, **)
           TemplatePackDefaultValuesParser.new.call(template_pack_name) do |result|
             result.success do

@@ -50,7 +50,7 @@ module Indoctrinatr
       end
 
       def pack_documentation_dir_path
-        path_name.join 'doc'
+        path_name(template_pack_name).join 'doc'
       end
 
       def pack_documentation_examples_dir_path
@@ -63,6 +63,11 @@ module Indoctrinatr
 
       def latex_log_file_destination
         path_name.join template_pack_name + 'documentation_latex_failure.log'
+      end
+
+      def pdf_with_fieldname_values_file_path_exists?
+        check_for_folder
+        File.exist? pdf_with_fieldname_values_file_path
       end
     end
   end

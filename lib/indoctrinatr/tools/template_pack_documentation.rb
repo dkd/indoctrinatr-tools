@@ -46,7 +46,8 @@ module Indoctrinatr
             keep_aux_files:,
             source_main_tex_file_path:,
             pack_documentation_dir_path:,
-            pack_technical_documentation_file_path:
+            pack_technical_documentation_file_path:,
+            path_name:
           }
         )
       end
@@ -54,7 +55,6 @@ module Indoctrinatr
       def fill_documentation_content(config)
         configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
         begin
-          puts 'here'
           documentation_content = TemplateDocumentationContent.new(config[:template_pack_name], configuration)
           config[:documentation_content] = documentation_content
         rescue IOError => e
@@ -66,7 +66,7 @@ module Indoctrinatr
       end
 
       def read_content_tex_file(config)
-        content_tex_file_content = File.read config[:content_tex_file_path]
+        content_tex_file_content = File.read(config[:content_tex_file_path], :encoding => 'Utf-8')
         config[:content_tex_file_content] = content_tex_file_content
         Success(config)
       rescue StandardError => e
@@ -74,7 +74,7 @@ module Indoctrinatr
       end
 
       def read_main_tex_file(config)
-        main_tex_file_content = File.read config[:source_main_tex_file_path]
+        main_tex_file_content = File.read(config[:source_main_tex_file_path], :encoding => 'Utf-8')
         config[:main_tex_file_content] = main_tex_file_content
         Success(config)
       rescue StandardError => e

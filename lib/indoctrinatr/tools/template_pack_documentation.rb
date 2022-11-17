@@ -66,7 +66,7 @@ module Indoctrinatr
       end
 
       def read_content_tex_file(config)
-        content_tex_file_content = File.read(config[:content_tex_file_path], :encoding => 'Utf-8')
+        content_tex_file_content = File.read(config[:content_tex_file_path], encoding: 'Utf-8')
         config[:content_tex_file_content] = content_tex_file_content
         Success(config)
       rescue StandardError => e
@@ -74,7 +74,7 @@ module Indoctrinatr
       end
 
       def read_main_tex_file(config)
-        main_tex_file_content = File.read(config[:source_main_tex_file_path], :encoding => 'Utf-8')
+        main_tex_file_content = File.read(config[:source_main_tex_file_path], encoding: 'Utf-8')
         config[:main_tex_file_content] = main_tex_file_content
         Success(config)
       rescue StandardError => e

@@ -3,7 +3,6 @@ require 'indoctrinatr/tools/template_pack_helpers'
 module Indoctrinatr
   module Tools
     class TemplatePackErrorChecker
-
       include Dry::Transaction
 
       # class wide constants
@@ -25,9 +24,9 @@ module Indoctrinatr
         config_file_path = path_name.join 'configuration.yaml'
         Success(
           {
-            template_pack_name: template_pack_name,
-            path_name: path_name,
-            config_file_path: config_file_path,
+            template_pack_name:,
+            path_name:,
+            config_file_path:
           }
         )
       rescue StandardError => e
@@ -35,7 +34,8 @@ module Indoctrinatr
       end
 
       def check_config_file_existence(config)
-        return Failure('The file configuration.yaml does not exist in the template_pack directory') if !File.exist? config[:config_file_path]
+        return Failure('The file configuration.yaml does not exist in the template_pack directory') unless File.exist? config[:config_file_path]
+
         Success(config)
       rescue StandardError => e
         Failure(e.message)
@@ -49,7 +49,7 @@ module Indoctrinatr
         Success(config)
       rescue YAML::SyntaxError => e # no program abort when this exception is thrown
         puts 'YAML syntax error in configuration.yaml, see error for details:'
-        Failure (e.message)
+        Failure(e.message)
       rescue StandardError => e
         Failure(e.message)
       end

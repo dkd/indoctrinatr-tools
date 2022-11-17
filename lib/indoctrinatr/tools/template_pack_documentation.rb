@@ -40,16 +40,17 @@ module Indoctrinatr
         pack_technical_documentation_file_path = pack_documentation_dir_path.join template_pack_name + '_technical_documentation.pdf'
         Success(
           {
-            content_tex_file_path: content_tex_file_path,
-            template_pack_name: template_pack_name,
-            documentation_files_path: documentation_files_path,
-            keep_aux_files: keep_aux_files,
-            source_main_tex_file_path: source_main_tex_file_path,
-            pack_documentation_dir_path: pack_documentation_dir_path,
-            pack_technical_documentation_file_path: pack_technical_documentation_file_path
+            content_tex_file_path:,
+            template_pack_name:,
+            documentation_files_path:,
+            keep_aux_files:,
+            source_main_tex_file_path:,
+            pack_documentation_dir_path:,
+            pack_technical_documentation_file_path:
           }
         )
       end
+
       def fill_documentation_content(config)
         configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
         begin
@@ -57,7 +58,7 @@ module Indoctrinatr
           documentation_content = TemplateDocumentationContent.new(config[:template_pack_name], configuration)
           config[:documentation_content] = documentation_content
         rescue IOError => e
-          Failure (e.message)
+          Failure(e.message)
         end
         Success(config)
       rescue StandardError => e
@@ -104,6 +105,7 @@ module Indoctrinatr
       rescue StandardError => e
         Failure(e.message)
       end
+
       def compile_setup(config)
         content_tex_file_destination_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation-content.tex'
         config[:content_tex_file_destination_path] = content_tex_file_destination_path
@@ -168,7 +170,7 @@ module Indoctrinatr
 
       def compile_documentation_to_pdf(config)
         begin
-        make_pdf config[:main_tex_file_destination_path], config[:documentation_compile_dir_path_name], cleanup: !config[:keep_aux_files]
+          make_pdf config[:main_tex_file_destination_path], config[:documentation_compile_dir_path_name], cleanup: !config[:keep_aux_files]
         rescue StandardError => e
           Failure(e.message)
         else

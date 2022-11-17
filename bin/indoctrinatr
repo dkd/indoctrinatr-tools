@@ -128,7 +128,7 @@ module Indoctrinatr
         end
       end
 
-      class Pdf_with_field_names < Dry::CLI::Command
+      class PdfWithFieldNames < Dry::CLI::Command
         desc 'Compile PDF with Variable Names as values'
 
         argument :template_pack_name, desc: 'Name of template pack'
@@ -171,7 +171,7 @@ module Indoctrinatr
 
         def call(template_pack_name:, **options)
           keep_aux_files = options.fetch(:keep_aux_files) == 'true'
-          TemplatePackDocumentation.new.call(template_pack_name: template_pack_name, keep_aux_files: keep_aux_files) do |result|
+          TemplatePackDocumentation.new.call(template_pack_name:, keep_aux_files:) do |result|
             result.success do
             end
             result.failure do |message|
@@ -181,14 +181,14 @@ module Indoctrinatr
         end
       end
 
-      register 'check', Check
-      register 'pdf_with_field_names', Pdf_with_field_names
-      register 'workflow', Workflow
-      register 'parse', Parse
       register 'version', Version, aliases: %w[v -v --version]
       register 'new', Scaffold
+      register 'parse', Parse
       register 'pdf', Pdf
+      register 'pdf_with_field_names', PdfWithFieldNames
       register 'doc', Doc
+      register 'check', Check
+      register 'workflow', Workflow
     end
   end
 end

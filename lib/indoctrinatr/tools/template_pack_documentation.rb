@@ -10,122 +10,226 @@ require 'fileutils'
 module Indoctrinatr
   module Tools
     class TemplatePackDocumentation
-      include TemplatePackHelpers
-      include TemplateDocumentationHelpers
       include PdfGenerator
+      include Dry::Transaction
 
-      attr_accessor :template_pack_name, :keep_aux_files
-
-      def initialize(template_pack_name, keep_aux_files = false)
-        @template_pack_name = template_pack_name
-        @keep_aux_files = keep_aux_files
-      end
-
-      def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-        fill_documentation_content
-        read_content_tex_file
-        read_main_tex_file
-        parse_content_tex_file
-        parse_main_tex_file
-        create_temp_compile_dir
-        write_content_tex_file
-        write_main_tex_file
-        copy_source_files
-        if compile_documentation_to_pdf
-          copy_doc_file_to_template_pack
-          if @keep_aux_files
-            copy_helper_files_to_template_pack
-            show_temp_directory
-          else
-            delete_temp_dir
-          end
-          show_success
-        else
-          if @keep_aux_files
-            copy_helper_files_to_template_pack
-            show_temp_directory
-          end
-          handle_latex_error
-        end
-      end
+      step :setup
+      step :fill_documentation_content
+      step :read_content_tex_file
+      step :read_main_tex_file
+      step :parse_content_tex_file
+      step :parse_main_tex_file
+      step :create_temp_compile_dir
+      step :compile_setup
+      step :write_content_tex_file
+      step :write_main_tex_file
+      step :copy_source_files
+      step :compile_documentation_to_pdf
+      step :copy_doc_file_to_template_pack
+      step :handle_aux_files
+      step :show_success
 
       private
 
-      def fill_documentation_content
-        configuration = ConfigurationExtractor.new(template_pack_name).call
+      def setup(template_pack_name:, keep_aux_files:)
+        documentation_files_path = Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'documentation')
+        content_tex_file_path = documentation_files_path.join 'indoctrinatr-technical-documentation-content.tex.erb'
+        source_main_tex_file_path = documentation_files_path.join 'indoctrinatr-technical-documentation.tex.erb'
+        path_name = Pathname.new(Dir.pwd).join template_pack_name
+        pack_documentation_dir_path = path_name.join 'doc'
+        pack_technical_documentation_file_path = pack_documentation_dir_path.join template_pack_name + '_technical_documentation.pdf'
+        Success(
+          {
+            content_tex_file_path: content_tex_file_path,
+            template_pack_name: template_pack_name,
+            documentation_files_path: documentation_files_path,
+            keep_aux_files: keep_aux_files,
+            source_main_tex_file_path: source_main_tex_file_path,
+            pack_documentation_dir_path: pack_documentation_dir_path,
+            pack_technical_documentation_file_path: pack_technical_documentation_file_path
+          }
+        )
+      end
+      def fill_documentation_content(config)
+        configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
         begin
-          @documentation_content = TemplateDocumentationContent.new template_pack_name, configuration
+          puts 'here'
+          documentation_content = TemplateDocumentationContent.new(config[:template_pack_name], configuration)
+          config[:documentation_content] = documentation_content
         rescue IOError => e
-          abort e.message
+          Failure (e.message)
         end
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def read_content_tex_file
-        @content_tex_file_content = File.read content_tex_file_path
+      def read_content_tex_file(config)
+        content_tex_file_content = File.read config[:content_tex_file_path]
+        config[:content_tex_file_content] = content_tex_file_content
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def read_main_tex_file
-        @main_tex_file_content = File.read source_main_tex_file_path
+      def read_main_tex_file(config)
+        main_tex_file_content = File.read config[:source_main_tex_file_path]
+        config[:main_tex_file_content] = main_tex_file_content
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def parse_content_tex_file
-        @parsed_content_tex_file_content = Erubis::Eruby.new(@content_tex_file_content).result(@documentation_content.retrieve_binding) # TODO: more useful error messages for user on errors
+      def parse_content_tex_file(config)
+        parsed_content_tex_file_content = Erubis::Eruby.new(config[:content_tex_file_content]).result(config[:documentation_content].retrieve_binding)
+        config[:parsed_content_tex_file_content] = parsed_content_tex_file_content
+        # TODO: more useful error messages for user on errors
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def parse_main_tex_file
-        @parsed_main_tex_file_content = Erubis::Eruby.new(@main_tex_file_content).result(@documentation_content.retrieve_binding)
+      def parse_main_tex_file(config)
+        parsed_main_tex_file_content = Erubis::Eruby.new(config[:main_tex_file_content]).result(config[:documentation_content].retrieve_binding)
+        config[:parsed_main_tex_file_content] = parsed_main_tex_file_content
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def create_temp_compile_dir
-        make_documentation_compile_dir_path_name
+      def create_temp_compile_dir(config)
+        documentation_compile_dir_path_name = Pathname.new Dir.mktmpdir 'indoctrinatr_tools_tmp'
+        config[:documentation_compile_dir_path_name] = documentation_compile_dir_path_name
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
+      end
+      def compile_setup(config)
+        content_tex_file_destination_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation-content.tex'
+        config[:content_tex_file_destination_path] = content_tex_file_destination_path
+
+        main_tex_file_destination_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.tex'
+        config[:main_tex_file_destination_path] = main_tex_file_destination_path
+
+        source_latex_package_file_path = config[:documentation_files_path].join 'indoctrinatr-technical-documentation.sty'
+        config[:source_latex_package_file_path] = source_latex_package_file_path
+
+        latex_package_destination_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.sty'
+        config[:latex_package_destination_path] = latex_package_destination_path
+
+        source_letterpaper_file_path = config[:documentation_files_path].join 'indoctrinatr_letterpaper.pdf'
+        config[:source_letterpaper_file_path] = source_letterpaper_file_path
+
+        letterpaper_file_destination_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr_letterpaper.pdf'
+        config[:letterpaper_file_destination_path] = letterpaper_file_destination_path
+
+        source_image_tools_package_file_path = config[:documentation_files_path].join 'dkd-image-tools.sty'
+        config[:source_image_tools_package_file_path] = source_image_tools_package_file_path
+
+        image_tools_package_destination_path = config[:documentation_compile_dir_path_name].join 'dkd-image-tools.sty'
+        config[:image_tools_package_destination_path] = image_tools_package_destination_path
+
+        latex_log_file = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.log'
+        config[:latex_log_file] = latex_log_file
+
+        latex_log_file_destination = config[:path_name].join config[:template_pack_name] + 'documentation_latex_failure.log'
+        config[:latex_log_file_destination] = latex_log_file_destination
+
+        documentation_file_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.pdf'
+        config[:documentation_file_path] = documentation_file_path
+
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def write_content_tex_file
-        File.write content_tex_file_destination_path, @parsed_content_tex_file_content
+      def write_content_tex_file(config)
+        File.write config[:content_tex_file_destination_path], config[:parsed_content_tex_file_content]
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def write_main_tex_file
-        File.write main_tex_file_destination_path, @parsed_main_tex_file_content
+      def write_main_tex_file(config)
+        File.write config[:main_tex_file_destination_path], config[:parsed_main_tex_file_content]
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def copy_source_files
-        FileUtils.copy_file source_latex_package_file_path, latex_package_destination_path
-        FileUtils.copy_file source_letterpaper_file_path, letterpaper_file_destination_path
-        FileUtils.copy_file source_image_tools_package_file_path, image_tools_package_destination_path
+      def copy_source_files(config)
+        FileUtils.copy_file config[:source_latex_package_file_path], config[:latex_package_destination_path]
+        FileUtils.copy_file config[:source_letterpaper_file_path], config[:letterpaper_file_destination_path]
+        FileUtils.copy_file config[:source_image_tools_package_file_path], config[:image_tools_package_destination_path]
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def compile_documentation_to_pdf
-        make_pdf main_tex_file_destination_path, documentation_compile_dir_path_name, make_pdf: !@keep_aux_files
+      def compile_documentation_to_pdf(config)
+        begin
+        make_pdf config[:main_tex_file_destination_path], config[:documentation_compile_dir_path_name], cleanup: !config[:keep_aux_files]
+        rescue StandardError => e
+          Failure(e.message)
+        else
+          if config[:keep_aux_files]
+            copy_helper_files_to_template_pack(config)
+            show_temp_directory(config)
+          end
+          handle_latex_error(config)
+          Failure()
+        end
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def copy_helper_files_to_template_pack
-        helper_files_to_copy = [latex_log_file, content_tex_file_destination_path, main_tex_file_destination_path].freeze
-        FileUtils.mkdir_p(pack_documentation_dir_path)
-        FileUtils.copy helper_files_to_copy, pack_documentation_dir_path
+      def copy_helper_files_to_template_pack(config)
+        helper_files_to_copy = [config[:latex_log_file], config[:content_tex_file_destination_path], config[:main_tex_file_destination_path]].freeze
+        FileUtils.mkdir_p(config[:pack_documentation_dir_path])
+        FileUtils.copy helper_files_to_copy, config[:pack_documentation_dir_path]
         puts 'TeX files and log file have been copied to doc subdirectory of your template_pack'
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def copy_doc_file_to_template_pack
+      def copy_doc_file_to_template_pack(config)
         # All the documentation shall go into template_pack/doc
-        FileUtils.mkdir_p(pack_documentation_dir_path)
-        FileUtils.copy_file documentation_file_path, pack_technical_documentation_file_path
+        FileUtils.mkdir_p(config[:pack_documentation_dir_path])
+        FileUtils.copy_file config[:documentation_file_path], config[:pack_technical_documentation_file_path]
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def show_temp_directory
-        puts "Look into the directory #{documentation_temp_dir} to see all files related to the technical documentation compilation"
+      def handle_aux_files(config)
+        if config[:keep_aux_files]
+          copy_helper_files_to_template_pack(config)
+          show_temp_directory(config)
+        else
+          delete_temp_dir(config)
+        end
+        Success()
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def delete_temp_dir
-        FileUtils.remove_entry_secure documentation_compile_dir_path_name
+      def show_temp_directory(config)
+        puts "Look into the directory #{config[:documentation_compile_dir_path_name]} to see all files related to the technical documentation compilation"
       end
 
-      def handle_latex_error
-        puts "possible LaTeX compilation failure! see #{latex_log_file_destination} for details. " # idea: process $CHILD_STATUS
-        FileUtils.copy_file latex_log_file, latex_log_file_destination
+      def delete_temp_dir(config)
+        FileUtils.remove_entry_secure config[:documentation_compile_dir_path_name]
+      end
+
+      def handle_latex_error(config)
+        puts "possible LaTeX compilation failure! see #{config[:latex_log_file_destination]} for details. " # idea: process $CHILD_STATUS
+        FileUtils.copy_file config[:latex_log_file], config[:latex_log_file_destination]
       end
 
       def show_success
         puts "A documentation for '#{template_pack_name}' has been successfully generated."
+        Success()
       end
     end
   end

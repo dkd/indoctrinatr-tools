@@ -35,20 +35,21 @@ module Indoctrinatr
         tex_with_fieldname_values_file_path = pack_documentation_examples_dir_path.join(template_pack_name + '_with_fieldname_values.tex')
         Success(
           {
-            template_pack_name: template_pack_name,
-            path_name: path_name,
-            keep_aux_files: keep_aux_files,
-            pack_documentation_dir_path: pack_documentation_dir_path,
-            pack_documentation_examples_dir_path: pack_documentation_examples_dir_path,
-            tex_with_default_values_file_path: tex_with_default_values_file_path,
-            tex_with_fieldname_values_file_path: tex_with_fieldname_values_file_path
+            template_pack_name:,
+            path_name:,
+            keep_aux_files:,
+            pack_documentation_dir_path:,
+            pack_documentation_examples_dir_path:,
+            tex_with_default_values_file_path:,
+            tex_with_fieldname_values_file_path:
           }
         )
       end
 
       def check_setup(config)
-        return Failure('Please specify a template pack name.') if config[:template_pack_name].empty? # rubocop:disable Style/SignalException
-        return Failure ("A folder with name '#{config[:template_pack_name]}' does not exist.") unless Dir.exist? config[:path_name]# rub
+        return Failure('Please specify a template pack name.') if config[:template_pack_name].empty?
+        return Failure("A folder with name '#{config[:template_pack_name]}' does not exist.") unless Dir.exist? config[:path_name] # rub
+
         Success(config)
       end
 
@@ -86,19 +87,16 @@ module Indoctrinatr
       end
 
       def result(config)
-        begin
-          make_pdf config[:tex_with_fieldname_values_file_path], config[:pack_documentation_examples_dir_path], cleanup: !config[:keep_aux_files]
-        rescue StandardError => e
-          puts 'possible LaTeX compilation failure!' # see #{latex_log_file_destination} for details. " # idea: process $CHILD_STATUS
-          # FileUtils.copy_file latex_log_file, latex_log_file_destination
-          Failure(e.message)
-        else
-          puts "The template pack '#{config[:template_pack_name]}' has been successfully parsed with the variable names"
-          puts 'Please check the .tex file and modify it to your needs and compile it again'
-          Success()
-        end
+        make_pdf config[:tex_with_fieldname_values_file_path], config[:pack_documentation_examples_dir_path], cleanup: !config[:keep_aux_files]
+      rescue StandardError => e
+        puts 'possible LaTeX compilation failure!' # see #{latex_log_file_destination} for details. " # idea: process $CHILD_STATUS
+        # FileUtils.copy_file latex_log_file, latex_log_file_destination
+        Failure(e.message)
+      else
+        puts "The template pack '#{config[:template_pack_name]}' has been successfully parsed with the variable names"
+        puts 'Please check the .tex file and modify it to your needs and compile it again'
+        Success()
       end
-
     end
   end
 end

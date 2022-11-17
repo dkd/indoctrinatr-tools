@@ -89,7 +89,7 @@ module Indoctrinatr
             end
           end
           keep_aux_files = options.fetch(:keep_aux_files) == 'true'
-          TemplatePackDefaultValuesCompiler.new.call(template_pack_name: template_pack_name, keep_aux_files: keep_aux_files) do |result|
+          TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files:) do |result|
             result.success do
             end
             result.failure do |message|
@@ -129,7 +129,6 @@ module Indoctrinatr
       end
 
       class Pdf_with_field_names < Dry::CLI::Command
-
         desc 'Compile PDF with Variable Names as values'
 
         argument :template_pack_name, desc: 'Name of template pack'
@@ -137,7 +136,7 @@ module Indoctrinatr
 
         def call(template_pack_name:, **options)
           keep_aux_files = options.fetch(:keep_aux_files) == 'true'
-          TemplatePackFieldnamesCreator.new.call(template_pack_name: template_pack_name, keep_aux_files: keep_aux_files) do |result|
+          TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files:) do |result|
             result.success do
             end
             result.failure do |message|
@@ -148,7 +147,6 @@ module Indoctrinatr
       end
 
       class Check < Dry::CLI::Command
-
         desc 'Display the suggested workflow'
 
         argument :template_pack_name, desc: 'Name of template pack'
@@ -166,7 +164,6 @@ module Indoctrinatr
       end
 
       class Doc < Dry::CLI::Command
-
         desc 'Create a documentation from a given source folder'
 
         argument :template_pack_name, desc: 'Name of template pack'

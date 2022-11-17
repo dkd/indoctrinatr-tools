@@ -6,12 +6,12 @@
 
 ## Installation
 
-[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools) [![Coverage Status](https://coveralls.io/repos/dkd/indoctrinatr-tools/badge.svg?branch=development&service=github)](https://coveralls.io/github/dkd/indoctrinatr-tools?branch=development)  master [![Travis CI Status: master](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=master)](https://travis-ci.org/dkd/indoctrinatr-tools) development  [![Travis CI Status: development](https://travis-ci.org/dkd/indoctrinatr-tools.svg?branch=development)](https://travis-ci.org/dkd/indoctrinatr-tools)
+[![Gem Version](https://badge.fury.io/rb/indoctrinatr-tools.svg)](http://badge.fury.io/rb/indoctrinatr-tools)
 
 
 1.  Install XeTeX:
 
-    Mac OS X: [MacTeX](https://tug.org/mactex/)
+    Mac OS X: [MacTeX](https://tug.org/mactex/) (e.g. `brew install mactex`)
 
     Debian/Ubuntu:
 
@@ -30,7 +30,7 @@
 
 * `latexmk`
 * for the template documentation
-  * Tested against TeX Live 2014
+  * Tested against TeX Live 2022
   * `dirtree`
   * `datetime2`
 
@@ -49,8 +49,6 @@ Command | Description
 `indoctrinatr pack project_name` | Creates a Template Pack from a given project folder
 `indoctrinatr demo` | Creates, parses, and compiles a demo project
 `indoctrinatr workflow` | Displays a suggested workflow
-`indoctrinatr bashcompletion` | Displays instructions for bash completion
-`indoctrinatr zshcompletion` | Displays instructions for zsh completion
 
 The commands `pdf`, `pdf_with_field_names` and `doc` have a `keep-aux-files` option. This is helpful if you run in into LaTeX errors, want to inspect the .log file and run LaTeX for yourself again.
 
@@ -69,7 +67,7 @@ What you think of Indoctrinatr and Indoctrinatr Tools? Drop us a line (<opensour
 We are also looking forward to your [GitHub Pull Requests](https://help.github.com/articles/using-pull-requests/).
 
 Manual testing: After cloning the repo, run `bundle exec bin/indoctrinatr` inside the directory for testing your own development changes.
-Automatic testing: run `rake test_with_coveralls`
+Automatic testing: run `rspec`
 
 ## License
 
@@ -80,5 +78,6 @@ Indoctrinatr and Indoctrinatr Tools are licensed under the terms and conditions 
 [![dkd](assets/images/dkd_logo.png)](https://dkd.de/)
 
 * Luka Lüdicke (development)
+* Eike Henrich (development)
 * Nicolai Reuschling (development)
 * Søren Schaffstein (idea, product management)

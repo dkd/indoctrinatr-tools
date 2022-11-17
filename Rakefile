@@ -13,10 +13,6 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = 'features --format pretty'
 end
 
-require 'coveralls/rake/task'
-Coveralls::RakeTask.new
-task test_with_coveralls: [:rubocop, :spec, :features, 'coveralls:push']
-
 desc 'Start up IRB session with Indoctrinatr Tools loaded'
 task :console do
   exec 'irb -r indoctrinatr/tools -I ./lib'

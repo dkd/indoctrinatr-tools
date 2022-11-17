@@ -3,47 +3,59 @@ require 'indoctrinatr/tools/template_pack_helpers'
 module Indoctrinatr
   module Tools
     class TemplatePackErrorChecker
-      include TemplatePackHelpers
+
+      include Dry::Transaction
 
       # class wide constants
       # needs to match indoctrinatr's TemplateField model
       VALID_PRESENTATIONS = %w[text textarea checkbox radiobutton dropdown date range file].freeze
       REQUIRES_AVAILABLE_OPTIONS = %w[dropdown checkbox radiobutton].freeze
 
-      attr_accessor :template_pack_name, :config_file
+      step :setup
+      step :check_config_file_existence
+      step :check_config_file_syntax
+      step :check_attributes
 
-      def initialize(template_pack_name)
-        @template_pack_name = template_pack_name
-      end
-
-      def call
-        check_config_file_existence && check_config_file_syntax && check_attributes
-        # TODO: check multiple variable name declaration (low-prio)
-      end
+      # TODO: check multiple variable name declaration (low-prio)
 
       private
 
-      def check_config_file_existence
-        return true if File.exist? config_file_path
+      def setup(template_pack_name)
+        path_name = Pathname.new(Dir.pwd).join template_pack_name
+        config_file_path = path_name.join 'configuration.yaml'
+        Success(
+          {
+            template_pack_name: template_pack_name,
+            path_name: path_name,
+            config_file_path: config_file_path,
+          }
+        )
+      rescue StandardError => e
+        Failure(e.message)
+      end
 
-        puts 'The file configuration.yaml does not exist in the template_pack directory'
-        false
+      def check_config_file_existence(config)
+        return Failure('The file configuration.yaml does not exist in the template_pack directory') if !File.exist? config[:config_file_path]
+        Success(config)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
       # YAML syntax check
-      def check_config_file_syntax
+      def check_config_file_syntax(config)
         puts 'Checking YAML syntax...'
-        YAML.parse_file config_file_path
+        YAML.parse_file config[:config_file_path]
         puts 'YAML syntax ok!'
-        true
+        Success(config)
       rescue YAML::SyntaxError => e # no program abort when this exception is thrown
         puts 'YAML syntax error in configuration.yaml, see error for details:'
-        puts e.message
-        false
+        Failure (e.message)
+      rescue StandardError => e
+        Failure(e.message)
       end
 
-      def check_attributes
-        configuration = ConfigurationExtractor.new(template_pack_name).call
+      def check_attributes(config)
+        configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
         puts 'Checking...'
 
         configuration.attributes_as_hashes_in_array.each_with_index do |attribute_hash, index|
@@ -58,6 +70,9 @@ module Indoctrinatr
           check_field_attribute attribute_hash, identifier, 'description'
           # idea: warning if no required attribute?
         end
+        Success()
+      rescue StandardError => e
+        Failure(e.message)
       end
 
       # false if something wrong, otherwise returns the key value

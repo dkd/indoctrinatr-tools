@@ -21,14 +21,6 @@ require 'dry/cli'
 #   end
 # end
 
-# desc 'Check for errors in the given source folder'
-# arg_name 'template_pack_name'
-# command :check do |c|
-#   c.action do |global_options, _, _|
-#     template_pack_name = global_options['template_pack_name']
-#     TemplatePackErrorChecker.new(template_pack_name).call
-#   end
-# end
 
 # desc 'Create a Template Pack from a given source folder'
 # arg_name 'template_pack_name'
@@ -43,6 +35,7 @@ require 'indoctrinatr/tools/template_pack_scaffold'
 require 'indoctrinatr/tools/template_pack_default_values_parser'
 require 'indoctrinatr/tools/template_pack_default_values_compiler'
 require 'indoctrinatr/tools/template_pack_fieldnames_creator'
+require 'indoctrinatr/tools/template_pack_error_checker'
 
 module Indoctrinatr
   module Tools
@@ -163,6 +156,23 @@ module Indoctrinatr
         end
       end
 
+      class Check < Dry::CLI::Command
+
+        argument :template_pack_name, desc: 'Name of template pack'
+
+        def call(template_pack_name:, **)
+          TemplatePackErrorChecker.new.call(template_pack_name) do |result|
+            result.success do
+            end
+            result.failure do |message|
+              puts message
+              return
+            end
+          end
+        end
+      end
+
+      register 'check', Check
       register 'pdf_with_field_names', Pdf_with_field_names
       register 'workflow', Workflow
       register 'parse', Parse

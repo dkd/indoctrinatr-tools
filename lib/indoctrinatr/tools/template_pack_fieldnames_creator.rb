@@ -31,8 +31,8 @@ module Indoctrinatr
         path_name = Pathname.new(Dir.pwd).join template_pack_name
         pack_documentation_dir_path = path_name.join 'doc'
         pack_documentation_examples_dir_path = pack_documentation_dir_path.join('examples')
-        tex_with_default_values_file_path = pack_documentation_examples_dir_path.join(template_pack_name + '_with_default_values.tex')
-        tex_with_fieldname_values_file_path = pack_documentation_examples_dir_path.join(template_pack_name + '_with_fieldname_values.tex')
+        tex_with_default_values_file_path = pack_documentation_examples_dir_path.join("#{template_pack_name}_with_default_values.tex")
+        tex_with_fieldname_values_file_path = pack_documentation_examples_dir_path.join("#{template_pack_name}_with_fieldname_values.tex")
         Success(
           {
             template_pack_name:,
@@ -62,7 +62,7 @@ module Indoctrinatr
       end
 
       def read_tex_file(config)
-        tex_file_path = config[:path_name].join(config[:template_pack_name] + '.tex.erb')
+        tex_file_path = config[:path_name].join("#{config[:template_pack_name]}.tex.erb")
         config[:tex_file_content] = File.read tex_file_path
         Success(config)
       rescue StandardError => e

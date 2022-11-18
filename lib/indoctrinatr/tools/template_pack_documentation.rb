@@ -37,7 +37,7 @@ module Indoctrinatr
         source_main_tex_file_path = documentation_files_path.join 'indoctrinatr-technical-documentation.tex.erb'
         path_name = Pathname.new(Dir.pwd).join template_pack_name
         pack_documentation_dir_path = path_name.join 'doc'
-        pack_technical_documentation_file_path = pack_documentation_dir_path.join template_pack_name + '_technical_documentation.pdf'
+        pack_technical_documentation_file_path = pack_documentation_dir_path.join "#{template_pack_name}_technical_documentation.pdf"
         Success(
           {
             content_tex_file_path:,
@@ -134,7 +134,7 @@ module Indoctrinatr
         latex_log_file = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.log'
         config[:latex_log_file] = latex_log_file
 
-        latex_log_file_destination = config[:path_name].join config[:template_pack_name] + 'documentation_latex_failure.log'
+        latex_log_file_destination = config[:path_name].join "#{config[:template_pack_name]}documentation_latex_failure.log"
         config[:latex_log_file_destination] = latex_log_file_destination
 
         documentation_file_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.pdf'

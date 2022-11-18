@@ -15,7 +15,6 @@ module Indoctrinatr
       # Overwrite the initialize method because the content is built up much more complex than for the other
       # ContentForTexFile children.
       def initialize(template_pack_name, configuration)
-
         super(configuration)
 
         @configuration = configuration
@@ -47,7 +46,7 @@ module Indoctrinatr
             return
           end
         end
-        TemplatePackDefaultValuesCompiler.new.call(template_pack_name: template_pack_name, keep_aux_files: false) do |result|
+        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result|
           result.success do
           end
           result.failure do |message|
@@ -58,11 +57,10 @@ module Indoctrinatr
       end
 
       def fieldname_values_example
-
         # This gives user the option to customize the FieldNameValues Example that is appended in the documentation
         return pdf_with_fieldname_values_file_path if pdf_with_fieldname_values_file_path_exists?
 
-        TemplatePackDefaultValuesCompiler.new.call(template_pack_name: template_pack_name, keep_aux_files: false) do |result|
+        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result|
           result.success do
             puts 'INFO: Example with field names has been automatically generated for the documentation' # More user information and for testing
             pdf_with_fieldname_values_file_path

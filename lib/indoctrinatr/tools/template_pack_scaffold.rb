@@ -26,7 +26,7 @@ module Indoctrinatr
             source_tex_file_path: Pathname.new(File.expand_path(__dir__)).join('..', 'templates', 'template.tex.erb'),
             assets_path: path_name.join('assets'),
             config_file_path: path_name.join('configuration.yaml'),
-            tex_file_path: path_name.join(template_pack_name + '.tex.erb')
+            tex_file_path: path_name.join("#{template_pack_name}.tex.erb")
           }
         )
       end

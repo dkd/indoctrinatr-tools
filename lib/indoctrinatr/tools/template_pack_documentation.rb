@@ -139,7 +139,6 @@ module Indoctrinatr
 
         documentation_file_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.pdf'
         config[:documentation_file_path] = documentation_file_path
-        binding.irb
         Success(config)
       rescue StandardError => e
         Failure(e.message)

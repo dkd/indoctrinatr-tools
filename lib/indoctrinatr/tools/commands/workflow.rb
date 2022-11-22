@@ -21,13 +21,16 @@ module Indoctrinatr
             4. Run in shell: indoctrinatr pdf demo
                Compiles PDF from demo_with_default_values.tex
 
-            5. Run in shell: indoctrinatr check demo
+            5. Run in shell: indoctrinatr pdf_with_field_names demo
+               Compiles PDF from demo_with_fieldname_values.tex
+
+            6. Run in shell: indoctrinatr check demo
                Analyzes your Template Pack for potential errors
 
-            6. Run in shell: indoctrinatr doc demo
+            7. Run in shell: indoctrinatr doc demo
                Creates a technical documentation for the Template Pack
 
-            7. Run in shell: indoctrinatr pack demo
+            8. Run in shell: indoctrinatr pack demo
                Creates demo.zip with all required file for upload to Indoctrinatr server
           HEREDOC
         end

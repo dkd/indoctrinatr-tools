@@ -13,6 +13,7 @@ module Indoctrinatr
         TemplatePackScaffold.new.call(template_pack_name)
         TemplatePackDefaultValuesParser.new.call(template_pack_name)
         TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false)
+        TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files: false)
         TemplatePackDocumentation.new.call(template_pack_name:, keep_aux_files: false)
         TemplatePackPacker.new.call(template_pack_name)
       end

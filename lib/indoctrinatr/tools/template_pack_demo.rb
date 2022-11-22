@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/template_pack_helpers'
-
 module Indoctrinatr
   module Tools
     class TemplatePackDemo
@@ -12,11 +10,11 @@ module Indoctrinatr
       end
 
       def call
-        TemplatePackScaffold.new(template_pack_name).call
-        TemplatePackDefaultValuesParser.new(template_pack_name).call
-        TemplatePackDefaultValuesCompiler.new(template_pack_name).call
-        TemplatePackDocumentation.new(template_pack_name).call
-        TemplatePackPacker.new(template_pack_name).call
+        TemplatePackScaffold.new.call(template_pack_name)
+        TemplatePackDefaultValuesParser.new.call(template_pack_name)
+        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false)
+        TemplatePackDocumentation.new.call(template_pack_name:, keep_aux_files: false)
+        TemplatePackPacker.new.call(template_pack_name)
       end
     end
   end

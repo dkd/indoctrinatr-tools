@@ -15,7 +15,7 @@ module Indoctrinatr
           args.delete_at 3 # Remove argument if no output dir is wished for. This probably could be done better.
         end
         latexmk_successful = system('latexmk', *args) # latexmk instead of running 2.times
-        latex_cleanup output_dir if latexmk_successful == true && cleanup
+        latex_cleanup output_dir if latexmk_successful && cleanup
         latexmk_successful
       end
 

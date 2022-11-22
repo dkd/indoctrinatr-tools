@@ -139,7 +139,7 @@ module Indoctrinatr
 
         documentation_file_path = config[:documentation_compile_dir_path_name].join 'indoctrinatr-technical-documentation.pdf'
         config[:documentation_file_path] = documentation_file_path
-
+        binding.irb
         Success(config)
       rescue StandardError => e
         Failure(e.message)
@@ -229,8 +229,8 @@ module Indoctrinatr
         FileUtils.copy_file config[:latex_log_file], config[:latex_log_file_destination]
       end
 
-      def show_success
-        puts "A documentation for '#{template_pack_name}' has been successfully generated."
+      def show_success(config)
+        puts "A documentation for '#{config[:template_pack_name]}' has been successfully generated."
         Success()
       end
     end

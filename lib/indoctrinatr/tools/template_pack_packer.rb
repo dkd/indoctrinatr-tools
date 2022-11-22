@@ -4,44 +4,55 @@ require 'zip'
 module Indoctrinatr
   module Tools
     class TemplatePackPacker
-      include TemplatePackHelpers
+      include Dry::Transaction
 
-      attr_accessor :template_pack_name
-
-      def initialize(template_pack_name)
-        @template_pack_name = template_pack_name
-      end
-
-      def call
-        check_for_folder
-        remove_existing_zip
-        zip_template_folder
-        show_success
-      end
+      step :setup
+      step :validate_setup
+      step :remove_existing_zip
+      step :zip_template_folder
+      step :show_success
 
       private
 
-      def remove_existing_zip
-        FileUtils.rm destination_zip_file, force: true
+      def setup(template_pack_name)
+        path_name = Pathname.new(Dir.pwd).join(template_pack_name)
+        Success(
+          {
+            template_pack_name:,
+            path_name:
+          }
+        )
       end
 
-      def zip_template_folder
-        Zip::File.open(destination_zip_file, Zip::File::CREATE) do |zipfile|
-          Dir[File.join(path_name, '**', '**')].each do |file|
-            zipfile.add(internal_file_name(file), file)
+      def validate_setup(config)
+        return Failure('Please specify a template pack name.') if config[:template_pack_name].nil? || config[:template_pack_name].empty?
+        return Failure("A folder with name '#{config[:template_pack_name]}' does not exist.") unless Dir.exist? config[:path_name]
+        Success(config)
+      end
+      def remove_existing_zip(config)
+        FileUtils.rm destination_zip_file(config[:template_pack_name]), force: true
+        Success(config)
+      end
+
+      def zip_template_folder(config)
+        Zip::File.open(destination_zip_file(config[:template_pack_name]), Zip::File::CREATE) do |zipfile|
+          Dir[File.join(config[:path_name], '**', '**')].each do |file|
+            zipfile.add(internal_file_name(file, config[:template_pack_name], config[:path_name]), file)
           end
         end
+        Success(config)
       end
 
-      def show_success
-        puts "The template pack '#{template_pack_name}.zip' was created successfully."
+      def show_success(config)
+        puts "The template pack '#{config[:template_pack_name]}.zip' was created successfully."
+        Success()
       end
 
-      def destination_zip_file
+      def destination_zip_file(template_pack_name)
         Pathname.new(Dir.pwd).join "#{template_pack_name}.zip"
       end
 
-      def internal_file_name(file_name)
+      def internal_file_name(file_name, template_pack_name, path_name)
         "#{template_pack_name}/#{file_name.sub(path_name.to_s, '')[1..]}" # remove leading /
       end
     end

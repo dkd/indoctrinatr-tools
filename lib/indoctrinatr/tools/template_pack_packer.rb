@@ -1,4 +1,3 @@
-require 'indoctrinatr/tools/template_pack_helpers'
 require 'zip'
 
 module Indoctrinatr

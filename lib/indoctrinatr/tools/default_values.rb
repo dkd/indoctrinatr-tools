@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/content_for_tex_files'
-
 module Indoctrinatr
   module Tools
     class DefaultValues < ContentForTexFiles

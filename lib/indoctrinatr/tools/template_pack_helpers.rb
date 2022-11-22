@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/default_values'
-
 module Indoctrinatr
   module Tools
     # classes that use this model are required to have template_pack_name as instance variable

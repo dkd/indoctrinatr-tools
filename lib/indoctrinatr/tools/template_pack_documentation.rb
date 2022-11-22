@@ -1,8 +1,3 @@
-require 'indoctrinatr/tools/template_documentation_content'
-require 'indoctrinatr/tools/template_pack_helpers'
-require 'indoctrinatr/tools/template_documentation_helpers'
-require 'indoctrinatr/tools/configuration_extractor'
-require 'indoctrinatr/tools/pdf_generator'
 require 'erubis'
 require 'to_latex'
 require 'fileutils'

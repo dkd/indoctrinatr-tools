@@ -1,5 +1,3 @@
-require_relative '../template_pack_packer'
-
 module Indoctrinatr
   module Tools
     module Commands

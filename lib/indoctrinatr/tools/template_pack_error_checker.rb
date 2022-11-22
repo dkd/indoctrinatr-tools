@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/template_pack_helpers'
-
 module Indoctrinatr
   module Tools
     class TemplatePackErrorChecker

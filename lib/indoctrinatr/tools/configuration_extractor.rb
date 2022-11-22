@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/template_pack_configuration'
-
 module Indoctrinatr
   module Tools
     class ConfigurationExtractor

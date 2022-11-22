@@ -1,7 +1,3 @@
-require 'indoctrinatr/tools/template_pack_helpers'
-require 'indoctrinatr/tools/field_name_values'
-require 'indoctrinatr/tools/configuration_extractor'
-require 'indoctrinatr/tools/pdf_generator'
 require 'erubis'
 require 'to_latex'
 

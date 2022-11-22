@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'indoctrinatr/tools/default_values'
-require 'indoctrinatr/tools/template_pack_configuration'
 
 context "when supporting Textile with 'textilize' function" do
   let(:configuration) do

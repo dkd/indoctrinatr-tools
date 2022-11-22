@@ -1,9 +1,3 @@
-require 'indoctrinatr/tools/content_for_tex_files'
-require 'indoctrinatr/tools/template_pack_configuration'
-require 'indoctrinatr/tools/directory_helpers'
-require 'indoctrinatr/tools/template_documentation_source_file'
-require 'indoctrinatr/tools/default_values'
-
 module Indoctrinatr
   module Tools
     class TemplateDocumentationContent < ContentForTexFiles

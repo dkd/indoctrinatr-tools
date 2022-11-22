@@ -1,6 +1,3 @@
-require_relative '../template_pack_default_values_parser'
-require_relative '../template_pack_default_values_compiler'
-
 module Indoctrinatr
   module Tools
     module Commands

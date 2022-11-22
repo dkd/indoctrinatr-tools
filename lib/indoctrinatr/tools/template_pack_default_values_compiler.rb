@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/configuration_extractor'
-require 'indoctrinatr/tools/pdf_generator'
 require 'fileutils'
 
 module Indoctrinatr

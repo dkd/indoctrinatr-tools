@@ -1,5 +1,3 @@
-require 'indoctrinatr/tools/content_for_tex_files'
-
 module Indoctrinatr
   module Tools
     # This class defines the content for a document that has the field names as content.

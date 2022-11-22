@@ -1,6 +1,3 @@
-require 'indoctrinatr/tools/template_pack_helpers'
-require 'indoctrinatr/tools/default_values'
-require 'indoctrinatr/tools/configuration_extractor'
 require 'erubis'
 require 'to_latex'
 

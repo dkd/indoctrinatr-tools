@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'RedCloth', '~> 4.3'
   spec.add_dependency 'rubyzip', '~> 2'
   spec.add_dependency 'to_latex', '~> 0.5'
+  spec.add_dependency 'zeitwerk', '~> 2.6'
 
   spec.requirements << 'LaTeX development enviroment'
   spec.metadata['rubygems_mfa_required'] = 'true'

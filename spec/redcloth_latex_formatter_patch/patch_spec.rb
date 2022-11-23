@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../../lib/redcloth/formatters/latex'
 
 context 'with patches for RedCloth::Formatter::LATEX' do
   it 'tranforms a h1. headline to LaTeX chapter notation' do

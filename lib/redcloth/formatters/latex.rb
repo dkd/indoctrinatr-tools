@@ -7,7 +7,9 @@ module RedCloth
         h1: 'chapter',
         h2: 'section',
         h3: 'subsection',
-        h4: 'subsubsection'
+        h4: 'subsubsection',
+        h5: 'subparagraph',
+        h6: 'textbf'
       }.each do |m, tag|
         define_method(m) do |opts|
           case opts[:align]

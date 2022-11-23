@@ -206,7 +206,7 @@ module Indoctrinatr
         else
           delete_temp_dir(config)
         end
-        Success()
+        Success(config)
       rescue StandardError => e
         Failure(e.message)
       end

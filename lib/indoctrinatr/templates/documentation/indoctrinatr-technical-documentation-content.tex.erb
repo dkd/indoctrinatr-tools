@@ -25,10 +25,10 @@
 \begin{landscape}
   \chapter{Variables}
 
-  \begin{longtabu}{ l l X l X }
-    \tabletoprule
+  \begin{longtable}{ l l l l l }
+%    \tabletoprule
     \textbf{Variable} & \textbf{Presentation} & \textbf{Default Value} & \textbf{Required} & \textbf{Description} \\
-    \tabletoprule
+%    \tabletoprule
     \endhead
     <% @attributes.each do |attribute| %>
       \texttt{<%= attribute['name'].to_latex -%>}
@@ -37,5 +37,5 @@
       & <%= 'true' if attribute['required'] == 'true' -%> <%# empty if false or not set. Wish by Søren for better readability-%>
       & <%= attribute['description'].to_latex if attribute['description'] -%>\\ <%# if condition to ignore errors on empty description field -%>
     <% end %>
-  \end{longtabu}
+  \end{longtable}
 \end{landscape}

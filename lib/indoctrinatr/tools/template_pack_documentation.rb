@@ -1,6 +1,7 @@
 require 'erubis'
 require 'to_latex'
 require 'fileutils'
+require 'tmpdir'
 
 module Indoctrinatr
   module Tools

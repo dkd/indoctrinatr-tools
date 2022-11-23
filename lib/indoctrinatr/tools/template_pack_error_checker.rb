@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Indoctrinatr
   module Tools
     class TemplatePackErrorChecker

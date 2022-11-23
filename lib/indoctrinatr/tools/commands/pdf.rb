@@ -29,4 +29,3 @@ module Indoctrinatr
     end
   end
 end
-

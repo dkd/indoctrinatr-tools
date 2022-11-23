@@ -12,8 +12,7 @@ module Indoctrinatr
       register 'check', Check
       register 'workflow', Workflow
       register 'pack', Pack
-      register 'demo' , Demo
+      register 'demo', Demo
     end
   end
 end
-

@@ -25,11 +25,11 @@ module RedCloth
         end
       end
 
-      def del opts
+      def del(opts)
         "\\st{#{opts[:text]}}"
       end
 
-      def table_close _opts
+      def table_close(_opts)
         output = "\\begin{tabu}{ #{'l ' * @table[0].size}}\n"
         output << "    #{@table[0].join(' & ')} \\\\\n"
         output << "    \\tabletoprule\n"

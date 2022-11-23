@@ -28,10 +28,12 @@ module Indoctrinatr
       def validate_setup(config)
         return Failure('Please specify a template pack name.') if config[:template_pack_name].nil? || config[:template_pack_name].empty?
         return Failure("A folder with name '#{config[:template_pack_name]}' does not exist.") unless Dir.exist? config[:path_name]
+
         Success(config)
       rescue StandardError => e
         Failure(e.message)
       end
+
       def remove_existing_zip(config)
         FileUtils.rm destination_zip_file(config[:template_pack_name]), force: true
         Success(config)

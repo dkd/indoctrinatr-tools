@@ -1,4 +1,9 @@
 require 'spec_helper'
+require 'redcloth'
+require_relative '../../../lib/redcloth/formatters/latex'
+require_relative '../../../lib/indoctrinatr/tools/template_pack_configuration'
+require_relative '../../../lib/indoctrinatr/tools/content_for_tex_files'
+require_relative '../../../lib/indoctrinatr/tools/default_values'
 
 context "when supporting Textile with 'textilize' function" do
   let(:configuration) do

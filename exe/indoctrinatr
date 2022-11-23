@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+# Bundler.require(:default)
+
+require 'dry/cli'
+require 'zeitwerk'
+
+require 'redcloth/formatters/latex'
+
+Zeitwerk::Loader.for_gem.tap do |loader|
+  # loader.log!
+  loader.push_dir('lib')
+  loader.ignore('lib/indoctrinatr/tools/version')
+  loader.ignore('lib/redcloth/formatters/latex')
+
+  # loader.inflector.inflect 'latex' => 'LATEX'
+  # loader.inflector.inflect 'redcloth' => 'RedCloth'
+
+  loader.setup
+end
+
+Dry::CLI.new(Indoctrinatr::Tools::Commands).call

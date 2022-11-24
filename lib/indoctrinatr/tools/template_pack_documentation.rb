@@ -21,7 +21,6 @@ module Indoctrinatr
       step :write_main_tex_file
       step :copy_source_files
       step :compile_documentation_to_pdf
-      step :copy_doc_file_to_template_pack
       step :handle_aux_files
       step :show_success
 
@@ -169,15 +168,15 @@ module Indoctrinatr
         rescue StandardError => e
           Failure(e.message)
         else
+          copy_doc_file_to_template_pack(config)
           if config[:keep_aux_files]
             copy_helper_files_to_template_pack(config)
             show_temp_directory(config)
           end
-          handle_latex_error(config)
-          Failure()
         end
         Success(config)
       rescue StandardError => e
+        handle_latex_error(config)
         Failure(e.message)
       end
 
@@ -194,9 +193,6 @@ module Indoctrinatr
         # All the documentation shall go into template_pack/doc
         FileUtils.mkdir_p(config[:pack_documentation_dir_path])
         FileUtils.copy_file config[:documentation_file_path], config[:pack_technical_documentation_file_path]
-        Success(config)
-      rescue StandardError => e
-        Failure(e.message)
       end
 
       def handle_aux_files(config)

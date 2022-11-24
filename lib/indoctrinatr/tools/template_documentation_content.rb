@@ -34,27 +34,26 @@ module Indoctrinatr
       def default_values_example
         TemplatePackDefaultValuesParser.new.call(@template_pack_name) do |result|
           result.success do
+            TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result2|
+              result2.success do
+              end
+              result2.failure do |message2|
+                puts message2
+              end
+            end
+            pdf_with_default_values_file_path @configuration
           end
           result.failure do |message|
             puts message
-            return
           end
         end
-        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result|
-          result.success do
-          end
-          result.failure do |message|
-            puts message
-          end
-        end
-        pdf_with_default_values_file_path @configuration
       end
 
       def fieldname_values_example
         # This gives user the option to customize the FieldNameValues Example that is appended in the documentation
         return pdf_with_fieldname_values_file_path if pdf_with_fieldname_values_file_path_exists?
 
-        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result|
+        TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files: false) do |result|
           result.success do
             puts 'INFO: Example with field names has been automatically generated for the documentation' # More user information and for testing
             pdf_with_fieldname_values_file_path

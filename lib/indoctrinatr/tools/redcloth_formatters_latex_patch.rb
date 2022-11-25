@@ -5,9 +5,7 @@ module Indoctrinatr
     module RedclothFormattersLatexPatch
       def self.apply
         const = Kernel.const_get('RedCloth::Formatters::LATEX')
-        if const
-          const.prepend(self)
-        end
+        const&.prepend(self)
       rescue NameError => e
         puts e
       end

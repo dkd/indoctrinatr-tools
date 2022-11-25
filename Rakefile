@@ -9,9 +9,6 @@ task default: :spec
 
 require 'cucumber'
 require 'cucumber/rake/task'
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = 'features --format pretty'
-end
 
 desc 'Start up IRB session with Indoctrinatr Tools loaded'
 task :console do
@@ -20,9 +17,9 @@ end
 
 desc 'Run demo'
 task :demo do
-  puts `bin/indoctrinatr new demo`
-  puts `bin/indoctrinatr parse demo`
-  puts `bin/indoctrinatr pdf demo`
-  puts `bin/indoctrinatr doc demo`
-  puts `bin/indoctrinatr pack demo`
+  puts `exe/indoctrinatr new demo`
+  puts `exe/indoctrinatr parse demo`
+  puts `exe/indoctrinatr pdf demo`
+  puts `exe/indoctrinatr doc demo`
+  puts `exe/indoctrinatr pack demo`
 end

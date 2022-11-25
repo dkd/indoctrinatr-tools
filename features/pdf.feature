@@ -12,4 +12,3 @@ Feature: Running the 'pdf' command
   Scenario: for a given 'demo' project and usage with tab-completion
     When I run `indoctrinatr pdf demo/`
     Then a file named "demo/doc/examples/demo_with_default_values.pdf" should exist
-

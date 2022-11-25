@@ -8,7 +8,7 @@ module Indoctrinatr
 
         argument :template_pack_name, desc: 'Name of template pack'
 
-        def call(template_pack_name:, **)
+        def call(template_pack_name: '', **)
           TemplatePackScaffold.new.call(template_pack_name) do |result|
             result.success do
               puts "A template pack scaffold was created in folder '#{template_pack_name}'. Happy templating…"
@@ -16,6 +16,7 @@ module Indoctrinatr
 
             result.failure do |message|
               puts message
+              exit(1)
             end
           end
         end

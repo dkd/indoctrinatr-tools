@@ -1,8 +1,17 @@
 require 'redcloth'
 
-module RedCloth
-  module Formatters
-    module LATEX
+module Indoctrinatr
+  module Tools
+    module RedclothFormattersLatexPatch
+      def self.apply
+        const = Kernel.const_get('RedCloth::Formatters::LATEX')
+        if const
+          const.prepend(self)
+        end
+      rescue NameError => e
+        puts e
+      end
+
       {
         h1: 'chapter',
         h2: 'section',
@@ -28,17 +37,6 @@ module RedCloth
       def del(opts)
         "\\st{#{opts[:text]}}"
       end
-
-      # def table_close(_opts)
-      #   output = "\\begin{tabu}{ #{'l ' * @table[0].size}}\n"
-      #   output << "    #{@table[0].join(' & ')} \\\\\n"
-      #   output << "    \\tabletoprule\n"
-      #   @table[1..-1].each do |row|
-      #     output << "    #{row.join(' & ')} \\\\\n"
-      #   end
-      #   output << "    \\tablebottomrule\n\\end{tabu}\n"
-      #   output
-      # end
     end
   end
 end

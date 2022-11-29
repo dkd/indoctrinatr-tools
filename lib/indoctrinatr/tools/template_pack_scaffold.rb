@@ -62,7 +62,7 @@ module Indoctrinatr
 
       def copy_tex_file(config)
         FileUtils.copy_file config[:source_tex_file_path], config[:tex_file_path]
-        Success()
+        Success("A template pack scaffold was created in folder '#{config[:template_pack_name]}'. Happy templating…")
       rescue StandardError => e
         Failure(e.message)
       end

@@ -3,7 +3,6 @@ require 'fileutils'
 module Indoctrinatr
   module Tools
     class TemplatePackDefaultValuesCompiler
-      include TemplatePackHelpers
       include PdfGenerator
       include Dry::Transaction
 
@@ -11,12 +10,6 @@ module Indoctrinatr
       step :check_setup
       step :compile_tex_file
       step :rename_if_necessary
-
-      def pdf_exists?(template_pack_name)
-        check_for_folder
-        file_path = pdf_with_default_values_file_path ConfigurationExtractor.new(template_pack_name).call
-        File.exist? file_path
-      end
 
       private
 
@@ -57,12 +50,12 @@ module Indoctrinatr
       def rename_if_necessary(config) # rubocop:disable Metrics/AbcSize
         configuration = ConfigurationExtractor.new(config[:template_pack_name]).call # TODO: avoid repeated calling of the ConfigurationExtrator
         @default_values = DefaultValues.new configuration
-        return Success() if @default_values.customized_output_file_name == @default_values.default_file_name
+        return Success("The pdf has successfully been created as '#{configuration.output_file_name}.") if @default_values.customized_output_file_name == @default_values.default_file_name
 
         custom_filepath = config[:pack_documentation_examples_dir_path] + @default_values.customized_output_file_name
-        FileUtils.rm custom_filepath if File.exist?(custom_filepath)
+        FileUtils.rm_f custom_filepath
         FileUtils.mv(config[:pack_documentation_examples_dir_path] + @default_values.default_file_name, custom_filepath)
-        Success()
+        Success("A pdf has successfully been created at '#{custom_filepath}.")
       rescue StandardError => e
         Failure(e.message)
       end

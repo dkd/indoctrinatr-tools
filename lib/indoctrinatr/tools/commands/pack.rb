@@ -10,7 +10,8 @@ module Indoctrinatr
           template_pack_name = CommandAutocompleteHelpers.handle_autocomplete(template_pack_name)
 
           TemplatePackPacker.new.call(template_pack_name) do |result|
-            result.success do
+            result.success do |message|
+              puts message
             end
 
             result.failure do |message|

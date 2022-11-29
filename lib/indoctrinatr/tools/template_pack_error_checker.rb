@@ -56,7 +56,7 @@ module Indoctrinatr
 
       def check_attributes(config)
         configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
-        puts 'Checking...'
+        puts 'Checking attributes...'
 
         configuration.attributes_as_hashes_in_array.each_with_index do |attribute_hash, index|
           identifier = "Variable number #{index + 1}" # string for the user to localize variable with errors/warnings
@@ -70,7 +70,7 @@ module Indoctrinatr
           check_field_attribute attribute_hash, identifier, 'description'
           # idea: warning if no required attribute?
         end
-        Success()
+        Success('Checking complete.')
       rescue StandardError => e
         Failure(e.message)
       end

@@ -53,8 +53,7 @@ module Indoctrinatr
       end
 
       def show_success(config)
-        puts "The template pack '#{config[:template_pack_name]}.zip' was created successfully."
-        Success()
+        Success("The template pack '#{config[:template_pack_name]}.zip' was created successfully.")
       rescue StandardError => e
         Failure(e.message)
       end

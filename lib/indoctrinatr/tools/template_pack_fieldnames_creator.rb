@@ -4,7 +4,6 @@ require 'to_latex'
 module Indoctrinatr
   module Tools
     class TemplatePackFieldnamesCreator
-      include TemplatePackHelpers
       include PdfGenerator
       include Dry::Transaction
 
@@ -15,11 +14,6 @@ module Indoctrinatr
       step :parse_tex_file
       step :write_tex_file
       step :result
-
-      def pdf_exists?
-        check_for_folder
-        File.exist? pdf_with_fieldname_values_file_path
-      end
 
       private
 
@@ -53,6 +47,7 @@ module Indoctrinatr
         configuration = ConfigurationExtractor.new(config[:template_pack_name]).call
         field_name_values = FieldNameValues.new configuration
         field_name_values._field_names_as_values
+        config[:configuration] = configuration
         config[:field_name_values] = field_name_values
         Success(config)
       end
@@ -67,6 +62,8 @@ module Indoctrinatr
 
       def parse_tex_file(config)
         config[:parsed_tex_file_content] = Erubis::Eruby.new(config[:tex_file_content]).result(config[:field_name_values].retrieve_binding)
+        puts "The template pack '#{config[:template_pack_name]}' has been successfully parsed with the variable names."
+        puts 'Please check the .tex file and modify it to your needs and compile it again'
         Success(config)
       rescue StandardError => e
         Failure(e.message)
@@ -89,9 +86,7 @@ module Indoctrinatr
         # FileUtils.copy_file latex_log_file, latex_log_file_destination
         Failure(e.message)
       else
-        puts "The template pack '#{config[:template_pack_name]}' has been successfully parsed with the variable names"
-        puts 'Please check the .tex file and modify it to your needs and compile it again'
-        Success()
+        Success('A pdf including variable names has successfully been created.')
       end
     end
   end

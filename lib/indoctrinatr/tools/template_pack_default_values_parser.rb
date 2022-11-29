@@ -68,7 +68,8 @@ module Indoctrinatr
         FileUtils.mkdir_p(config[:pack_documentation_dir_path])
         FileUtils.mkdir_p(config[:pack_documentation_examples_dir_path])
         File.write config[:tex_with_default_values_file_path], config[:parsed_tex_file_content]
-        Success()
+
+        Success("The template pack '#{config[:template_pack_name]}' has been successfully parsed with default values.")
       rescue StandardError => e
         Failure(e.message)
       end

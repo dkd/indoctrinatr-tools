@@ -1,8 +1,6 @@
 module Indoctrinatr
   module Tools
     class TemplatePackDemo
-      include TemplatePackHelpers
-
       attr_accessor :template_pack_name
 
       def initialize(template_pack_name)
@@ -10,12 +8,86 @@ module Indoctrinatr
       end
 
       def call
-        TemplatePackScaffold.new.call(template_pack_name)
-        TemplatePackDefaultValuesParser.new.call(template_pack_name)
-        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false)
-        TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files: false)
-        TemplatePackDocumentation.new.call(template_pack_name:, keep_aux_files: false)
-        TemplatePackPacker.new.call(template_pack_name)
+        new
+        parse
+        pdf
+        pdf_with_field_names
+        doc
+        pack
+      end
+
+      private
+
+      def new
+        TemplatePackScaffold.new.call(template_pack_name) do |result|
+          result.success do |message|
+            puts message
+          end
+
+          result.failure do |message|
+            puts message
+          end
+        end
+      end
+
+      def parse
+        TemplatePackDefaultValuesParser.new.call(template_pack_name) do |result|
+          result.success do |message|
+            puts message
+          end
+
+          result.failure do |message|
+            puts message
+          end
+        end
+      end
+
+      def pdf
+        TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result|
+          result.success do |message|
+            puts message
+          end
+
+          result.failure do |message|
+            puts message
+          end
+        end
+      end
+
+      def pdf_with_field_names
+        TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files: false) do |result|
+          result.success do |message|
+            puts message
+          end
+
+          result.failure do |message|
+            puts message
+          end
+        end
+      end
+
+      def doc
+        TemplatePackDocumentation.new.call(template_pack_name:, keep_aux_files: false) do |result|
+          result.success do |message|
+            puts message
+          end
+
+          result.failure do |message|
+            puts message
+          end
+        end
+      end
+
+      def pack
+        TemplatePackPacker.new.call(template_pack_name) do |result|
+          result.success do |message|
+            puts message
+          end
+
+          result.failure do |message|
+            puts message
+          end
+        end
       end
     end
   end

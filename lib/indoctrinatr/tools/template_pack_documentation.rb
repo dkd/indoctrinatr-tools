@@ -221,8 +221,7 @@ module Indoctrinatr
       end
 
       def show_success(config)
-        puts "A documentation for '#{config[:template_pack_name]}' has been successfully generated."
-        Success()
+        Success("A documentation for '#{config[:template_pack_name]}' has been successfully generated.")
       end
     end
   end

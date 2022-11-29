@@ -60,7 +60,7 @@ module Indoctrinatr
         return Success() if @default_values.customized_output_file_name == @default_values.default_file_name
 
         custom_filepath = config[:pack_documentation_examples_dir_path] + @default_values.customized_output_file_name
-        FileUtils.rm custom_filepath
+        FileUtils.rm custom_filepath if File.exist?(custom_filepath)
         FileUtils.mv(config[:pack_documentation_examples_dir_path] + @default_values.default_file_name, custom_filepath)
         Success()
       rescue StandardError => e

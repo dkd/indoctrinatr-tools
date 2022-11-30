@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'indoctrinatr/tools/version'
+require_relative '../../../lib/indoctrinatr/tools/version'
 
 describe 'Indoctrinatr::Tools' do
   it 'defines a VERSION constant' do

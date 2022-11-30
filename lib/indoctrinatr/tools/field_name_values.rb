@@ -2,8 +2,8 @@ module Indoctrinatr
   module Tools
     # This class defines the content for a document that has the field names as content.
     class FieldNameValues < ContentForTexFiles
-      # TODO: extensive list of possibilities
       PICTURE_FILE_ENDINGS = %w[.png .jpeg .jpg .bmp .gif .pdf].freeze
+
       def _field_names_as_values # rubocop:disable Metrics/AbcSize
         @_configuration.attributes_as_hashes_in_array.each do |attribute_hash|
           # Usage of \textless to avoid issues with the < > characters.

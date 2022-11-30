@@ -2,7 +2,8 @@ module Indoctrinatr
   module Tools
     module Commands
       class Workflow < Dry::CLI::Command
-        desc 'Display the suggested workflow'
+        desc 'Display the suggested workflow.'
+
         def call(**)
           puts <<~HEREDOC
             The workflow for a project (e.g. demo) typically looks like this:

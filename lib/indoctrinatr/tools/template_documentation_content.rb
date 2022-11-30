@@ -32,10 +32,10 @@ module Indoctrinatr
       end
 
       def default_values_example
-        TemplatePackDefaultValuesParser.new.call(@template_pack_name) do |result|
+        Indoctrinatr::Tools::Transactions::TemplatePackDefaultValuesParser.new.call(@template_pack_name) do |result|
           result.success do |message|
             puts message
-            TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result2|
+            Indoctrinatr::Tools::Transactions::TemplatePackDefaultValuesCompiler.new.call(template_pack_name:, keep_aux_files: false) do |result2|
               result2.success do |message2|
                 puts message2
               end
@@ -78,7 +78,7 @@ module Indoctrinatr
 
         return pdf_with_fieldname_values_file_path if File.exist? pdf_with_fieldname_values_file_path
 
-        TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files: false) do |result|
+        Indoctrinatr::Tools::Transactions::TemplatePackFieldnamesCreator.new.call(template_pack_name:, keep_aux_files: false) do |result|
           result.success do
             puts 'INFO: Example with field names has been automatically generated for the documentation' # More user information and for testing
             pdf_with_fieldname_values_file_path

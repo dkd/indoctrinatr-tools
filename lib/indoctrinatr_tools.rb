@@ -2,8 +2,8 @@ require 'zeitwerk'
 require 'dry/cli'
 
 Zeitwerk::Loader.for_gem(warn_on_extra_files: false).tap do |loader|
-  # loader.log!
   loader.ignore('lib/indoctrinatr/tools/version')
+  loader.ignore('lib/indoctrinatr/templates')
   loader.setup
 end
 

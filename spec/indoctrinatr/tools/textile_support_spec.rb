@@ -16,7 +16,7 @@ context "when supporting Textile with 'textilize' function" do
   end
   let(:default_values) { Indoctrinatr::Tools::DefaultValues.new configuration }
 
-  it 'parses to LaTeX' do
-    expect(default_values.textile2latex('*strong*')).to eq "\\textbf{strong}\n\n"
+  it 'parses Textile ** to LaTeX textbf' do
+    expect(default_values.textile2latex('*strong text*')).to eq "\\textbf{strong text}\n\n"
   end
 end

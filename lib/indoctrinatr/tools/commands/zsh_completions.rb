@@ -1,12 +1,13 @@
 module Indoctrinatr
   module Tools
     module Commands
-      class Zshcompletion < Dry::CLI::Command
-        desc 'Print a guide how to add indoctrinatr-tools to .zshrc.'
+      class ZshCompletions < Dry::CLI::Command
+        desc 'Print a guide how to add indoctrinatr-tools integration to .zshrc.'
 
-        def call(*)
+        def call(**)
           puts <<~HEREDOC
             Add this to your .zshrc (and open up a new shell):
+
             if [[ -n ${ZSH_VERSION-} ]]; then
               autoload -U +X bashcompinit && bashcompinit
             fi
@@ -14,9 +15,7 @@ module Indoctrinatr
             function get_indoctrinatr_commands()
             {
               local binary="indoctrinatr"
-              help_params=${COMP_WORDS[@]:1}
-              clean_params=${help_params//-*([^ ])?( )}
-              COMPREPLY=(`$binary help -c $clean_params`)
+              COMPREPLY=(`$binary completions`)
             }
           HEREDOC
         end

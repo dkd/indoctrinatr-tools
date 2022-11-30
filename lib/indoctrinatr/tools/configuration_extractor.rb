@@ -11,14 +11,14 @@ module Indoctrinatr
 
       def call
         config_file = YAML.load_file((Pathname.new(Dir.pwd).join template_pack_name).join('configuration.yaml'))
-        configuration = TemplatePackConfiguration.new
-        configuration.template_asset_path = ((Pathname.new(Dir.pwd).join template_pack_name).join 'assets').to_s
-        configuration.default_file_name = "#{template_pack_name}_with_default_values.pdf"
-        configuration.output_file_name = config_file.fetch('output_file_name', "#{template_pack_name}_with_default_values.pdf")
-        configuration.template_name = config_file.fetch 'template_name'
-        configuration.textual_description = config_file.fetch('textual_description'), ''
-        configuration.attributes_as_hashes_in_array = config_file.fetch 'fields', []
-        configuration
+        TemplatePackConfiguration.new.tap do |configuration|
+          configuration.template_asset_path = ((Pathname.new(Dir.pwd).join template_pack_name).join 'assets').to_s
+          configuration.default_file_name = "#{template_pack_name}_with_default_values.pdf"
+          configuration.output_file_name = config_file.fetch('output_file_name', "#{template_pack_name}_with_default_values.pdf")
+          configuration.template_name = config_file.fetch 'template_name'
+          configuration.textual_description = config_file.fetch('textual_description'), ''
+          configuration.attributes_as_hashes_in_array = config_file.fetch 'fields', []
+        end
       end
     end
   end

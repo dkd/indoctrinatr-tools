@@ -13,6 +13,9 @@ module Indoctrinatr
       register 'workflow', Workflow
       register 'pack', Pack
       register 'demo', Demo
+      register 'bashcompletion', Bashcompletion
+      register 'zshcompletion', Zshcompletion
+      register 'help', Help
     end
   end
 end

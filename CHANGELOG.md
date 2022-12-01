@@ -1,11 +1,10 @@
 # indoctrinatr-tools
 
-## v0.17.0 WIP
+## v0.17.0 (2022-12-01)
 
 ### changes
 
 * migrate to `dry-cli` and `dry-transaction`
-* remove support for autocompletions
 * move to Ruby `~> 3.0` versions (3.0, 3.1)
 * drop support for Ruby 2.x versions
 
